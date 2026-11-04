@@ -16,7 +16,7 @@ const { items, filterable = false } = Astro.props;
           <time class="news-date tnum" datetime={n.date}>{formatDate(n.date)}</time>
           <a class="news-title ext" href={n.url} rel="noopener">{n.title}</a>
           <span class="news-meta">
-            {n.category && <span class="tag">{n.category}</span>}
+            {n.category && <span class="tag">{n.category.split(/[、,，]/)[0]}</span>}
             {u && <span class="news-unit">{u.shortName}</span>}
           </span>
         </li>

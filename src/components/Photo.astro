@@ -1,0 +1,58 @@
+---
+/**
+ * Renders a campus photo from src/data/photos.json by key.
+ * Each entry: { file: "hero", widths: [640,1280,1920], w, h, alt, credit?, focus? }
+ * Files live in public/photos/<file>-<width>.webp (+ .jpg fallback).
+ * If the key is missing, renders a neutral placeholder so layouts can be built first.
+ */
+import photos from '../data/photos.json';
+import { url } from '../lib/url';
+
+interface Props {
+  name: string;
+  sizes?: string;
+  class?: string;
+  eager?: boolean;
+  /** decorative photos get alt="" */
+  decorative?: boolean;
+}
+type Entry = { file: string; widths: number[]; w: number; h: number; alt: string; credit?: string; focus?: string };
+const { name, sizes = '100vw', class: cls = '', eager = false, decorative = false } = Astro.props;
+// Slots without a dedicated photo reuse one (only on inner pages, so no page repeats a photo).
+const alias: Record<string, string> = { career: 'hero', safety: 'campus', admin: 'money', community: 'clubs', arts: 'clubs' };
+const all = photos as Record<string, Entry>;
+const p = all[name] ?? all[alias[name]];
+const set = (ext: string) => p?.widths.map((w) => `${url(`/photos/${p.file}-${w}.${ext}`)} ${w}w`).join(', ');
+const largest = p ? p.widths[p.widths.length - 1] : 0;
+---
+{p ? (
+  <picture class={`photo ${cls}`}>
+    <source type="image/webp" srcset={set('webp')} sizes={sizes} />
+    <img
+      src={url(`/photos/${p.file}-${largest}.jpg`)}
+      srcset={set('jpg')}
+      sizes={sizes}
+      width={p.w}
+      height={p.h}
+      alt={decorative ? '' : p.alt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={eager ? 'high' : undefined}
+      style={p.focus ? `object-position: ${p.focus}` : undefined}
+    />
+  </picture>
+) : (
+  <div class={`photo photo-missing ${cls}`} role="presentation"><span>照片：{name}</span></div>
+)}
+
+<style>
+  .photo { display: block; overflow: hidden; background: var(--brand-tint); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-missing {
+    display: grid;
+    place-items: center;
+    background: repeating-linear-gradient(135deg, var(--brand-tint) 0 14px, var(--paper) 14px 28px);
+    color: var(--ink-soft);
+    font-size: var(--s-1);
+  }
+</style>

@@ -1,0 +1,418 @@
+{
+ "home-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "services-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_dorm-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_counseling-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units_health-center-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "news-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "emergency-desk-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "home-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "services-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_dorm-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_counseling-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units_health-center-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "news-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "emergency-mob-light": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "home-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "services-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_dorm-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_counseling-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units_health-center-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "news-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "emergency-desk-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "home-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "services-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_dorm-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "tasks_counseling-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units_health-center-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "units-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "news-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ],
+ "emergency-mob-dark": [
+  {
+   "id": "label-content-name-mismatch",
+   "impact": "serious",
+   "help": "Elements must have their visible text as part of their accessible name",
+   "nodes": [
+    {
+     "t": ".brand",
+     "s": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+    }
+   ]
+  }
+ ]
+}

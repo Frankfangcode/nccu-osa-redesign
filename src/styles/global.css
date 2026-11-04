@@ -16,13 +16,16 @@
   --alert: #b42318;
   --alert-ink: #ffffff;
   --alert-tint: #fdecea;
+  --alert-surface: #b42318;
+  --alert-surface-ink: #ffffff;
+  --control-line: #737d90;
   --focus: #1f4e8c;
 
   --font-display: 'Chiron GoRound TC Variable', 'Noto Sans TC Variable', system-ui, sans-serif;
   --font-body: 'Noto Sans TC Variable', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
 
   /* 1.25 modular scale */
-  --s-1: 0.8rem;
+  --s-1: 0.875rem;
   --s0: 1rem;
   --s1: 1.25rem;
   --s2: 1.563rem;
@@ -63,7 +66,10 @@
     --marker-ink: #10151f;
     --alert: #ff6b5b;
     --alert-ink: #10151f;
-    --alert-tint: #3a1a17;
+    --alert-tint: #2a1513;
+    --alert-surface: #6b1d16;
+    --alert-surface-ink: #ffe9e6;
+    --control-line: #7d89a2;
     --focus: #ffd84d;
     color-scheme: dark;
   }
@@ -81,7 +87,10 @@
   --marker-ink: #10151f;
   --alert: #ff6b5b;
   --alert-ink: #10151f;
-  --alert-tint: #3a1a17;
+  --alert-tint: #2a1513;
+  --alert-surface: #6b1d16;
+  --alert-surface-ink: #ffe9e6;
+  --control-line: #7d89a2;
   --focus: #ffd84d;
   color-scheme: dark;
 }
@@ -193,8 +202,10 @@ ul, ol { margin: 0; padding: 0; }
   border: 2px solid var(--brand);
   background: var(--brand);
   color: var(--paper);
+  font: inherit;
   font-weight: 700;
   text-decoration: none;
+  cursor: pointer;
 }
 .btn:hover { background: var(--brand-strong); border-color: var(--brand-strong); }
 .btn-ghost { background: transparent; color: var(--brand); }

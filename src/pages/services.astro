@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import { url } from '../lib/url';
 import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
+import groups from '../data/groups.json';
+const gslug = (name: string) => groups.find((g) => g.name === name)?.slug ?? name;
 ---
 <Base title="找服務" current="services" description="搜尋政大學務處的所有服務：輸入關鍵字或選擇身分，立即找到要辦的事與負責單位。">
   <div class="wrap">
@@ -26,7 +28,7 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
 
     <div id="groups">
       {taskGroups.map((g) => (
-        <section class="group" data-group>
+        <section class="group" data-group id={gslug(g)}>
           <h2 class="group-title">{g}</h2>
           <ul class="task-list">
             {tasks.filter((t) => t.group === g).map((t) => {
@@ -35,7 +37,7 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
                 <li
                   data-task
                   data-aud={t.audiences.join(',')}
-                  data-text={[t.phrase, t.title, t.summary, ...t.keywords, u?.name ?? '', u?.shortName ?? ''].join(' ').toLowerCase()}
+                  data-text={[t.phrase, t.title, t.summary, ...t.keywords, u?.name ?? '', u?.shortName ?? '', u?.summary ?? ''].join(' ').toLowerCase()}
                 >
                   <a href={url(`/tasks/${t.slug}/`)} class="task-link">{t.title}</a>
                   <p class="task-summary">{t.summary}</p>
@@ -84,6 +86,11 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
     }
     if (location.hash === '#q') q.focus();
 
+    var timer = null;
+    function announce(text) {
+      clearTimeout(timer);
+      timer = setTimeout(function () { count.textContent = text; }, 400);
+    }
     function currentAud() {
       var c = document.querySelector('input[name="aud"]:checked');
       return c ? c.value : '';
@@ -103,7 +110,9 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
         g.hidden = !g.querySelector('[data-task]:not([hidden])');
       });
       empty.hidden = shown !== 0;
-      count.textContent = (term || aud ? '找到 ' : '共 ') + shown + ' 項服務';
+      announce(shown === 0
+        ? '沒有符合的服務。試試更短的關鍵字，或切換回「全部」身分。'
+        : (term || aud ? '找到 ' : '共 ') + shown + ' 項服務');
 
       var next = new URLSearchParams();
       if (q.value.trim()) next.set('q', q.value.trim());
@@ -139,6 +148,7 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
             siteList.appendChild(li);
           });
           siteBox.hidden = rows.length === 0;
+          if (rows.length) announce(count.textContent.replace(/。?另有.*$/, '') + '，另有 ' + rows.length + ' 個相關頁面');
         })
         .catch(function () { siteBox.hidden = true; });
     }
@@ -151,9 +161,6 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
 
 <style>
   .finder {
-    position: sticky;
-    top: 4rem;
-    z-index: 10;
     background: var(--paper);
     padding-block: var(--space-4);
     border-bottom: 1px solid var(--line);
@@ -189,7 +196,7 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
     align-items: center;
     min-height: 44px;
     padding: 0 var(--space-4);
-    border: 1px solid var(--line);
+    border: 1px solid var(--control-line);
     border-radius: 999px;
     background: var(--surface);
   }
@@ -230,7 +237,5 @@ import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
   .site-results { margin-top: var(--space-6); }
   [hidden] { display: none !important; }
 
-  @media (max-width: 760px) {
-    .finder { top: 3.6rem; position: static; }
-  }
+
 </style>

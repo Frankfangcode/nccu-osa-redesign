@@ -1,8 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NewsList from '../../components/NewsList.astro';
+import Photo from '../../components/Photo.astro';
 import { url } from '../../lib/url';
-import { units, news, tasksForUnit, tel, type Unit } from '../../lib/data';
+import { units, news, tasksForUnit, tel, phoneMain, phoneNote, emailsIn, type Unit } from '../../lib/data';
 
 export function getStaticPaths() {
   return units.map((u) => ({ params: { slug: u.slug }, props: { unit: u } }));
@@ -11,9 +12,17 @@ const { unit } = Astro.props as { unit: Unit };
 const myTasks = tasksForUnit(unit.slug);
 const myNews = news.filter((n) => n.unit === unit.slug).slice(0, 5);
 const c = unit.contact;
+const unitPhoto: Record<string, string> = {
+  'dean-office': 'campus', 'student-life': 'money', 'student-activities': 'clubs', housing: 'housing',
+  'student-safety': 'safety', 'health-center': 'health', 'resource-room': 'health', 'arts-center': 'arts',
+  'career-center': 'career', 'indigenous-center': 'community', 'hope-seed': 'community',
+};
 const hasContact = c.phone || c.email || c.location || c.hours;
 ---
 <Base title={unit.name} current="units" description={unit.summary}>
+  <div class="wrap">
+    <Photo name={unitPhoto[unit.slug] ?? 'campus'} class="unit-hero" sizes="(max-width: 1240px) 100vw, 1216px" eager decorative />
+  </div>
   <div class="wrap unit-layout">
     <nav class="unit-nav" aria-label="單位導覽">
       <p class="unit-nav-title">學務處單位</p>
@@ -41,8 +50,8 @@ const hasContact = c.phone || c.email || c.location || c.hours;
         <section class="contact-strip" aria-labelledby="contact-title">
           <h2 id="contact-title" class="visually-hidden">聯絡方式</h2>
           <dl>
-            {c.phone && (<div><dt>電話</dt><dd><a class="tnum" href={tel(c.phone)}>{c.phone}</a></dd></div>)}
-            {c.email && (<div><dt>Email</dt><dd><a href={`mailto:${c.email}`}>{c.email}</a></dd></div>)}
+            {c.phone && (<div><dt>電話</dt><dd><a class="tnum" href={tel(c.phone)}>{phoneMain(c.phone)}</a> <span class="c-note">{phoneNote(c.phone)}</span></dd></div>)}
+            {c.email && (<div><dt>Email</dt><dd>{emailsIn(c.email).map((e, i) => (<>{i > 0 && '、'}<a href={`mailto:${e}`}>{e}</a></>))}</dd></div>)}
             {c.location && (<div><dt>地點</dt><dd>{c.location}</dd></div>)}
             {c.hours && (<div><dt>服務時間</dt><dd>{c.hours}</dd></div>)}
           </dl>
@@ -90,6 +99,7 @@ const hasContact = c.phone || c.email || c.location || c.hours;
 </Base>
 
 <style>
+  :global(.unit-hero) { margin-top: var(--space-5); aspect-ratio: 16 / 5; border-radius: var(--radius-m); }
   .unit-layout {
     display: grid;
     grid-template-columns: 12rem minmax(0, 1fr);
@@ -99,7 +109,7 @@ const hasContact = c.phone || c.email || c.location || c.hours;
     position: sticky;
     top: 5rem;
     align-self: start;
-    padding-top: var(--space-8);
+    padding-top: var(--space-6);
   }
   .unit-nav-title { font-size: var(--s-1); color: var(--ink-soft); font-weight: 700; margin-bottom: var(--space-2); }
   .unit-nav ul { list-style: none; border-left: 2px solid var(--line); }
@@ -154,8 +164,11 @@ const hasContact = c.phone || c.email || c.location || c.hours;
   .head-row .section-title { margin-bottom: var(--space-5); }
   .unit-main .section:first-of-type { border-top: 0; }
 
+  .unit-main :global(.page-head) { padding-top: var(--space-6); }
   @media (max-width: 860px) {
+    :global(.unit-hero) { aspect-ratio: 16 / 7; margin-inline: -1rem; border-radius: 0; }
     .unit-layout { grid-template-columns: 1fr; gap: 0; }
     .unit-nav { position: static; padding-top: var(--space-5); order: 2; border-top: 1px solid var(--line); margin-top: var(--space-6); }
   }
+  .c-note { display: block; font-weight: 400; font-size: var(--s-1); color: var(--ink-soft); }
 </style>

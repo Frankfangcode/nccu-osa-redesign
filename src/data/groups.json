@@ -1,0 +1,54 @@
+[
+  {
+    "name": "住宿",
+    "heading": "找到住的地方",
+    "photo": "housing",
+    "slug": "housing"
+  },
+  {
+    "name": "獎助與費用",
+    "heading": "把學費和生活費顧好",
+    "photo": "money",
+    "slug": "money"
+  },
+  {
+    "name": "身心健康",
+    "heading": "照顧好自己",
+    "photo": "health",
+    "slug": "health"
+  },
+  {
+    "name": "社團與活動",
+    "heading": "在課堂外找到同伴",
+    "photo": "clubs",
+    "slug": "clubs"
+  },
+  {
+    "name": "職涯",
+    "heading": "為畢業後做準備",
+    "photo": "career",
+    "slug": "career",
+    "home": "text"
+  },
+  {
+    "name": "請假、兵役與學籍",
+    "heading": "處理在學的大小事",
+    "photo": "admin",
+    "slug": "admin",
+    "home": "text"
+  },
+  {
+    "name": "校園安全",
+    "heading": "安心待在校園",
+    "photo": "safety",
+    "slug": "safety",
+    "home": "text"
+  },
+  {
+    "name": "僑生、陸生與原民生",
+    "heading": "依身分取得專屬協助",
+    "photo": "community",
+    "slug": "community",
+    "home": "text"
+  }
+]

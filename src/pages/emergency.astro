@@ -5,11 +5,17 @@ import { lines, tel, phoneMain, phoneNote, is24h, type Line } from '../lib/data'
 const digits = (l: Line) => phoneMain(l.phone).replace(/\D/g, '');
 const life = lines.filter((l) => l.scope === 'national' && ['110', '119'].includes(digits(l)));
 const campus24 = lines.filter((l) => l.scope === 'campus' && is24h(l));
-const campusDay = lines.filter((l) => l.scope === 'campus' && !campus24.includes(l));
-const national = lines.filter((l) => l.scope === 'national' && !life.includes(l));
-const is24 = is24h;
+const crisisNums = ['1925', '1995'];
+const crisis = [
+  ...lines.filter((l) => l.scope === 'national' && crisisNums.includes(digits(l))),
+  ...lines.filter((l) => l.scope === 'campus' && /心理諮商/.test(l.name)),
+];
+const campusDay = lines.filter((l) => l.scope === 'campus' && !campus24.includes(l) && !crisis.includes(l));
+const national = lines.filter((l) => l.scope === 'national' && !life.includes(l) && !crisis.includes(l));
+const duty = campus24[0];
+const hoursText = (l: Line) => l.hours || '服務時段請見官方網站';
 ---
-<Base title="緊急求助" current="emergency" hideAlertBand description="政大校園 24 小時緊急聯絡電話，以及全國緊急與心理支持專線，依急迫程度排列。">
+<Base title="緊急求助" current="emergency" hideAlertBand description="政大校園 24 小時緊急聯絡電話，以及心理支持與全國專線，依急迫程度排列。">
   <div class="wrap">
     <header class="page-head">
       <h1>緊急求助</h1>
@@ -26,11 +32,14 @@ const is24 = is24h;
           <ul class="life-list">
             {life.map((l) => (
               <li>
-                <a href={tel(l.phone)} class="life-num tnum">{phoneMain(l.phone)}</a>
-                <span class="life-name">{l.name}</span>
+                <a href={tel(l.phone)} class="life-num tnum" aria-label={`撥打 ${phoneMain(l.phone)}，${l.name}`}>{phoneMain(l.phone)}</a>
+                <span class="life-name" aria-hidden="true">{l.name}</span>
               </li>
             ))}
           </ul>
+          {duty && (
+            <p class="life-campus">人在校內，撥完後請通知校安中心 <a class="tnum" href={tel(duty.phone)}>{phoneMain(duty.phone)}</a>（24 小時）</p>
+          )}
         </li>
       )}
 
@@ -44,11 +53,32 @@ const is24 = is24h;
             {campus24.map((l) => (
               <li>
                 <p class="big-name">{l.name}</p>
-                <a class="big-num tnum" href={tel(l.phone)}>{phoneMain(l.phone)}</a>
+                <a class="big-num tnum" href={tel(l.phone)} aria-label={`撥打 ${l.name} ${phoneMain(l.phone)}`}>{phoneMain(l.phone)}</a>
                 {phoneNote(l.phone) && <p class="big-note">{phoneNote(l.phone).replace(/^（|）$/g, '')}</p>}
                 <p class="badge">24 小時</p>
                 <p class="big-desc">{l.description}</p>
-                <a class="source" href={l.sourceUrl} rel="noopener">資料來源</a>
+                <a class="source" href={l.sourceUrl} rel="noopener">資料來源<span class="visually-hidden">：{l.name}</span></a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      )}
+
+      {crisis.length > 0 && (
+        <li class="tier tier-crisis" aria-labelledby="t3">
+          <div class="tier-head">
+            <h2 id="t3">想傷害自己，或需要有人陪你說話</h2>
+            <p>不用等到情況很糟才打。說不清楚也沒關係，接聽的人會陪你慢慢說。</p>
+          </div>
+          <ul class="line-list">
+            {crisis.map((l) => (
+              <li>
+                <div>
+                  <h3>{l.name} {is24h(l) && <span class="badge badge-inline">24 小時</span>}</h3>
+                  <p class="ll-desc">{l.description}</p>
+                  <p class="ll-hours">{hoursText(l)}<span aria-hidden="true">・</span><a href={l.sourceUrl} rel="noopener">來源<span class="visually-hidden">：{l.name}</span></a></p>
+                </div>
+                <a class="ll-num tnum" href={tel(l.phone)} aria-label={`撥打 ${l.name} ${phoneMain(l.phone)}`}>{phoneMain(l.phone)}</a>
               </li>
             ))}
           </ul>
@@ -56,9 +86,9 @@ const is24 = is24h;
       )}
 
       {campusDay.length > 0 && (
-        <li class="tier" aria-labelledby="t3">
+        <li class="tier" aria-labelledby="t4">
           <div class="tier-head">
-            <h2 id="t3">校內其他窗口</h2>
+            <h2 id="t4">校內其他窗口</h2>
             <p>多數在上班時間服務。下班後請改撥上方 24 小時專線。</p>
           </div>
           <ul class="line-list">
@@ -67,7 +97,7 @@ const is24 = is24h;
                 <div>
                   <h3>{l.name}</h3>
                   <p class="ll-desc">{l.description}</p>
-                  <p class="ll-hours">{l.hours}<span aria-hidden="true">・</span><a href={l.sourceUrl} rel="noopener">來源</a></p>
+                  <p class="ll-hours">{hoursText(l)}<span aria-hidden="true">・</span><a href={l.sourceUrl} rel="noopener">來源<span class="visually-hidden">：{l.name}</span></a></p>
                 </div>
                 <a class="ll-num tnum" href={tel(l.phone)} aria-label={`撥打 ${l.name} ${phoneMain(l.phone)}`}>{phoneMain(l.phone)}</a>
               </li>
@@ -77,18 +107,18 @@ const is24 = is24h;
       )}
 
       {national.length > 0 && (
-        <li class="tier" aria-labelledby="t4">
+        <li class="tier" aria-labelledby="t5">
           <div class="tier-head">
-            <h2 id="t4">全國專線</h2>
-            <p>想找人說說話、遇到家庭暴力或性侵害，或需要外語協助時。</p>
+            <h2 id="t5">其他全國專線</h2>
+            <p>遇到家庭暴力或性侵害、想找人談生活困擾，或需要外語協助時。</p>
           </div>
           <ul class="line-list">
             {national.map((l) => (
               <li>
                 <div>
-                  <h3>{l.name} {is24(l) && <span class="badge badge-inline">24 小時</span>}</h3>
+                  <h3>{l.name} {is24h(l) && <span class="badge badge-inline">24 小時</span>}</h3>
                   <p class="ll-desc">{l.description}</p>
-                  <p class="ll-hours">{l.hours}<span aria-hidden="true">・</span><a href={l.sourceUrl} rel="noopener">來源</a></p>
+                  <p class="ll-hours">{hoursText(l)}<span aria-hidden="true">・</span><a href={l.sourceUrl} rel="noopener">來源<span class="visually-hidden">：{l.name}</span></a></p>
                 </div>
                 <a class="ll-num tnum" href={tel(l.phone)} aria-label={`撥打 ${l.name} ${phoneMain(l.phone)}`}>{phoneMain(l.phone)}</a>
               </li>
@@ -107,8 +137,8 @@ const is24 = is24h;
   .tier-head p { color: var(--ink-soft); margin-top: var(--space-2); max-width: var(--measure); }
 
   .tier-life {
-    background: var(--alert);
-    color: var(--alert-ink);
+    background: var(--alert-surface);
+    color: var(--alert-surface-ink);
     border-radius: var(--radius-m);
     padding: var(--space-6);
     display: flex;
@@ -119,19 +149,22 @@ const is24 = is24h;
   }
   .tier-life .tier-head { margin: 0; }
   .tier-life .tier-head p { color: inherit; opacity: 0.92; }
-  .life-list { list-style: none; display: flex; gap: var(--space-7); }
+  .tier-life :focus-visible { outline-color: currentColor; }
+  .life-list { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-7); }
   .life-list li { display: flex; flex-direction: column; align-items: center; }
   .life-num {
     color: inherit;
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: var(--s7);
+    font-size: clamp(var(--s5), 16vw, var(--s7));
     line-height: 1;
     text-decoration: none;
+    min-width: 44px;
   }
   .life-num:hover { text-decoration: underline; }
-  .tier-life :focus-visible { outline-color: var(--alert-ink); }
   .life-name { font-weight: 700; }
+  .life-campus { flex-basis: 100%; padding-top: var(--space-4); border-top: 1px solid currentColor; }
+  .life-campus a { color: inherit; font-weight: 800; }
 
   .tier-24 {
     border: 3px solid var(--alert);
@@ -139,13 +172,17 @@ const is24 = is24h;
     background: var(--alert-tint);
     padding: var(--space-6);
   }
-  .big-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: var(--space-6); }
-  .big-list li { display: flex; flex-direction: column; align-items: flex-start; }
+  .tier-crisis {
+    border-left: 6px solid var(--brand);
+    padding-left: var(--space-5);
+  }
+  .big-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr)); gap: var(--space-6); }
+  .big-list li { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
   .big-name { font-weight: 700; font-size: var(--s1); }
   .big-num {
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: clamp(var(--s4), 6vw, var(--s6));
+    font-size: clamp(var(--s3), 8vw, var(--s6));
     line-height: 1.15;
     color: var(--ink);
     text-decoration: none;
@@ -159,13 +196,13 @@ const is24 = is24h;
     margin-top: var(--space-2);
     padding: 0.05em 0.7em;
     border-radius: 999px;
-    background: var(--alert);
-    color: var(--alert-ink);
+    background: var(--alert-surface);
+    color: var(--alert-surface-ink);
     font-size: var(--s-1);
     font-weight: 700;
   }
   .badge-inline { margin: 0 0 0 var(--space-2); vertical-align: middle; font-family: var(--font-body); }
-  .source { margin-top: var(--space-2); font-size: var(--s-1); }
+  .source { margin-top: var(--space-2); font-size: var(--s-1); display: inline-flex; min-height: 32px; align-items: center; }
 
   .line-list { list-style: none; }
   .line-list li {
@@ -180,6 +217,7 @@ const is24 = is24h;
   .line-list h3 { font-size: var(--s1); }
   .ll-desc { color: var(--ink-soft); max-width: var(--measure); }
   .ll-hours { font-size: var(--s-1); color: var(--ink-soft); margin-top: var(--space-1); }
+  .ll-hours a { display: inline-flex; min-height: 32px; align-items: center; }
   .ll-num {
     font-family: var(--font-display);
     font-weight: 900;
@@ -197,8 +235,8 @@ const is24 = is24h;
   .ll-num:hover { background: var(--ink); color: var(--paper); }
 
   @media (max-width: 640px) {
-    .tier-life, .tier-24 { padding: var(--space-5); }
-    .life-num { font-size: var(--s6); }
+    .tier-life, .tier-24 { padding: var(--space-4); }
     .line-list li { flex-direction: column; align-items: flex-start; }
+    .tier-head h2 { font-size: var(--s2); }
   }
 </style>

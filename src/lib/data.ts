@@ -37,12 +37,16 @@ export type Line = {
   scope: 'campus' | 'national';
   description: string;
   sourceUrl: string;
+  /** internal provenance note, never rendered */
+  note?: string;
+  /** false = could not be verified; kept in data, hidden from the site */
+  show?: boolean;
 };
 
 export const units = unitsRaw as Unit[];
 export const news = (newsRaw as News[]).slice().sort((a, b) => b.date.localeCompare(a.date));
 export const tasks = tasksRaw as Task[];
-export const lines = emergencyRaw as Line[];
+export const lines = (emergencyRaw as Line[]).filter((l) => l.show !== false);
 
 export const unitBySlug = (slug: string) => units.find((u) => u.slug === slug);
 export const tasksForUnit = (slug: string) => tasks.filter((t) => t.unit === slug);
@@ -73,4 +77,15 @@ export function phoneNote(p: string): string {
 export const is24h = (l: Line) => /^\s*24\s*小時/.test(l.hours);
 export const campus24h = () => lines.filter((l) => l.scope === 'campus' && is24h(l));
 
-export const tel = (p: string) => `tel:${phoneMain(p).replace(/[^\d+]/g, '')}`;
+/**
+ * tel: URI in international form. An extension is appended (",63252") only when the
+ * note starts with 分機 — "校內分機" is for internal dialing and must not be appended
+ * to a mobile number.
+ */
+export const tel = (p: string) => {
+  const d = phoneMain(p).replace(/\D/g, '');
+  const intl = d.length >= 9 && d.startsWith('0') ? `+886${d.slice(1)}` : d;
+  const ext = phoneNote(p).match(/^分機\s*(\d+)/)?.[1];
+  return `tel:${intl}${ext ? `,${ext}` : ''}`;
+};
+export const emailsIn = (s: string) => s.match(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g) ?? [];

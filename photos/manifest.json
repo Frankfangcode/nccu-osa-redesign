@@ -1,0 +1,8 @@
+{
+  "hero":    { "src": "/mnt/user-data/attachments/(uploaded)/9b7fb0b1-image.jpg", "alt": "政大達賢圖書館，白色建築倒映在前方水池", "focus": "38% 50%" },
+  "campus":  { "src": "/mnt/user-data/attachments/(uploaded)/c9856aae-image.jpg", "alt": "空拍政大校園，景美溪沿著運動場與校舍流過", "focus": "50% 60%" },
+  "housing": { "src": "/mnt/user-data/attachments/(uploaded)/525a996d-image.jpg", "alt": "空拍政大山上校區，校舍散落在樹林之間", "focus": "50% 65%" },
+  "money":   { "src": "/mnt/user-data/attachments/(uploaded)/ad1e0218-image.jpg", "alt": "政大校園建築與前方階梯廣場，後方是山景", "focus": "50% 55%" },
+  "health":  { "src": "/mnt/user-data/attachments/(uploaded)/5a41b8f4-image.jpg", "alt": "從樹林間望向政大法學院大樓", "focus": "45% 50%" },
+  "clubs":   { "src": "/mnt/user-data/attachments/(uploaded)/edb5d57d-image.jpg", "alt": "政大校門，兩位學生正走過斑馬線", "focus": "35% 55%" }
+}

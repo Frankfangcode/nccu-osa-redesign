@@ -1,31 +1,38 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { url } from '../../lib/url';
-import { tasks, unitBySlug, tel, type Task } from '../../lib/data';
+import Photo from '../../components/Photo.astro';
+import groups from '../../data/groups.json';
+import { tasks, unitBySlug, tel, phoneMain, phoneNote, emailsIn, type Task } from '../../lib/data';
 
 export function getStaticPaths() {
   return tasks.map((t) => ({ params: { slug: t.slug }, props: { task: t } }));
 }
 const { task } = Astro.props as { task: Task };
 const unit = unitBySlug(task.unit);
+const group = groups.find((g) => g.name === task.group);
 const related = tasks.filter((t) => t.group === task.group && t.slug !== task.slug).slice(0, 4);
 ---
 <Base title={task.title} current="services" description={task.summary}>
   <div class="wrap">
-    <header class="page-head">
+    <header class="page-head task-head">
+      <div class="task-head-text">
       <nav class="breadcrumb" aria-label="麵包屑">
         <ol>
           <li><a href={url('/')}>首頁</a></li>
           <li><a href={url('/services/')}>找服務</a></li>
-          <li><a href={url(`/services/`)}>{task.group}</a></li>
+          <li><a href={url(`/services/#${group?.slug ?? ''}`)}>{task.group}</a></li>
+          <li><span aria-current="page">{task.title}</span></li>
         </ol>
       </nav>
-      <p class="task-kicker">我想{task.phrase}</p>
+      <p class="task-kicker">{task.group}</p>
       <h1 data-pagefind-meta="title">{task.title}</h1>
       <p class="lede">{task.summary}</p>
       {task.audiences.length > 0 && (
         <p class="aud"><span class="visually-hidden">適用對象：</span>{task.audiences.map((a) => <span class="tag">{a}</span>)}</p>
       )}
+      </div>
+      <Photo name={group?.photo ?? 'campus'} class="task-photo" sizes="(max-width: 860px) 100vw, 26rem" eager decorative />
     </header>
 
     <div class="task-grid" data-pagefind-body>
@@ -36,7 +43,6 @@ const related = tasks.filter((t) => t.group === task.group && t.slug !== task.sl
             <li>
               <a href={l.url} rel="noopener">
                 <span class="ll-title ext">{l.title}</span>
-                <span class="ll-meta">{new URL(l.url).hostname.replace('www.', '')}</span>
               </a>
             </li>
           ))}
@@ -49,8 +55,8 @@ const related = tasks.filter((t) => t.group === task.group && t.slug !== task.sl
           <h2 id="owner-title" class="owner-title">負責單位</h2>
           <p class="owner-name"><a href={url(`/units/${unit.slug}/`)}>{unit.name}</a></p>
           <dl class="contact">
-            {unit.contact.phone && (<><dt>電話</dt><dd><a class="tnum" href={tel(unit.contact.phone)}>{unit.contact.phone}</a></dd></>)}
-            {unit.contact.email && (<><dt>Email</dt><dd><a href={`mailto:${unit.contact.email}`}>{unit.contact.email}</a></dd></>)}
+            {unit.contact.phone && (<><dt>電話</dt><dd><a class="tnum" href={tel(unit.contact.phone)}>{phoneMain(unit.contact.phone)}</a> <span class="c-note">{phoneNote(unit.contact.phone)}</span></dd></>)}
+            {unit.contact.email && (<><dt>Email</dt><dd>{emailsIn(unit.contact.email).map((e, i) => (<>{i > 0 && '、'}<a href={`mailto:${e}`}>{e}</a></>))}</dd></>)}
             {unit.contact.location && (<><dt>地點</dt><dd>{unit.contact.location}</dd></>)}
             {unit.contact.hours && (<><dt>時間</dt><dd>{unit.contact.hours}</dd></>)}
           </dl>
@@ -73,6 +79,8 @@ const related = tasks.filter((t) => t.group === task.group && t.slug !== task.sl
 </Base>
 
 <style>
+  .task-head { display: grid; grid-template-columns: minmax(0, 1fr) 26rem; gap: var(--space-7); align-items: end; }
+  :global(.task-photo) { aspect-ratio: 4 / 3; border-radius: var(--radius-m); }
   .task-kicker {
     font-family: var(--font-display);
     font-weight: 800;
@@ -107,5 +115,8 @@ const related = tasks.filter((t) => t.group === task.group && t.slug !== task.sl
   .rel-list a { font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
   @media (max-width: 860px) {
     .task-grid { grid-template-columns: 1fr; }
+    .task-head { grid-template-columns: 1fr; gap: var(--space-5); }
+    :global(.task-photo) { order: -1; aspect-ratio: 16 / 9; }
   }
+  .c-note { display: block; font-weight: 400; font-size: var(--s-1); color: var(--ink-soft); }
 </style>

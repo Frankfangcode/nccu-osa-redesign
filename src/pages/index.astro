@@ -1,13 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import NewsList from '../components/NewsList.astro';
+import Photo from '../components/Photo.astro';
 import { url } from '../lib/url';
 import { tasks, news, units, audiences, featuredTasks, tel, phoneMain, campus24h } from '../lib/data';
+import groups from '../data/groups.json';
 import site from '../data/site.json';
 
-const featured = featuredTasks;
+const featured = featuredTasks.slice(0, 8);
 const latest = news.slice(0, 6);
 const duty = campus24h()[0];
+const groupCards = groups.map((g) => ({ ...g, tasks: tasks.filter((t) => t.group === g.name) }));
 
 // Online systems students use most, picked from the scraped unit menus.
 const pick = (unit: string, title: string) =>
@@ -24,30 +27,62 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
 ---
 <Base title="首頁" current="home">
   <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap">
+    <div class="hero-text">
       <h1 id="hero-title" class="hero-lead">我想</h1>
       <ul class="phrases" aria-label="常用服務">
         {featured.map((t) => (
           <li><a class="phrase" href={url(`/tasks/${t.slug}/`)}>{t.phrase}</a></li>
         ))}
-        <li><a class="phrase phrase-more" href={url('/services/')}>看全部 {tasks.length} 項服務</a></li>
       </ul>
-
       <form class="hero-search" action={url('/services/')} method="get" role="search">
         <label for="hero-q" class="visually-hidden">搜尋服務、表單或公告</label>
         <input id="hero-q" name="q" type="search" placeholder="搜尋：兵役、工讀、遺失物…" autocomplete="off" />
         <button type="submit" class="btn">搜尋</button>
       </form>
+      <p class="hero-all"><a href={url('/services/')}>看全部 {tasks.length} 項服務</a></p>
     </div>
+    <Photo name="hero" class="hero-photo" sizes="(max-width: 900px) 100vw, 48vw" eager />
   </section>
 
-  <section class="section audience" aria-labelledby="aud-title">
+  <section class="aud-band" aria-labelledby="aud-title">
     <div class="wrap aud-grid">
       <h2 id="aud-title" class="aud-title">依身分找服務</h2>
       <ul class="aud-list">
         {audiences.map((a) => (
           <li><a href={url(`/services/?for=${encodeURIComponent(a)}`)}>{a}</a></li>
         ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="life-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="life-title" class="section-title">在政大生活，你可能會需要</h2>
+        <a href={url('/services/')}>所有服務</a>
+      </div>
+      <ul class="life-grid">
+        {groupCards.map((g) => {
+          const photo = g.home !== 'text';
+          const n = photo ? 4 : 3;
+          return (
+            <li class={`life-card ${photo ? '' : 'life-card-text'}`}>
+              {photo && <Photo name={g.photo} class="life-photo" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 25vw" decorative />}
+              <div class="life-body">
+                <p class="life-group">{g.name}</p>
+                <h3 class="life-heading">{g.heading}</h3>
+                <ul class="life-tasks">
+                  {g.tasks.slice(0, n).map((t) => (
+                    <li><a href={url(`/tasks/${t.slug}/`)}>{t.title}</a></li>
+                  ))}
+                </ul>
+                {g.tasks.length > n && (
+                  <a class="life-more" href={url(`/services/#${g.slug}`)}>全部 {g.tasks.length} 項<span class="visually-hidden">{g.name}服務</span></a>
+                )}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </section>
@@ -59,6 +94,17 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
         <a href={url('/news/')}>全部消息</a>
       </div>
       <NewsList items={latest} />
+    </div>
+  </section>
+
+  <section class="numbers" aria-label="學務處服務一覽">
+    <div class="wrap numbers-inner">
+      <Photo name="campus" class="numbers-photo" sizes="(max-width: 860px) 100vw, 50vw" decorative />
+      <dl class="numbers-list">
+        <div><dt>線上整理的服務</dt><dd class="tnum">{tasks.length}</dd></div>
+        <div><dt>負責的組與中心</dt><dd class="tnum">{units.length}</dd></div>
+        <div><dt>校安中心值勤</dt><dd>24<span>小時</span></dd></div>
+      </dl>
     </div>
   </section>
 
@@ -93,7 +139,7 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
             <li>
               <a href={s.link!.url} rel="noopener">
                 <span class="ll-title ext">{s.label}</span>
-                <span class="ll-meta">{new URL(s.link!.url).hostname}</span>
+                
               </a>
             </li>
           ))}
@@ -108,12 +154,9 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
         <h2 id="units-title" class="section-title">負責單位</h2>
         <a href={url('/units/')}>單位與聯絡方式</a>
       </div>
-      <ul class="unit-cols">
+      <ul class="unit-row">
         {units.map((u) => (
-          <li>
-            <a href={url(`/units/${u.slug}/`)} class="unit-name">{u.name}</a>
-            <p>{u.summary}</p>
-          </li>
+          <li><a href={url(`/units/${u.slug}/`)}>{u.name}</a></li>
         ))}
       </ul>
     </div>
@@ -121,11 +164,23 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
 </Base>
 
 <style>
+  /* ---------- hero: text left, photo bleeding to the right edge ---------- */
   .hero {
-    padding-block: clamp(var(--space-7), 8vw, var(--space-9)) var(--space-7);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    min-height: min(78vh, 46rem);
+    border-bottom: 1px solid var(--line);
   }
+  .hero-text {
+    padding: clamp(var(--space-7), 6vw, var(--space-9)) var(--space-7) var(--space-7)
+      max(1rem, calc((100vw - var(--wrap)) / 2));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  :global(.hero-photo) { height: 100%; min-height: 22rem; }
   .hero-lead {
-    font-size: clamp(var(--s5), 11vw, 7.5rem);
+    font-size: clamp(var(--s5), 8vw, 6.5rem);
     font-weight: 900;
     line-height: 1;
     color: var(--brand);
@@ -135,13 +190,12 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.15em 0.55em;
+    gap: 0.1em 0.5em;
     margin-top: var(--space-4);
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(var(--s3), 5.2vw, var(--s6));
+    font-size: clamp(var(--s3), 3.6vw, var(--s5));
     line-height: 1.3;
-    max-width: 22em;
   }
   .phrase {
     color: var(--ink);
@@ -152,36 +206,21 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
     background-size: 0% 0.38em;
     transition: background-size 260ms cubic-bezier(.2, .7, .2, 1);
     border-radius: 2px;
-  }
-  .phrase:hover,
-  .phrase:focus-visible {
-    background-size: 100% 0.38em;
-  }
-  .phrase:focus-visible { outline-offset: 4px; }
-  .phrase-more {
-    color: var(--brand);
-    font-size: 0.5em;
-    align-self: center;
-    font-weight: 700;
     text-decoration: underline;
     text-decoration-thickness: 2px;
-    text-underline-offset: 0.25em;
-    background-image: none;
+    text-decoration-color: var(--line);
+    text-underline-offset: 0.18em;
   }
-
-  .hero-search {
-    display: flex;
-    gap: var(--space-2);
-    margin-top: var(--space-7);
-    max-width: 40rem;
-  }
+  .phrase:hover, .phrase:focus-visible { background-size: 100% 0.38em; text-decoration-color: transparent; }
+  .phrase:focus-visible { outline-offset: 4px; }
+  .hero-search { display: flex; gap: var(--space-2); margin-top: var(--space-6); max-width: 34rem; }
   .hero-search input {
     flex: 1;
     min-width: 0;
     min-height: 52px;
     padding: 0 var(--space-5);
     border-radius: 999px;
-    border: 2px solid var(--line);
+    border: 2px solid var(--control-line);
     background: var(--surface);
     color: var(--ink);
     font: inherit;
@@ -189,67 +228,67 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
   .hero-search input::placeholder { color: var(--ink-soft); }
   .hero-search input:focus-visible { border-color: var(--brand); outline-offset: 2px; }
   .hero-search .btn { min-height: 52px; }
+  .hero-all { margin-top: var(--space-4); font-weight: 700; }
 
-  .aud-grid {
-    display: grid;
-    grid-template-columns: 14rem 1fr;
-    gap: var(--space-5);
-    align-items: center;
-  }
-  .aud-title { font-size: var(--s2); }
+  /* ---------- audience band ---------- */
+  .aud-band { padding-block: var(--space-5); background: var(--surface); border-bottom: 1px solid var(--line); }
+  .aud-grid { display: grid; grid-template-columns: 12rem 1fr; gap: var(--space-5); align-items: center; }
+  .aud-title { font-size: var(--s1); }
   .aud-list { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2); }
   .aud-list a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 var(--space-5);
-    border: 2px solid var(--ink);
-    border-radius: 999px;
-    color: var(--ink);
-    text-decoration: none;
-    font-weight: 700;
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-5);
+    border: 2px solid var(--ink); border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 700;
   }
   .aud-list a:hover { background: var(--ink); color: var(--paper); }
 
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-4);
-    margin-bottom: var(--space-5);
-  }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); }
   .section-head .section-title { margin: 0; }
   .section-head a { font-weight: 700; white-space: nowrap; }
 
-  .unit-cols {
+  /* ---------- life situations: photo cards ---------- */
+  .life-grid {
     list-style: none;
-    columns: 2 22rem;
-    column-gap: var(--space-7);
-  }
-  .unit-cols li {
-    break-inside: avoid;
-    padding-block: var(--space-4);
-    border-top: 1px solid var(--line);
-  }
-  .unit-name {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: var(--s1);
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .unit-name:hover { color: var(--brand); text-decoration: underline; }
-  .unit-cols p { color: var(--ink-soft); margin-top: var(--space-1); max-width: var(--measure); }
-
-  .help-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-5);
   }
+  .life-card { display: flex; flex-direction: column; }
+  :global(.life-photo) { aspect-ratio: 4 / 3; border-radius: var(--radius-m); }
+  .life-card-text { border-top: 3px solid var(--ink); }
+  .life-body { padding-top: var(--space-4); }
+  .life-group { font-size: var(--s-1); color: var(--brand); font-weight: 700; }
+  .life-heading { font-size: var(--s1); margin-top: var(--space-1); }
+  .life-tasks { list-style: none; margin-top: var(--space-3); }
+  .life-tasks li { border-top: 1px solid var(--line); }
+  .life-tasks a {
+    display: flex; align-items: center; min-height: 44px;
+    color: var(--ink); text-decoration: none; font-weight: 600;
+  }
+  .life-tasks a:hover { box-shadow: inset 0 -3px 0 var(--marker); }
+  .life-more { display: inline-block; margin-top: var(--space-3); font-size: 0.95rem; font-weight: 700; }
+
+  /* ---------- numbers band ---------- */
+  .numbers { background: var(--brand); color: var(--paper); }
+  .numbers-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+  :global(.numbers-photo) { min-height: 18rem; margin-left: calc(-1 * max(1rem, (100vw - var(--wrap)) / 2)); }
+  .numbers-list {
+    margin: 0; padding: var(--space-7) 0 var(--space-7) var(--space-7);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); align-content: center;
+  }
+  .numbers-list dt { font-size: var(--s-1); opacity: 0.9; order: 2; }
+  .numbers-list div { display: flex; flex-direction: column; }
+  .numbers-list dd {
+    margin: 0; order: 1;
+    font-family: var(--font-display); font-weight: 900; font-size: var(--s6); line-height: 1;
+  }
+  .numbers-list dd span { font-size: var(--s1); margin-left: 0.15em; }
+
+  /* ---------- help ---------- */
+  .help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); }
   .help-lede { color: var(--ink-soft); max-width: var(--measure); }
   .help-lines { margin: var(--space-5) 0 0; display: grid; gap: var(--space-4); }
   .help-lines dt { font-size: var(--s-1); color: var(--ink-soft); }
-  .help-lines dd { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: var(--s2); }
+  .help-lines dd { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: var(--s2); overflow-wrap: anywhere; }
   .help-lines dd a { color: var(--ink); text-decoration: none; }
   .help-lines dd a:hover { text-decoration: underline; }
   .help-lines dd span { font-family: var(--font-body); font-weight: 400; font-size: var(--s-1); color: var(--ink-soft); }
@@ -257,11 +296,34 @@ const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[
   .help-duty dd a { color: var(--alert); }
   .ll-meta { overflow: hidden; text-overflow: ellipsis; }
 
+  /* ---------- units ---------- */
+  .unit-row { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+  .unit-row a {
+    display: inline-flex; align-items: center; min-height: 44px;
+    font-family: var(--font-display); font-weight: 800; font-size: var(--s1);
+    color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--line);
+  }
+  .unit-row a:hover { border-color: var(--marker); }
+
+  @media (max-width: 1100px) {
+    .life-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: 0; }
+    :global(.hero-photo) { order: -1; min-height: 0; aspect-ratio: 16 / 9; height: auto; }
+    .hero-text { padding: var(--space-6) 1rem var(--space-7); }
+  }
   @media (max-width: 860px) {
+    .numbers-inner { grid-template-columns: 1fr; }
+    :global(.numbers-photo) { margin: 0 -1rem; min-height: 0; aspect-ratio: 16 / 9; }
+    .numbers-list { padding: var(--space-6) 0; }
     .help-grid { grid-template-columns: 1fr; gap: var(--space-6); }
   }
   @media (max-width: 760px) {
-    .aud-grid { grid-template-columns: 1fr; }
+    .aud-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+    .life-grid { grid-template-columns: 1fr; }
+    :global(.life-photo) { aspect-ratio: 16 / 9; }
     .hero-search { flex-direction: column; }
+    .numbers-list dd { font-size: var(--s5); }
   }
 </style>

@@ -303,6 +303,27 @@ T = [
       L("hope-seed", "原住民學生輔導")]),
 ]
 
+# Colloquial and English search terms, found missing in the design review.
+EXTRA_KEYWORDS = {
+    "dorm": ["dorm", "housing", "宿舍費", "住宿費", "床位申請"],
+    "scholarship": ["scholarship", "獎助", "補助", "清寒獎學金"],
+    "student-loan": ["loan", "student loan"],
+    "tuition-waiver": ["學費減免", "tuition"],
+    "counseling": ["counseling", "心理師", "心情不好", "焦慮", "憂鬱", "失眠", "想找人聊"],
+    "first-aid": ["看醫生", "生病", "保健室", "健康中心", "受傷了"],
+    "health-check": ["健檢", "health check"],
+    "disability": ["身障", "身心障礙", "特殊需求", "accessibility"],
+    "leave": ["leave", "請病假", "請事假"],
+    "internship": ["internship", "intern"],
+    "jobs": ["job", "工作機會", "找工作"],
+    "lost": ["lost and found", "掉東西"],
+    "clubs": ["club", "社團活動"],
+    "venue": ["借教室", "場地借用"],
+    "military": ["當兵", "役男"],
+    "overseas-new": ["overseas", "僑生報到"],
+    "mainland": ["mainland", "陸生報到"],
+}
+
 FEATURED = ["dorm", "scholarship", "leave", "counseling", "student-loan", "tuition-waiver",
             "internship", "clubs", "venue", "military", "lost", "health-check"]
 
@@ -311,7 +332,8 @@ for slug, phrase, title, group, unit, aud, kw, summary, links in T:
     assert unit in by_slug, unit
     item = {
         "slug": slug, "phrase": phrase, "title": title, "summary": summary,
-        "group": group, "audiences": aud, "unit": unit, "links": links, "keywords": kw,
+        "group": group, "audiences": aud, "unit": unit, "links": links,
+        "keywords": kw + EXTRA_KEYWORDS.get(slug, []),
     }
     if slug in FEATURED:
         item["featured"] = True

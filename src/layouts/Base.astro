@@ -50,7 +50,7 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
             <span class="alert-label">24 小時校安專線</span>
             <a class="alert-phone tnum" href={tel(hotline.phone)}>{phoneMain(hotline.phone)}</a>
             </p>
-          <p class="alert-sub"><span class="alert-life">生命危險 <a href="tel:110">110</a>／<a href="tel:119">119</a></span>
+          <p class="alert-sub"><span class="alert-life">生命危險 <a class="tap" href="tel:110">110</a> <a class="tap" href="tel:119">119</a></span>
           <a class="alert-more" href={url('/emergency/')}>更多緊急電話</a></p>
         </div>
       </aside>
@@ -58,13 +58,27 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
 
     <header class="site-header">
       <div class="wrap header-inner">
-        <a class="brand" href={url('/')} aria-label="政大學務處 首頁">
+        <a class="brand" href={url('/')}>
           <span class="brand-mark" aria-hidden="true">政</span>
           <span class="brand-text">
             <span class="brand-name">學務處</span>
             <span class="brand-sub">國立政治大學</span>
           </span>
+          <span class="visually-hidden">首頁</span>
         </a>
+
+        <div class="header-tools">
+          <a class="icon-btn" href={url('/services/#q')} aria-label="搜尋服務">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+          <button class="icon-btn" type="button" id="theme-toggle" aria-label="切換為深色模式">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
+          </button>
+          <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-list" id="menu-toggle">
+            <span class="visually-hidden">選單</span>
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
 
         <nav class="main-nav" aria-label="主要導覽">
           <ul id="nav-list">
@@ -76,19 +90,6 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
             </li>
           </ul>
         </nav>
-
-        <div class="header-tools">
-          <a class="icon-btn" href={url('/services/#q')} aria-label="搜尋服務">
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </a>
-          <button class="icon-btn" type="button" id="theme-toggle" aria-label="切換深色模式" aria-pressed="false">
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
-          </button>
-          <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-list" id="menu-toggle">
-            <span class="visually-hidden">選單</span>
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </button>
-        </div>
       </div>
     </header>
 
@@ -114,14 +115,14 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
         <div class="footer-emergency">
           <p class="footer-name">緊急聯絡</p>
           <ul>
-            <li>生命危險 <a class="tnum" href="tel:110">110</a>／<a class="tnum" href="tel:119">119</a></li>
+            <li>生命危險 <a class="tnum tap" href="tel:110">110</a> <a class="tnum tap" href="tel:119">119</a></li>
             {campus24.map((l) => (
               <li>{l.name.replace(/（.*?）/, '')} <a class="tnum" href={tel(l.phone)}>{phoneMain(l.phone)}</a>（24 小時）</li>
             ))}
           </ul>
         </div>
         <div class="footer-note">
-          <p>這是學生製作的非官方重新設計提案，內容與連結取自 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a>（擷取於 {site.fetchedAt}）。辦理事務請以官方網站公告為準。</p>
+          <p>這是學生製作的非官方重新設計提案，內容與連結取自 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a>（擷取於 {site.fetchedAt}）。辦理事務請以官方網站公告為準。校園照片由提案者提供。</p>
         </div>
       </div>
     </footer>
@@ -136,15 +137,21 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
           return window.matchMedia('(prefers-color-scheme: dark)').matches;
         }
         function sync() {
-          btn.setAttribute('aria-pressed', String(isDark()));
           btn.setAttribute('aria-label', isDark() ? '切換為淺色模式' : '切換為深色模式');
         }
+        function syncMeta() {
+          document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+            m.setAttribute('content', isDark() ? '#10151f' : '#f6f7f9');
+          });
+        }
         sync();
+        if (root.dataset.theme) syncMeta();
         btn.addEventListener('click', function () {
           var next = isDark() ? 'light' : 'dark';
           root.dataset.theme = next;
           try { localStorage.setItem('theme', next); } catch (e) {}
           sync();
+          syncMeta();
         });
         var menu = document.getElementById('menu-toggle');
         var list = document.getElementById('nav-list');
@@ -152,6 +159,7 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
           var open = menu.getAttribute('aria-expanded') === 'true';
           menu.setAttribute('aria-expanded', String(!open));
           list.classList.toggle('is-open', !open);
+          if (!open) { var first = list.querySelector('a'); if (first) first.focus(); }
         });
         document.addEventListener('keydown', function (e) {
           if (e.key === 'Escape' && list.classList.contains('is-open')) {
@@ -167,8 +175,8 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
 
 <style>
   .alert-band {
-    background: var(--alert);
-    color: var(--alert-ink);
+    background: var(--alert-surface);
+    color: var(--alert-surface-ink);
     font-size: var(--s-1);
   }
   .alert-inner {
@@ -182,6 +190,9 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
   .alert-inner p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); }
   .alert-label { font-weight: 700; }
   .alert-band a { color: inherit; }
+  .alert-band :focus-visible { outline-color: currentColor; }
+  .tap { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+  .alert-band .tap { min-height: 32px; }
   .alert-phone {
     font-size: var(--s1);
     font-weight: 800;
@@ -232,6 +243,8 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
   .brand-name { font-family: var(--font-display); font-weight: 900; font-size: var(--s1); }
   .brand-sub { font-size: var(--s-1); color: var(--ink-soft); }
 
+  .main-nav { order: 2; }
+  .header-tools { order: 3; }
   .main-nav ul { list-style: none; display: flex; gap: var(--space-2); align-items: center; }
   .main-nav a {
     display: inline-flex;
@@ -246,11 +259,11 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
   .main-nav a:hover { background: var(--brand-tint); }
   .main-nav a[aria-current='page'] { box-shadow: inset 0 -3px 0 var(--marker); border-radius: 0; }
   .nav-emergency a {
-    background: var(--alert);
-    color: var(--alert-ink);
+    background: var(--alert-surface);
+    color: var(--alert-surface-ink);
     padding-inline: var(--space-4);
   }
-  .nav-emergency a:hover { background: var(--alert); text-decoration: underline; }
+  .nav-emergency a:hover { background: var(--alert-surface); text-decoration: underline; }
   .nav-emergency a[aria-current='page'] { border-radius: 999px; box-shadow: none; }
 
   .header-tools { display: flex; align-items: center; gap: var(--space-1); }
@@ -295,16 +308,16 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
   .footer-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr 1.4fr 1.6fr;
+    gap: var(--space-6) var(--space-7);
   }
   .footer-emergency ul { list-style: none; display: grid; gap: var(--space-1); }
   .footer-emergency a { color: var(--ink); font-weight: 700; }
+  .footer-links { list-style: none; display: grid; gap: var(--space-1); }
+  .footer-links a { display: inline-flex; align-items: center; min-height: 36px; color: var(--ink); }
   @media (max-width: 1000px) and (min-width: 761px) {
     .footer-grid { grid-template-columns: 1fr 1fr; }
-    gap: var(--space-6);
   }
   .footer-name { font-family: var(--font-display); font-weight: 800; color: var(--ink); font-size: var(--s0); margin-bottom: var(--space-2); }
-  .footer-links { list-style: none; display: grid; gap: var(--space-1); }
-  .footer-links a { color: var(--ink); }
   @media (max-width: 760px) {
     .footer-grid { grid-template-columns: 1fr; }
   }
