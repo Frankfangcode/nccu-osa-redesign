@@ -1,0 +1,220 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { url } from '../data/url';
+import { tasks, units, news, featuredTasks, taskBySlug, unitBySlug, emergency } from '../data/site';
+
+const featured = featuredTasks.map(taskBySlug);
+const more = tasks.filter((t) => !featuredTasks.includes(t.slug) && t.slug !== 'emergency');
+const latest = news.slice(0, 4);
+const audiences = [
+  { label: '新生', desc: '報到、宿舍、健檢、就貸', q: '新生' },
+  { label: '僑生・港澳生・陸生', desc: '居留、健保、生活輔導', q: '僑生' },
+  { label: '研究生', desc: '宿舍、獎學金、職涯', q: '研究生' },
+  { label: '家長', desc: '住宿、安全與聯絡窗口', q: '家長' },
+];
+const fmt = (d: string) => d.replaceAll('-', '.');
+---
+<Base title="首頁" current="home">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Office of Student Affairs</p>
+        <h1>在政大的生活，<br /><span class="hl">從這裡開始安排。</span></h1>
+        <p class="lede">宿舍、獎學金、請假、心理諮商——直接說你想做什麼，我們幫你找到對的窗口。</p>
+        <form class="hero-search" action={url('search')} method="get" role="search">
+          <label for="hero-q" class="sr-only">搜尋服務</label>
+          <Icon name="search" size={22} />
+          <input id="hero-q" name="q" type="search" placeholder="試試「宿舍」「學貸」「請假」" autocomplete="off" />
+          <button class="btn btn-primary" type="submit">搜尋</button>
+        </form>
+        <p class="hero-popular">
+          <span>熱門：</span>
+          {['宿舍申請', '弱勢助學金', '預約初談', '病假'].map((k) => <a href={`${url('search')}?q=${encodeURIComponent(k)}`}>{k}</a>)}
+        </p>
+      </div>
+
+      <aside class="hero-sos" aria-labelledby="hero-sos-h">
+        <p class="hero-sos-tag"><Icon name="clock" size={16} />24 小時・全年無休</p>
+        <h2 id="hero-sos-h">需要立即協助？</h2>
+        <a class="hero-sos-num" href={`tel:${emergency.campus[0].tel}`}>
+          <Icon name="phone" size={26} />
+          <span><small>校安專線</small>{emergency.campus[0].display}</span>
+        </a>
+        <p>危及生命請先撥 <a href="tel:119">119</a> 或 <a href="tel:110">110</a>。心理危機可撥安心專線 <a href="tel:1925">1925</a>。</p>
+        <a class="hero-sos-link" href={url('emergency')}>依情況找緊急資源 <Icon name="arrow" size={16} /></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tasks-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Tasks</p>
+          <h2 id="tasks-h">我想…</h2>
+        </div>
+        <a class="btn btn-ghost" href={url('tasks')}>全部服務 <Icon name="arrow" size={16} /></a>
+      </div>
+      <ul class="task-grid">
+        {featured.map((t, i) => (
+          <li>
+            <a class="task-card lift" href={url(`tasks/${t.slug}`)}>
+              <span class="task-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="task-icon"><Icon name={t.icon} size={28} /></span>
+              <span class="task-verb">{t.verb}</span>
+              <span class="task-sum">{t.summary}</span>
+              <span class="task-unit">{t.units.map((u) => unitBySlug(u).short).join('・')}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="more-tasks">
+        <span>還有：</span>
+        {more.map((t) => <a href={url(`tasks/${t.slug}`)}>{t.verb}</a>)}
+      </p>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="aud-h">
+    <div class="wrap">
+      <p class="eyebrow">For you</p>
+      <h2 id="aud-h">依身分快速找</h2>
+      <ul class="aud-grid">
+        {audiences.map((a) => (
+          <li><a class="aud-card lift" href={`${url('search')}?q=${encodeURIComponent(a.q)}`}><strong>{a.label}</strong><span>{a.desc}</span><Icon name="arrow" size={18} /></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="news-h">
+    <div class="wrap news-layout">
+      <div>
+        <div class="section-head">
+          <div><p class="eyebrow">News</p><h2 id="news-h">最新消息</h2></div>
+          <a class="btn btn-ghost" href={url('news')}>所有消息 <Icon name="arrow" size={16} /></a>
+        </div>
+        <ol class="news-list">
+          {latest.map((n) => (
+            <li>
+              <time datetime={n.date}>{fmt(n.date)}</time>
+              <div>
+                <span class="chip">{n.category}</span>
+                <p class="news-title">{n.title}</p>
+                <span class="news-unit">{unitBySlug(n.unit).name}</span>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="notice-proto">消息為版面示範用的範例資料，上線時改接原站公告。</p>
+      </div>
+
+      <aside class="who card" aria-labelledby="who-h">
+        <Icon name="users" size={32} />
+        <h2 id="who-h">不知道該找誰？</h2>
+        <p>不確定事情歸哪個單位管，直接打給學務處總機，我們幫你轉接到對的人。</p>
+        <a class="who-num" href="tel:+886229393091">02-2939-3091</a>
+        <p class="who-small">上班時間<br /><a href="mailto:nccuosa@nccu.edu.tw">nccuosa@nccu.edu.tw</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="units-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="eyebrow">Units</p><h2 id="units-h">學務處各單位</h2></div>
+        <a class="btn btn-ghost" href={url('units')}>單位總覽 <Icon name="arrow" size={16} /></a>
+      </div>
+      <ul class="unit-grid">
+        {units.map((u) => (
+          <li>
+            <a class="unit-row" href={url(`units/${u.slug}`)}>
+              <span class="unit-short">{u.short}</span>
+              <span class="unit-name">{u.name}<small lang="en">{u.en}</small></span>
+              <Icon name="arrow" size={18} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-block: clamp(40px, 7vw, 88px); border-bottom: 1px solid var(--line); background:
+    radial-gradient(1200px 400px at 85% -10%, var(--brand-soft), transparent 70%); }
+  .hero-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; }
+  .hero h1 { font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 900; line-height: 1.2; }
+  .hl { background: linear-gradient(transparent 62%, var(--accent-soft) 62%); }
+  .lede { font-size: clamp(1.0625rem, 2vw, 1.25rem); color: var(--ink-2); max-width: 32em; }
+  .hero-search { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 6px 6px 18px; max-width: 560px; box-shadow: var(--shadow); color: var(--ink-2); }
+  .hero-search:focus-within { border-color: var(--focus); }
+  .hero-search input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; color: var(--ink); padding: 8px 0; }
+  .hero-search input:focus { outline: none; }
+  .hero-search input::placeholder { color: var(--ink-3); }
+  .hero-popular { margin-top: 14px; font-size: .9375rem; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .hero-popular a { color: var(--ink); }
+
+  .hero-sos { background: var(--danger-soft); border: 1.5px solid var(--danger); border-radius: var(--radius); padding: 28px; }
+  .hero-sos h2 { font-size: 1.5rem; margin: 6px 0 12px; }
+  .hero-sos-tag { display: inline-flex; align-items: center; gap: 6px; font-size: .8125rem; font-weight: 700; color: var(--danger); margin: 0; }
+  .hero-sos-num { display: flex; align-items: center; gap: 14px; background: var(--danger); color: var(--danger-ink); border-radius: var(--radius-sm); padding: 14px 18px; text-decoration: none; margin-bottom: 14px; }
+  .hero-sos-num span { display: flex; flex-direction: column; font-size: 1.75rem; font-weight: 900; letter-spacing: .02em; line-height: 1.2; }
+  .hero-sos-num small { font-size: .8125rem; font-weight: 700; letter-spacing: .08em; }
+  .hero-sos p { font-size: .9375rem; color: var(--ink); }
+  .hero-sos a:not(.hero-sos-num) { color: var(--ink); font-weight: 700; }
+  .hero-sos-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+
+  .task-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .task-card { position: relative; display: flex; flex-direction: column; gap: 8px; height: 100%; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); }
+  .task-card:hover { border-color: var(--brand); box-shadow: var(--shadow); }
+  .task-num { position: absolute; top: 18px; right: 22px; font-family: var(--font-serif); font-size: 1.75rem; font-weight: 900; color: var(--line); }
+  .task-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 12px; background: var(--brand-soft); color: var(--brand); margin-bottom: 8px; }
+  .task-verb { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; }
+  .task-sum { color: var(--ink-2); font-size: .9375rem; flex: 1; }
+  .task-unit { font-size: .8125rem; color: var(--ink-2); border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 4px; }
+  .more-tasks { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--ink-2); }
+  .more-tasks a { color: var(--ink); min-height: 32px; display: inline-flex; align-items: center; }
+
+  .band { background: var(--surface-2); }
+  .aud-grid { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .aud-card { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; padding: 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink); }
+  .aud-card strong { font-size: 1.125rem; }
+  .aud-card span { grid-column: 1; color: var(--ink-2); font-size: .875rem; }
+  .aud-card :global(svg) { grid-column: 2; grid-row: 1 / 3; align-self: center; color: var(--brand); }
+  .aud-card:hover { border-color: var(--brand); }
+
+  .news-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; align-items: start; }
+  .news-list { list-style: none; padding: 0; margin: 0 0 20px; border-top: 2px solid var(--ink); }
+  .news-list li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .news-list time { font-family: var(--font-serif); font-weight: 700; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .news-title { font-size: 1.125rem; font-weight: 700; margin: 6px 0 4px; line-height: 1.5; }
+  .news-unit { font-size: .8125rem; color: var(--ink-2); }
+  .who { position: sticky; top: 100px; color: var(--ink); }
+  .who :global(svg) { color: var(--brand); margin-bottom: 12px; }
+  .who h2 { font-size: 1.5rem; }
+  .who-num { display: block; font-size: 1.75rem; font-weight: 900; color: var(--brand); text-decoration: none; margin: 8px 0; }
+  .who-small { font-size: .875rem; color: var(--ink-2); }
+
+  .unit-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 32px; border-top: 2px solid var(--ink); }
+  .unit-row { display: grid; grid-template-columns: 96px 1fr auto; align-items: center; gap: 16px; padding: 18px 4px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); min-height: 72px; }
+  .unit-row:hover .unit-name { text-decoration: underline; }
+  .unit-short { font-family: var(--font-serif); font-weight: 900; font-size: 1.125rem; color: var(--brand); }
+  .unit-name { display: flex; flex-direction: column; font-weight: 700; }
+  .unit-name small { font-weight: 400; font-size: .8125rem; color: var(--ink-2); }
+
+  @media (max-width: 960px) {
+    .hero-grid, .news-layout { grid-template-columns: 1fr; }
+    .who { position: static; }
+    .task-grid { grid-template-columns: repeat(2, 1fr); }
+    .aud-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .task-grid, .aud-grid, .unit-grid { grid-template-columns: 1fr; }
+    .task-card { padding: 20px; }
+    .news-list li { grid-template-columns: 1fr; gap: 4px; }
+    .unit-row { grid-template-columns: 80px 1fr auto; }
+    .hero-search .btn { padding-inline: 14px; }
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { url } from '../data/url';
+import { emergency } from '../data/site';
+
+const [hotline, police, dorm, counsel] = emergency.campus;
+const nat = Object.fromEntries(emergency.national.map((n) => [n.tel, n]));
+
+// 依「情境」分區，而非依單位（研究建議 #2）
+const situations = [
+  {
+    id: 'danger', tone: 'danger', title: '有生命危險、受傷或正在發生的危險',
+    desc: '先確保自身安全，再撥打電話。',
+    calls: [ { ...nat['119'], label: '119 消防・救護' }, { ...nat['110'], label: '110 報案' }, { ...hotline, label: '通報校安專線' } ],
+    note: '撥完 119／110 後，請同步通報校安專線，學校會派人協助。',
+  },
+  {
+    id: 'mental', tone: 'danger', title: '情緒崩潰、有傷害自己的念頭',
+    desc: '你不用一個人撐著。現在就可以找人說話。',
+    calls: [ { ...nat['1925'], label: '1925 安心專線（24 小時）' }, { ...hotline, label: '校安 24 小時專線' }, { ...counsel, label: '身心健康中心（上班時間）' } ],
+    note: '如果身邊的朋友有危險，請不要讓他獨處，並撥打上面的電話。',
+  },
+  {
+    id: 'afterhours', tone: 'warn', title: '宿舍或下班後、假日發生的狀況',
+    desc: '停電、漏水、門禁、室友衝突、身體不適。',
+    calls: [ { ...dorm, label: '住宿組夜間值勤' }, { ...hotline, label: '校安 24 小時專線' }, { ...police, label: '駐警隊' } ],
+  },
+  {
+    id: 'violence', tone: 'warn', title: '遭遇騷擾、暴力或性平事件',
+    desc: '你的隱私會被保護，求助不代表一定要提告。',
+    calls: [ { ...nat['113'], label: '113 保護專線（24 小時）' }, { ...hotline, label: '校安 24 小時專線' } ],
+  },
+];
+---
+<Base title="緊急求助" description="政大 24 小時校安專線與校內外緊急求助資源。" current="emergency">
+  <header class="em-hero">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: '緊急求助' }]} />
+      <h1>緊急求助</h1>
+      <p class="lede">任何時間、任何事，打這支電話就有人接。</p>
+      <a class="big-call" href={`tel:${hotline.tel}`}>
+        <Icon name="phone" size={36} />
+        <span><small>政大校安 24 小時專線</small><strong>{hotline.display}</strong></span>
+      </a>
+      <p class="em-sub">危及生命請先撥 <a href="tel:119">119</a> 或 <a href="tel:110">110</a></p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="jump" aria-label="依情況選擇">
+      <p>你遇到的是：</p>
+      <ul>{situations.map((s) => <li><a href={`#${s.id}`}>{s.title}</a></li>)}</ul>
+    </nav>
+
+    <div class="sits">
+      {situations.map((s) => (
+        <section id={s.id} class:list={['sit', s.tone]} aria-labelledby={`${s.id}-h`}>
+          <h2 id={`${s.id}-h`}>{s.title}</h2>
+          <p>{s.desc}</p>
+          <ul class="calls">
+            {s.calls.map((c, i) => (
+              <li><a class:list={['call', { primary: i === 0 }]} href={`tel:${c.tel}`}><Icon name="phone" size={20} /><span><strong>{c.display}</strong><small>{c.label}</small></span></a></li>
+            ))}
+          </ul>
+          {s.note && <p class="note">{s.note}</p>}
+        </section>
+      ))}
+    </div>
+
+    <section class="all" aria-labelledby="all-h">
+      <h2 id="all-h">所有緊急電話</h2>
+      <div class="tables">
+        <div>
+          <h3>校內</h3>
+          <dl>{emergency.campus.map((c) => <div><dt>{c.label}<small>{c.desc}</small></dt><dd><a href={`tel:${c.tel}`}>{c.display}</a></dd></div>)}</dl>
+        </div>
+        <div>
+          <h3>校外（24 小時）</h3>
+          <dl>{emergency.national.map((c) => <div><dt>{c.label}<small>{c.desc}</small></dt><dd><a href={`tel:${c.tel}`}>{c.display}</a></dd></div>)}</dl>
+        </div>
+      </div>
+      <p class="notice-proto">校內電話整理自政大校安緊急事件流程圖等公開資料，正式上線前需與學安中心核對。非緊急的心理諮商請見<a href={url('tasks/counseling')}>預約心理諮商</a>。</p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .em-hero { background: var(--danger); color: var(--danger-ink); padding-block: 32px 48px; }
+  .em-hero :global(.breadcrumb), .em-hero :global(.breadcrumb a) { color: inherit; }
+  .em-hero :global(.breadcrumb li + li::before) { color: inherit; }
+  .em-hero h1 { margin-top: 12px; }
+  .em-hero .lede { font-size: 1.25rem; margin-bottom: 24px; }
+  .big-call { display: inline-flex; align-items: center; gap: 18px; padding: 18px 28px; background: var(--danger-ink); color: var(--danger); border-radius: var(--radius); text-decoration: none; }
+  .big-call span { display: flex; flex-direction: column; line-height: 1.2; }
+  .big-call small { font-weight: 700; font-size: .875rem; color: var(--ink); }
+  :global([data-theme='dark']) .big-call small { color: #fff; }
+  .big-call strong { font-size: clamp(2rem, 6vw, 3rem); font-weight: 900; letter-spacing: .02em; }
+  .em-sub { margin: 16px 0 0; font-weight: 700; }
+  .em-sub a { color: inherit; font-size: 1.25rem; }
+
+  .jump { margin: 40px 0; }
+  .jump p { font-weight: 700; color: var(--ink-2); margin-bottom: 8px; }
+  .jump ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .jump a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
+  .jump a:hover { border-color: var(--ink-2); }
+
+  .sits { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .sit { padding: 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--accent); scroll-margin-top: 100px; }
+  .sit.danger { border-top-color: var(--danger); }
+  .sit h2 { font-size: 1.375rem; }
+  .sit > p { color: var(--ink-2); }
+  .calls { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .call { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--line); text-decoration: none; color: var(--ink); min-height: 56px; }
+  .call:hover { border-color: var(--ink-2); }
+  .call span { display: flex; flex-direction: column; line-height: 1.3; }
+  .call strong { font-size: 1.25rem; }
+  .call small { font-size: .875rem; color: var(--ink-2); }
+  .call.primary { background: var(--danger); border-color: var(--danger); color: var(--danger-ink); }
+  .call.primary small { color: inherit; }
+  .sit.warn .call.primary { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
+  .note { font-size: .9375rem; margin: 14px 0 0; padding-left: 12px; border-left: 3px solid var(--line); }
+
+  .all { margin-top: 64px; }
+  .tables { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 24px; }
+  dl { margin: 0; border-top: 2px solid var(--ink); }
+  dl div { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  dt { display: flex; flex-direction: column; font-weight: 700; }
+  dt small { font-weight: 400; color: var(--ink-2); font-size: .8125rem; }
+  dd { margin: 0; white-space: nowrap; }
+  dd a { font-weight: 900; font-size: 1.125rem; color: var(--ink); display: inline-flex; min-height: 44px; align-items: center; }
+  @media (max-width: 760px) { .sits, .tables { grid-template-columns: 1fr; } .sit { padding: 20px; } }
+</style>

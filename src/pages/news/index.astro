@@ -1,0 +1,111 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { url } from '../../data/url';
+import { news, units, unitBySlug } from '../../data/site';
+const categories = [...new Set(news.map((n) => n.category))];
+---
+<Base title="最新消息" current="news">
+  <header class="page-hero">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: '最新消息' }]} />
+      <p class="eyebrow">News</p>
+      <h1>最新消息</h1>
+      <p class="lede">學務處各單位的公告、申請期限與活動資訊。</p>
+    </div>
+  </header>
+
+  <div class="wrap news-wrap">
+    <form class="filters" id="filters" aria-label="篩選消息">
+      <div class="field">
+        <label for="f-unit">單位</label>
+        <select id="f-unit" name="unit">
+          <option value="">全部單位</option>
+          {units.map((u) => <option value={u.slug}>{u.name}</option>)}
+        </select>
+      </div>
+      <fieldset class="field cats">
+        <legend>類別</legend>
+        <div class="cat-row">
+          <label class="cat"><input type="radio" name="cat" value="" checked /><span>全部</span></label>
+          {categories.map((c) => <label class="cat"><input type="radio" name="cat" value={c} /><span>{c}</span></label>)}
+        </div>
+      </fieldset>
+    </form>
+
+    <p class="count" id="count" role="status" aria-live="polite">共 {news.length} 則</p>
+
+    <ol class="news-feed" id="feed">
+      {news.map((n) => (
+        <li data-unit={n.unit} data-cat={n.category}>
+          <time datetime={n.date}><span class="y">{n.date.slice(0, 4)}</span>{n.date.slice(5).replace('-', '.')}</time>
+          <div>
+            <p class="meta"><span class="chip">{n.category}</span><a href={url(`units/${n.unit}`)}>{unitBySlug(n.unit).name}</a></p>
+            <h2 class="t">{n.title}</h2>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <p class="empty" id="empty" hidden>這個條件下沒有消息。</p>
+    <p class="notice-proto">以上為版面示範用的範例消息，依公開搜尋資料中出現過的公告主題改寫，上線時改接原站公告。</p>
+  </div>
+</Base>
+
+<script>
+  const form = document.getElementById('filters') as HTMLFormElement;
+  const items = [...document.querySelectorAll<HTMLLIElement>('#feed li')];
+  const count = document.getElementById('count')!;
+  const empty = document.getElementById('empty')!;
+  const sel = form.querySelector<HTMLSelectElement>('#f-unit')!;
+  const params = new URLSearchParams(location.search);
+  if (params.get('unit')) sel.value = params.get('unit')!;
+  const apply = () => {
+    const unit = sel.value;
+    const cat = (form.querySelector<HTMLInputElement>('input[name=cat]:checked')?.value) ?? '';
+    let n = 0;
+    for (const li of items) {
+      const show = (!unit || li.dataset.unit === unit) && (!cat || li.dataset.cat === cat);
+      li.hidden = !show;
+      if (show) n++;
+    }
+    count.textContent = `共 ${n} 則`;
+    empty.hidden = n > 0;
+    const p = new URLSearchParams();
+    if (unit) p.set('unit', unit);
+    if (cat) p.set('cat', cat);
+    history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
+  };
+  const c = params.get('cat');
+  if (c) { const r = form.querySelector<HTMLInputElement>(`input[name=cat][value="${CSS.escape(c)}"]`); if (r) r.checked = true; }
+  form.addEventListener('change', apply);
+  apply();
+</script>
+
+<style>
+  .news-wrap { padding-top: 32px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: end; padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .field { display: flex; flex-direction: column; gap: 6px; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .field label[for], legend { font-size: .875rem; font-weight: 700; color: var(--ink-2); padding: 0; margin-bottom: 6px; }
+  select { font: inherit; min-height: 44px; padding: 0 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
+  .cat-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cat { position: relative; }
+  .cat input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .cat span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line); font-size: .9375rem; }
+  .cat input:checked + span { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); font-weight: 700; }
+  .cat input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .count { margin: 24px 0 8px; color: var(--ink-2); font-size: .9375rem; }
+  .news-feed { list-style: none; padding: 0; margin: 0 0 24px; border-top: 2px solid var(--ink); }
+  .news-feed li { display: grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .news-feed li[hidden] { display: none; }
+  time { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  time .y { display: block; font-size: .875rem; color: var(--ink-2); }
+  .meta { display: flex; gap: 12px; align-items: center; margin: 0 0 6px; font-size: .875rem; }
+  .meta a { color: var(--ink-2); }
+  .t { font-family: var(--font-sans); font-size: 1.1875rem; margin: 0; line-height: 1.5; }
+  .empty { color: var(--ink-2); }
+  @media (max-width: 600px) {
+    .news-feed li { grid-template-columns: 1fr; gap: 6px; }
+    time { font-size: 1rem; } time .y { display: inline; margin-right: 4px; font-size: 1rem; color: inherit; }
+    time .y::after { content: '.'; }
+  }
+</style>

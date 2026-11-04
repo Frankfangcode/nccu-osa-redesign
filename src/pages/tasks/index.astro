@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { url } from '../../data/url';
+import { tasks, unitBySlug } from '../../data/site';
+const list = tasks.filter((t) => t.slug !== 'emergency');
+---
+<Base title="我想…" current="tasks">
+  <header class="page-hero">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: '我想…' }]} />
+      <p class="eyebrow">All services</p>
+      <h1>我想…</h1>
+      <p class="lede">依照你要做的事情找服務，不必先知道是哪個單位負責。</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <ul class="all-tasks">
+      {list.map((t) => (
+        <li>
+          <a href={url(`tasks/${t.slug}`)} class="lift">
+            <span class="ic"><Icon name={t.icon} size={26} /></span>
+            <span class="txt"><strong>{t.verb}</strong><span>{t.summary}</span></span>
+            <span class="u">{t.units.map((u) => unitBySlug(u).short).join('・')}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+<style>
+  .all-tasks { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .all-tasks a { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); text-decoration: none; color: var(--ink); height: 100%; }
+  .all-tasks a:hover { border-color: var(--brand); }
+  .ic { grid-row: 1 / 3; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--brand-soft); color: var(--brand); }
+  .txt { display: flex; flex-direction: column; }
+  .txt strong { font-family: var(--font-serif); font-size: 1.25rem; }
+  .txt span { color: var(--ink-2); font-size: .9375rem; }
+  .u { grid-column: 2; font-size: .8125rem; color: var(--ink-2); }
+  @media (max-width: 700px) { .all-tasks { grid-template-columns: 1fr; } }
+</style>

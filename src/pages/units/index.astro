@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { url } from '../../data/url';
+import { units } from '../../data/site';
+---
+<Base title="單位總覽" current="units">
+  <header class="page-hero">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: '單位' }]} />
+      <p class="eyebrow">Units</p>
+      <h1>學務處各單位</h1>
+      <p class="lede">已經知道要找哪個組？從這裡直接進入。不確定的話，可以從<a href={url('tasks')}>「我想…」</a>開始找。</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <ul class="units">
+      {units.map((u) => (
+        <li class="card">
+          <p class="short">{u.short}</p>
+          <h2><a href={url(`units/${u.slug}`)}>{u.name}</a></h2>
+          <p class="en" lang="en">{u.en}</p>
+          <p class="sum">{u.summary}</p>
+          <p class="go" aria-hidden="true"><Icon name="arrow" size={18} /></p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+<style>
+  .units { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .units li { position: relative; display: flex; flex-direction: column; }
+  .units li:hover { border-color: var(--brand); }
+  .units li:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .short { font-family: var(--font-serif); font-weight: 900; color: var(--brand); margin: 0; }
+  h2 { font-size: 1.375rem; margin: 4px 0 2px; }
+  h2 a { color: var(--ink); text-decoration: none; }
+  h2 a::after { content: ''; position: absolute; inset: 0; }
+  h2 a:focus-visible { outline: none; }
+  .en { font-size: .8125rem; color: var(--ink-2); margin-bottom: 12px; }
+  .sum { color: var(--ink-2); font-size: .9375rem; flex: 1; }
+  .go { color: var(--brand); margin: 0; }
+  @media (max-width: 960px) { .units { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .units { grid-template-columns: 1fr; } }
+</style>

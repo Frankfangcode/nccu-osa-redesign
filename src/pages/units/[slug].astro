@@ -1,0 +1,112 @@
+---
+/**
+ * 單位頁模板：所有組別共用。
+ * 區塊順序依研究建議：概要 → 常用服務（連到任務）→ 最新公告 → 聯絡 → 緊急資源
+ */
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ContactCard from '../../components/ContactCard.astro';
+import { url } from '../../data/url';
+import { units, news, tasks, taskBySlug, emergency, type Unit } from '../../data/site';
+
+export function getStaticPaths() {
+  return units.map((u) => ({ params: { slug: u.slug }, props: { unit: u } }));
+}
+const { unit } = Astro.props as { unit: Unit };
+const unitNews = news.filter((n) => n.unit === unit.slug).slice(0, 5);
+const relatedTasks = tasks.filter((t) => t.units.includes(unit.slug) && t.slug !== 'emergency');
+const others = units.filter((u) => u.slug !== unit.slug);
+---
+<Base title={unit.name} description={unit.summary} current="units">
+  <header class="page-hero">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: '單位', href: url('units') }, { label: unit.name }]} />
+      <p class="eyebrow" lang="en">{unit.en}</p>
+      <h1>{unit.name}</h1>
+      <p class="lede">{unit.summary}</p>
+      {relatedTasks.length > 0 && (
+        <ul class="quick" aria-label="這個單位可以幫你">
+          {relatedTasks.map((t) => <li><a class="btn btn-ghost" href={url(`tasks/${t.slug}`)}><Icon name={t.icon} size={18} />{t.verb}</a></li>)}
+        </ul>
+      )}
+    </div>
+  </header>
+
+  <div class="wrap unit-layout">
+    <div class="unit-main">
+      <section class="block" aria-labelledby="svc-h">
+        <h2 id="svc-h">常用服務</h2>
+        <ul class="svc-list">
+          {unit.services.map((s) => {
+            const t = s.task ? taskBySlug(s.task) : null;
+            return (
+              <li>
+                <h3>{t ? <a href={t.slug === 'emergency' ? url('emergency') : url(`tasks/${t.slug}`)}>{s.title}</a> : s.title}</h3>
+                <p>{s.desc}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <section class="block" aria-labelledby="un-h">
+        <div class="section-head">
+          <h2 id="un-h">最新公告</h2>
+          <a href={`${url('news')}?unit=${unit.slug}`}>看{unit.short}全部公告</a>
+        </div>
+        {unitNews.length ? (
+          <ol class="mini-news">
+            {unitNews.map((n) => <li><time datetime={n.date}>{n.date.replaceAll('-', '.')}</time><span>{n.title}</span></li>)}
+          </ol>
+        ) : <p class="empty">目前沒有公告。</p>}
+      </section>
+
+      <p class="notice-proto">本頁內容依公開搜尋資料整理，尚待與<a href={unit.url}>原站</a>核對。</p>
+    </div>
+
+    <aside class="unit-side">
+      <ContactCard contacts={unit.contacts} hours={unit.hours} location={unit.location} />
+      <section class="side-sos" aria-labelledby="ss-h">
+        <h2 id="ss-h"><Icon name="alert" size={18} />緊急狀況</h2>
+        <a href={`tel:${emergency.campus[0].tel}`}>{emergency.campus[0].display}</a>
+        <p>校安 24 小時專線</p>
+      </section>
+      <nav class="side-units" aria-label="其他單位">
+        <h2>其他單位</h2>
+        <ul>{others.map((u) => <li><a href={url(`units/${u.slug}`)}>{u.name}</a></li>)}</ul>
+      </nav>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .quick { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .unit-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; padding-top: 48px; align-items: start; }
+  .block { margin-bottom: 56px; }
+  .svc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; border-top: 2px solid var(--ink); }
+  .svc-list li { padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .svc-list h3 { margin-bottom: 4px; }
+  .svc-list h3 a { color: var(--ink); }
+  .svc-list p { margin: 0; color: var(--ink-2); font-size: .9375rem; }
+  .mini-news { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+  .mini-news li { display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .mini-news time { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .empty { color: var(--ink-2); }
+  .unit-side { display: grid; gap: 20px; position: sticky; top: 100px; }
+  .side-sos { border: 1.5px solid var(--danger); background: var(--danger-soft); border-radius: var(--radius); padding: 20px; }
+  .side-sos h2 { font-family: var(--font-sans); font-size: 1rem; display: flex; gap: 6px; align-items: center; color: var(--danger); margin-bottom: 4px; }
+  .side-sos a { font-size: 1.5rem; font-weight: 900; color: var(--ink); text-decoration: none; }
+  .side-sos p { margin: 0; font-size: .875rem; color: var(--ink-2); }
+  .side-units h2 { font-family: var(--font-sans); font-size: 1rem; letter-spacing: .08em; color: var(--ink-2); }
+  .side-units ul { list-style: none; padding: 0; margin: 0; }
+  .side-units a { display: block; padding: 8px 0; color: var(--ink); border-bottom: 1px solid var(--line); }
+  @media (max-width: 920px) {
+    .unit-layout { grid-template-columns: 1fr; }
+    .unit-side { position: static; }
+  }
+  @media (max-width: 600px) {
+    .svc-list { grid-template-columns: 1fr; }
+    .mini-news li { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>

@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../data/url';
+---
+<Base title="找不到頁面">
+  <div class="wrap" style="padding-block: 96px;">
+    <p class="eyebrow">404</p>
+    <h1>這個頁面不存在</h1>
+    <p>可能是網址有誤或頁面已搬移。試試<a href={url('search')}>搜尋服務</a>，或回到<a href={url('')}>首頁</a>。</p>
+  </div>
+</Base>

@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ContactCard from '../../components/ContactCard.astro';
+import { url } from '../../data/url';
+import { tasks, unitBySlug, type Task } from '../../data/site';
+
+export function getStaticPaths() {
+  return tasks.filter((t) => t.slug !== 'emergency').map((t) => ({ params: { slug: t.slug }, props: { task: t } }));
+}
+const { task } = Astro.props as { task: Task };
+const owners = task.units.map(unitBySlug);
+const related = tasks.filter((t) => t.slug !== task.slug && t.slug !== 'emergency' && t.units.some((u) => task.units.includes(u))).slice(0, 4);
+---
+<Base title={task.title} description={task.summary} current="tasks">
+  <header class="page-hero">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: '我想…', href: url('tasks') }, { label: task.verb }]} />
+      <p class="eyebrow">我想{task.verb}</p>
+      <h1>{task.title}</h1>
+      <p class="lede">{task.summary}</p>
+      <p class="aud"><span class="sr-only">適用對象：</span>{task.audience.map((a) => <span class="chip">{a}</span>)}</p>
+    </div>
+  </header>
+
+  <div class="wrap task-layout">
+    <div>
+      {task.steps.length > 0 && (
+        <section aria-labelledby="steps-h">
+          <h2 id="steps-h">怎麼辦理</h2>
+          <ol class="steps">
+            {task.steps.map((s) => <li><h3>{s.title}</h3><p>{s.desc}</p></li>)}
+          </ol>
+        </section>
+      )}
+      {task.links.length > 0 && (
+        <section aria-labelledby="links-h" class="links">
+          <h2 id="links-h">相關連結</h2>
+          <ul>
+            {task.links.map((l) => <li><a href={l.url} rel="noopener">{l.label}<Icon name="external" size={16} /><span class="sr-only">（開啟原學務處網站）</span></a></li>)}
+          </ul>
+          <p class="notice-proto">連結目前暫時指向原學務處網站首頁，實際頁面網址待原站資料到位後補上。</p>
+        </section>
+      )}
+    </div>
+    <aside class="task-side">
+      <section class="card owner">
+        <h2 class="owner-h">負責單位</h2>
+        <ul>{owners.map((u) => <li><a href={url(`units/${u.slug}`)}><strong>{u.name}</strong><Icon name="arrow" size={16} /></a></li>)}</ul>
+      </section>
+      <ContactCard contacts={owners.flatMap((u) => u.contacts)} title="有問題先打這裡" />
+      {related.length > 0 && (
+        <nav aria-label="相關服務" class="related">
+          <h2>相關服務</h2>
+          <ul>{related.map((t) => <li><a href={url(`tasks/${t.slug}`)}>{t.verb}</a></li>)}</ul>
+        </nav>
+      )}
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .aud { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+  .task-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; padding-top: 48px; align-items: start; }
+  .steps { list-style: none; counter-reset: s; padding: 0; margin: 0 0 48px; }
+  .steps li { counter-increment: s; position: relative; padding: 0 0 28px 64px; border-left: 2px solid var(--line); margin-left: 20px; }
+  .steps li:last-child { border-left-color: transparent; }
+  .steps li::before { content: counter(s); position: absolute; left: -21px; top: -4px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--brand); color: var(--brand-ink); font-weight: 900; font-family: var(--font-serif); }
+  .steps li { padding-left: 36px; }
+  .steps p { color: var(--ink-2); margin: 0; }
+  .links ul { list-style: none; padding: 0; margin: 0 0 16px; border-top: 2px solid var(--ink); }
+  .links a { display: flex; justify-content: space-between; align-items: center; padding: 16px 4px; border-bottom: 1px solid var(--line); color: var(--ink); font-weight: 700; text-decoration: none; min-height: 44px; }
+  .links a:hover { color: var(--link); text-decoration: underline; }
+  .task-side { display: grid; gap: 20px; position: sticky; top: 100px; }
+  .owner-h, .related h2 { font-family: var(--font-sans); font-size: 1rem; letter-spacing: .08em; color: var(--ink-2); margin-bottom: 8px; }
+  .owner ul, .related ul { list-style: none; padding: 0; margin: 0; }
+  .owner a { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; color: var(--ink); text-decoration: none; min-height: 44px; }
+  .owner a:hover strong { text-decoration: underline; }
+  .related a { display: block; padding: 8px 0; color: var(--ink); border-bottom: 1px solid var(--line); }
+  @media (max-width: 920px) { .task-layout { grid-template-columns: 1fr; } .task-side { position: static; } }
+</style>

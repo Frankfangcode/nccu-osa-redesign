@@ -1,0 +1,11 @@
+---
+import { url } from '../data/url';
+interface Props { items: { label: string; href?: string }[] }
+const { items } = Astro.props;
+---
+<nav class="breadcrumb" aria-label="麵包屑">
+  <ol>
+    <li><a href={url('')}>首頁</a></li>
+    {items.map((i) => <li>{i.href ? <a href={i.href}>{i.label}</a> : <span aria-current="page">{i.label}</span>}</li>)}
+  </ol>
+</nav>

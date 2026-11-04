@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import type { Contact } from '../data/site';
+interface Props { contacts: Contact[]; title?: string; hours?: string; location?: string }
+const { contacts, title = '聯絡方式', hours, location } = Astro.props;
+---
+<section class="contact card" aria-label={title}>
+  <h2 class="contact-h">{title}</h2>
+  <ul>
+    {contacts.map((c) => (
+      <li>
+        <span class="c-label">{c.label}</span>
+        <a class="c-tel" href={`tel:${c.tel}`}><Icon name="phone" size={18} />{c.display}</a>
+        {c.note && <span class="c-note">{c.note}</span>}
+      </li>
+    ))}
+  </ul>
+  {hours && <p class="c-meta"><Icon name="clock" size={16} />{hours}</p>}
+  {location && <p class="c-meta"><Icon name="pin" size={16} />{location}</p>}
+</section>
+<style>
+  .contact-h { font-family: var(--font-sans); font-size: 1rem; letter-spacing: .08em; color: var(--ink-2); margin-bottom: 12px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  li { display: flex; flex-direction: column; }
+  .c-label { font-size: .875rem; color: var(--ink-2); }
+  .c-tel { display: inline-flex; align-items: center; gap: 8px; font-size: 1.25rem; font-weight: 700; color: var(--ink); text-decoration: none; min-height: 44px; }
+  .c-tel:hover { text-decoration: underline; }
+  .c-note { font-size: .8125rem; color: var(--ink-2); }
+  .c-meta { display: flex; gap: 8px; align-items: center; font-size: .875rem; color: var(--ink-2); margin: 14px 0 0; }
+</style>
