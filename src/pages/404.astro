@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+---
+<Base title="找不到頁面">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>找不到這個頁面</h1>
+      <p class="lede">連結可能已經改變。從「找服務」搜尋你要辦的事，或回到首頁。</p>
+    </header>
+    <p style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <a class="btn" href={url('/services/')}>找服務</a>
+      <a class="btn btn-ghost" href={url('/')}>回到首頁</a>
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+import { units, tasksForUnit, tel } from '../../lib/data';
+---
+<Base title="單位" current="units" description="政大學務處各組與中心的職掌、聯絡方式，以及各自負責的服務。">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>單位</h1>
+      <p class="lede">知道要辦什麼，卻不確定找誰？這裡列出學務處各組與中心負責的事，以及聯絡方式。</p>
+    </header>
+
+    <ul class="unit-table">
+      {units.map((u) => {
+        const ts = tasksForUnit(u.slug);
+        return (
+          <li>
+            <div class="ut-name">
+              <h2><a href={url(`/units/${u.slug}/`)}>{u.name}</a></h2>
+              {u.parent && u.parent !== '學務處' && <p class="ut-parent">{u.parent}</p>}
+            </div>
+            <p class="ut-summary">{u.summary}</p>
+            <div class="ut-side">
+              {u.contact.phone && <a class="tnum" href={tel(u.contact.phone)}>{u.contact.phone}</a>}
+              {ts.length > 0 && <p class="ut-count">負責 {ts.length} 項服務</p>}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .unit-table { list-style: none; }
+  .unit-table li {
+    display: grid;
+    grid-template-columns: 18rem minmax(0, 1fr) 12rem;
+    gap: var(--space-3) var(--space-6);
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--line);
+  }
+  .unit-table li:last-child { border-bottom: 1px solid var(--line); }
+  .ut-name h2 { font-size: var(--s1); }
+  .ut-name a { color: var(--ink); text-decoration: none; }
+  .ut-name a:hover { color: var(--brand); text-decoration: underline; }
+  .ut-parent { font-size: var(--s-1); color: var(--ink-soft); }
+  .ut-summary { color: var(--ink-soft); max-width: var(--measure); }
+  .ut-side { font-size: 0.95rem; display: grid; gap: var(--space-1); align-content: start; }
+  .ut-count { color: var(--ink-soft); font-size: var(--s-1); }
+  @media (max-width: 860px) {
+    .unit-table li { grid-template-columns: 1fr; }
+  }
+</style>

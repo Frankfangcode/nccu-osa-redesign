@@ -1,0 +1,169 @@
+---
+import Base from '../layouts/Base.astro';
+import { lines, tel } from '../lib/data';
+
+const campus = lines.filter((l) => l.scope === 'campus');
+const national = lines.filter((l) => l.scope === 'national');
+const primary = campus.find((l) => /24/.test(l.hours)) ?? campus[0];
+const otherCampus = campus.filter((l) => l !== primary);
+const life = national.filter((l) => ['110', '119'].includes(l.phone.replace(/\D/g, '')));
+const support = national.filter((l) => !life.includes(l));
+---
+<Base title="緊急求助" current="emergency" hideAlertBand description="政大校園 24 小時緊急聯絡電話，以及全國緊急與心理支持專線。">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>緊急求助</h1>
+      <p class="lede">遇到危險、受傷、身體或情緒上撐不住，現在就打電話。電話接通時，先說你在哪裡、發生什麼事。</p>
+    </header>
+
+    {life.length > 0 && (
+      <section class="life" aria-labelledby="life-title">
+        <h2 id="life-title" class="visually-hidden">有生命危險</h2>
+        <p class="life-lead">有立即的生命危險</p>
+        <ul class="life-list">
+          {life.map((l) => (
+            <li>
+              <a href={tel(l.phone)} class="life-num tnum" aria-label={`撥打 ${l.name} ${l.phone}`}>{l.phone}</a>
+              <span class="life-name">{l.name}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {primary && (
+      <section class="primary" aria-labelledby="primary-title">
+        <h2 id="primary-title" class="primary-name">{primary.name}</h2>
+        <p class="primary-hours">{primary.hours}</p>
+        <a class="primary-num tnum" href={tel(primary.phone)}>{primary.phone}</a>
+        <p class="primary-desc">{primary.description}</p>
+        <p class="source"><a class="ext" href={primary.sourceUrl} rel="noopener">資料來源</a></p>
+      </section>
+    )}
+
+    {otherCampus.length > 0 && (
+      <section class="section" aria-labelledby="campus-title">
+        <h2 id="campus-title" class="section-title">校內其他協助</h2>
+        <ul class="line-list">
+          {otherCampus.map((l) => (
+            <li>
+              <div>
+                <h3>{l.name}</h3>
+                <p class="ll-desc">{l.description}</p>
+                <p class="ll-hours">{l.hours}・<a href={l.sourceUrl} rel="noopener">來源</a></p>
+              </div>
+              <a class="ll-num tnum" href={tel(l.phone)}>{l.phone}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {support.length > 0 && (
+      <section class="section" aria-labelledby="national-title">
+        <h2 id="national-title" class="section-title">全國專線</h2>
+        <ul class="line-list">
+          {support.map((l) => (
+            <li>
+              <div>
+                <h3>{l.name}</h3>
+                <p class="ll-desc">{l.description}</p>
+                <p class="ll-hours">{l.hours}・<a href={l.sourceUrl} rel="noopener">來源</a></p>
+              </div>
+              <a class="ll-num tnum" href={tel(l.phone)}>{l.phone}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</Base>
+
+<style>
+  .life {
+    background: var(--alert);
+    color: var(--alert-ink);
+    border-radius: var(--radius-m);
+    padding: var(--space-5) var(--space-6);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .life-lead { font-family: var(--font-display); font-weight: 900; font-size: var(--s2); }
+  .life-list { list-style: none; display: flex; gap: var(--space-6); }
+  .life-list li { display: flex; flex-direction: column; align-items: center; }
+  .life-num {
+    color: inherit;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--s6);
+    line-height: 1;
+    text-decoration: none;
+  }
+  .life-num:hover { text-decoration: underline; }
+  .life-num:focus-visible { outline-color: var(--alert-ink); }
+  .life-name { font-size: var(--s-1); font-weight: 700; }
+
+  .primary {
+    margin-top: var(--space-6);
+    padding: var(--space-7) var(--space-6);
+    border: 3px solid var(--alert);
+    border-radius: var(--radius-m);
+    background: var(--alert-tint);
+    text-align: center;
+  }
+  .primary-name { font-size: var(--s3); }
+  .primary-hours { font-weight: 700; color: var(--alert); margin-top: var(--space-1); }
+  .primary-num {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(var(--s5), 9vw, var(--s7));
+    line-height: 1.1;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .primary-num:hover { text-decoration: underline; text-decoration-color: var(--alert); }
+  .primary-desc { margin: var(--space-4) auto 0; max-width: var(--measure); color: var(--ink-soft); }
+  .source { margin-top: var(--space-3); font-size: var(--s-1); }
+
+  .line-list { list-style: none; }
+  .line-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-5);
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+  .line-list li:last-child { border-bottom: 1px solid var(--line); }
+  .line-list h3 { font-size: var(--s1); }
+  .ll-desc { color: var(--ink-soft); max-width: var(--measure); }
+  .ll-hours { font-size: var(--s-1); color: var(--ink-soft); margin-top: var(--space-1); }
+  .ll-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--s3);
+    white-space: nowrap;
+    color: var(--ink);
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 var(--space-4);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+  }
+  .ll-num:hover { background: var(--ink); color: var(--paper); }
+
+  @media (max-width: 640px) {
+    .life { padding: var(--space-5); }
+    .life-num { font-size: var(--s5); }
+    .line-list li { flex-direction: column; align-items: flex-start; }
+    .ll-num { font-size: var(--s2); }
+  }
+</style>

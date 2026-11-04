@@ -1,0 +1,161 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsList from '../../components/NewsList.astro';
+import { url } from '../../lib/url';
+import { units, news, tasksForUnit, tel, type Unit } from '../../lib/data';
+
+export function getStaticPaths() {
+  return units.map((u) => ({ params: { slug: u.slug }, props: { unit: u } }));
+}
+const { unit } = Astro.props as { unit: Unit };
+const myTasks = tasksForUnit(unit.slug);
+const myNews = news.filter((n) => n.unit === unit.slug).slice(0, 5);
+const c = unit.contact;
+const hasContact = c.phone || c.email || c.location || c.hours;
+---
+<Base title={unit.name} current="units" description={unit.summary}>
+  <div class="wrap unit-layout">
+    <nav class="unit-nav" aria-label="單位導覽">
+      <p class="unit-nav-title">學務處單位</p>
+      <ul>
+        {units.map((u) => (
+          <li><a href={url(`/units/${u.slug}/`)} aria-current={u.slug === unit.slug ? 'page' : undefined}>{u.shortName}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="unit-main" data-pagefind-body>
+      <header class="page-head">
+        <nav class="breadcrumb" aria-label="麵包屑">
+          <ol>
+            <li><a href={url('/')}>首頁</a></li>
+            <li><a href={url('/units/')}>單位</a></li>
+          </ol>
+        </nav>
+        <h1 data-pagefind-meta="title">{unit.name}</h1>
+        <p class="lede">{unit.summary}</p>
+        <p class="official"><a class="ext" href={unit.officialUrl} rel="noopener">前往官方單位網站</a></p>
+      </header>
+
+      {hasContact && (
+        <section class="contact-strip" aria-labelledby="contact-title">
+          <h2 id="contact-title" class="visually-hidden">聯絡方式</h2>
+          <dl>
+            {c.phone && (<div><dt>電話</dt><dd><a class="tnum" href={tel(c.phone)}>{c.phone}</a></dd></div>)}
+            {c.email && (<div><dt>Email</dt><dd><a href={`mailto:${c.email}`}>{c.email}</a></dd></div>)}
+            {c.location && (<div><dt>地點</dt><dd>{c.location}</dd></div>)}
+            {c.hours && (<div><dt>服務時間</dt><dd>{c.hours}</dd></div>)}
+          </dl>
+        </section>
+      )}
+
+      {myTasks.length > 0 && (
+        <section class="section" aria-labelledby="tasks-title">
+          <h2 id="tasks-title" class="section-title">在這裡可以辦</h2>
+          <ul class="task-chips">
+            {myTasks.map((t) => (
+              <li><a href={url(`/tasks/${t.slug}/`)}>{t.title}</a></li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {unit.sections.length > 0 && (
+        <section class="section" aria-labelledby="sections-title">
+          <h2 id="sections-title" class="section-title">業務與資源</h2>
+          <div class="sections-grid">
+            {unit.sections.map((s) => (
+              <div class="sec">
+                <h3>{s.title}</h3>
+                <ul class="link-list">
+                  {s.links.map((l) => (
+                    <li><a href={l.url} rel="noopener"><span class="ll-title ext">{l.title}</span></a></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section class="section" aria-labelledby="unit-news-title">
+        <div class="head-row">
+          <h2 id="unit-news-title" class="section-title">{unit.shortName}最新消息</h2>
+          {unit.newsUrl && <a class="ext" href={unit.newsUrl} rel="noopener">官方消息列表</a>}
+        </div>
+        <NewsList items={myNews} />
+      </section>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .unit-layout {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+  .unit-nav {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+    padding-top: var(--space-8);
+  }
+  .unit-nav-title { font-size: var(--s-1); color: var(--ink-soft); font-weight: 700; margin-bottom: var(--space-2); }
+  .unit-nav ul { list-style: none; border-left: 2px solid var(--line); }
+  .unit-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding-left: var(--space-4);
+    margin-left: -2px;
+    border-left: 2px solid transparent;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .unit-nav a:hover { color: var(--ink); }
+  .unit-nav a[aria-current='page'] { border-left: 4px solid var(--marker); color: var(--ink); font-weight: 700; margin-left: -3px; }
+  .official { margin-top: var(--space-4); font-weight: 700; }
+
+  .contact-strip dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--space-4);
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+  }
+  .contact-strip dt { font-size: var(--s-1); color: var(--ink-soft); }
+  .contact-strip dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+
+  .task-chips { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .task-chips a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    background: var(--brand-tint);
+    color: var(--ink);
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .task-chips a:hover { box-shadow: inset 0 -4px 0 var(--marker); }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: var(--space-6);
+  }
+  .sec h3 { font-size: var(--s1); margin-bottom: var(--space-2); }
+  .head-row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); }
+  .head-row .section-title { margin-bottom: var(--space-5); }
+  .unit-main .section:first-of-type { border-top: 0; }
+
+  @media (max-width: 860px) {
+    .unit-layout { grid-template-columns: 1fr; gap: 0; }
+    .unit-nav { position: static; padding-top: var(--space-5); order: 2; border-top: 1px solid var(--line); margin-top: var(--space-6); }
+  }
+</style>

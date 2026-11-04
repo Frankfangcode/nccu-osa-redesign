@@ -1,0 +1,53 @@
+---
+import { formatDate } from '../lib/url';
+import { unitBySlug, type News } from '../lib/data';
+
+interface Props { items: News[]; filterable?: boolean }
+const { items, filterable = false } = Astro.props;
+---
+{items.length === 0 ? (
+  <p class="empty">目前沒有消息。可以到 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a> 查看最新公告。</p>
+) : (
+  <ol class="news-list">
+    {items.map((n) => {
+      const u = unitBySlug(n.unit);
+      return (
+        <li data-unit={filterable ? n.unit : undefined} data-cat={filterable ? n.category : undefined}>
+          <time class="news-date tnum" datetime={n.date}>{formatDate(n.date)}</time>
+          <a class="news-title ext" href={n.url} rel="noopener">{n.title}</a>
+          <span class="news-meta">
+            {n.category && <span class="tag">{n.category}</span>}
+            {u && <span class="news-unit">{u.shortName}</span>}
+          </span>
+        </li>
+      );
+    })}
+  </ol>
+)}
+
+<style>
+  .news-list { list-style: none; }
+  .news-list li {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr auto;
+    gap: var(--space-2) var(--space-5);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+  .news-list li:last-child { border-bottom: 1px solid var(--line); }
+  .news-date { color: var(--ink-soft); font-size: var(--s-1); }
+  .news-title {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--s0);
+  }
+  .news-title:hover { text-decoration: underline; text-decoration-color: var(--brand); }
+  .news-meta { display: flex; gap: var(--space-3); align-items: baseline; font-size: var(--s-1); color: var(--ink-soft); white-space: nowrap; }
+  .empty { color: var(--ink-soft); }
+  @media (max-width: 760px) {
+    .news-list li { grid-template-columns: 1fr; gap: var(--space-1); }
+    .news-date { order: -1; }
+  }
+</style>

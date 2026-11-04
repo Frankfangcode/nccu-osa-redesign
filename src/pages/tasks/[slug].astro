@@ -1,0 +1,108 @@
+---
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+import { tasks, unitBySlug, tel, type Task } from '../../lib/data';
+
+export function getStaticPaths() {
+  return tasks.map((t) => ({ params: { slug: t.slug }, props: { task: t } }));
+}
+const { task } = Astro.props as { task: Task };
+const unit = unitBySlug(task.unit);
+const related = tasks.filter((t) => t.group === task.group && t.slug !== task.slug).slice(0, 4);
+---
+<Base title={task.title} current="services" description={task.summary}>
+  <div class="wrap">
+    <header class="page-head">
+      <nav class="breadcrumb" aria-label="麵包屑">
+        <ol>
+          <li><a href={url('/')}>首頁</a></li>
+          <li><a href={url('/services/')}>找服務</a></li>
+          <li><a href={url(`/services/`)}>{task.group}</a></li>
+        </ol>
+      </nav>
+      <p class="task-kicker">我想{task.phrase}</p>
+      <h1 data-pagefind-meta="title">{task.title}</h1>
+      <p class="lede">{task.summary}</p>
+      {task.audiences.length > 0 && (
+        <p class="aud"><span class="visually-hidden">適用對象：</span>{task.audiences.map((a) => <span class="tag">{a}</span>)}</p>
+      )}
+    </header>
+
+    <div class="task-grid" data-pagefind-body>
+      <section aria-labelledby="links-title">
+        <h2 id="links-title" class="section-title">官方辦理頁面</h2>
+        <ul class="link-list">
+          {task.links.map((l) => (
+            <li>
+              <a href={l.url} rel="noopener">
+                <span class="ll-title ext">{l.title}</span>
+                <span class="ll-meta">{new URL(l.url).hostname.replace('www.', '')}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="note">以上連結會開啟學務處或相關單位的官方頁面，申請期限與文件以官方公告為準。</p>
+      </section>
+
+      {unit && (
+        <aside class="owner" aria-labelledby="owner-title">
+          <h2 id="owner-title" class="owner-title">負責單位</h2>
+          <p class="owner-name"><a href={url(`/units/${unit.slug}/`)}>{unit.name}</a></p>
+          <dl class="contact">
+            {unit.contact.phone && (<><dt>電話</dt><dd><a class="tnum" href={tel(unit.contact.phone)}>{unit.contact.phone}</a></dd></>)}
+            {unit.contact.email && (<><dt>Email</dt><dd><a href={`mailto:${unit.contact.email}`}>{unit.contact.email}</a></dd></>)}
+            {unit.contact.location && (<><dt>地點</dt><dd>{unit.contact.location}</dd></>)}
+            {unit.contact.hours && (<><dt>時間</dt><dd>{unit.contact.hours}</dd></>)}
+          </dl>
+        </aside>
+      )}
+    </div>
+
+    {related.length > 0 && (
+      <section class="section related" aria-labelledby="rel-title">
+        <h2 id="rel-title" class="section-title">同類服務</h2>
+        <ul class="rel-list">
+          {related.map((t) => (
+            <li><a href={url(`/tasks/${t.slug}/`)}>{t.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</Base>
+
+<style>
+  .task-kicker {
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--brand);
+    font-size: var(--s1);
+    margin-bottom: var(--space-2);
+  }
+  .aud { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+  .task-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  .note { margin-top: var(--space-4); font-size: var(--s-1); color: var(--ink-soft); max-width: var(--measure); }
+  .owner {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--brand);
+    border-radius: var(--radius-s);
+    padding: var(--space-5);
+  }
+  .owner-title { font-size: var(--s0); color: var(--ink-soft); font-family: var(--font-body); font-weight: 700; }
+  .owner-name { font-family: var(--font-display); font-weight: 800; font-size: var(--s1); margin-top: var(--space-1); }
+  .owner-name a { color: var(--ink); }
+  .contact { margin: var(--space-4) 0 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-2) var(--space-4); font-size: 0.95rem; }
+  .contact dt { color: var(--ink-soft); }
+  .contact dd { margin: 0; overflow-wrap: anywhere; }
+  .rel-list { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+  .rel-list a { font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
+  @media (max-width: 860px) {
+    .task-grid { grid-template-columns: 1fr; }
+  }
+</style>

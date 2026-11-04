@@ -1,0 +1,193 @@
+---
+import Base from '../layouts/Base.astro';
+import NewsList from '../components/NewsList.astro';
+import { url } from '../lib/url';
+import { tasks, news, units, audiences } from '../lib/data';
+
+const featured = tasks.filter((t) => t.featured);
+const latest = news.slice(0, 6);
+---
+<Base title="首頁" current="home">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <h1 id="hero-title" class="hero-lead">我想</h1>
+      <ul class="phrases" aria-label="常用服務">
+        {featured.map((t) => (
+          <li><a class="phrase" href={url(`/tasks/${t.slug}/`)}>{t.phrase}</a></li>
+        ))}
+        <li><a class="phrase phrase-more" href={url('/services/')}>看全部 {tasks.length} 項服務</a></li>
+      </ul>
+
+      <form class="hero-search" action={url('/services/')} method="get" role="search">
+        <label for="hero-q" class="visually-hidden">搜尋服務、表單或公告</label>
+        <input id="hero-q" name="q" type="search" placeholder="或直接搜尋：例如「兵役」「工讀」「遺失物」" autocomplete="off" />
+        <button type="submit" class="btn">搜尋</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section audience" aria-labelledby="aud-title">
+    <div class="wrap aud-grid">
+      <h2 id="aud-title" class="aud-title">依身分找服務</h2>
+      <ul class="aud-list">
+        {audiences.map((a) => (
+          <li><a href={url(`/services/?for=${encodeURIComponent(a)}`)}>{a}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="news-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="news-title" class="section-title">最新消息</h2>
+        <a href={url('/news/')}>全部消息</a>
+      </div>
+      <NewsList items={latest} />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="units-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="units-title" class="section-title">負責單位</h2>
+        <a href={url('/units/')}>單位與聯絡方式</a>
+      </div>
+      <ul class="unit-cols">
+        {units.map((u) => (
+          <li>
+            <a href={url(`/units/${u.slug}/`)} class="unit-name">{u.name}</a>
+            <p>{u.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(var(--space-7), 8vw, var(--space-9)) var(--space-7);
+  }
+  .hero-lead {
+    font-size: clamp(var(--s5), 11vw, 7.5rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--brand);
+    letter-spacing: 0.02em;
+  }
+  .phrases {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15em 0.55em;
+    margin-top: var(--space-4);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(var(--s3), 5.2vw, var(--s6));
+    line-height: 1.3;
+    max-width: 22em;
+  }
+  .phrase {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--marker), var(--marker));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 0% 0.38em;
+    transition: background-size 260ms cubic-bezier(.2, .7, .2, 1);
+    border-radius: 2px;
+  }
+  .phrase:hover,
+  .phrase:focus-visible {
+    background-size: 100% 0.38em;
+  }
+  .phrase:focus-visible { outline-offset: 4px; }
+  .phrase-more {
+    color: var(--brand);
+    font-size: 0.5em;
+    align-self: center;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+    background-image: none;
+  }
+
+  .hero-search {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-7);
+    max-width: 40rem;
+  }
+  .hero-search input {
+    flex: 1;
+    min-width: 0;
+    min-height: 52px;
+    padding: 0 var(--space-5);
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+  }
+  .hero-search input::placeholder { color: var(--ink-soft); }
+  .hero-search input:focus-visible { border-color: var(--brand); outline-offset: 2px; }
+  .hero-search .btn { min-height: 52px; }
+
+  .aud-grid {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  .aud-title { font-size: var(--s2); }
+  .aud-list { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .aud-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-5);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .aud-list a:hover { background: var(--ink); color: var(--paper); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+  .section-head .section-title { margin: 0; }
+  .section-head a { font-weight: 700; white-space: nowrap; }
+
+  .unit-cols {
+    list-style: none;
+    columns: 2 22rem;
+    column-gap: var(--space-7);
+  }
+  .unit-cols li {
+    break-inside: avoid;
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+  .unit-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--s1);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .unit-name:hover { color: var(--brand); text-decoration: underline; }
+  .unit-cols p { color: var(--ink-soft); margin-top: var(--space-1); max-width: var(--measure); }
+
+  @media (max-width: 760px) {
+    .aud-grid { grid-template-columns: 1fr; }
+    .hero-search { flex-direction: column; }
+  }
+</style>

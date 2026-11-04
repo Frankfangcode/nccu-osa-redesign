@@ -1,0 +1,297 @@
+---
+import '../styles/global.css';
+import { url } from '../lib/url';
+import emergency from '../data/emergency.json';
+import site from '../data/site.json';
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: 'home' | 'services' | 'news' | 'units' | 'emergency';
+  hideAlertBand?: boolean;
+}
+const { title, description = '政大學務處服務入口：獎助學金、請假、宿舍、諮商、社團與僑陸生服務，依你要辦的事找到窗口。', current, hideAlertBand = false } = Astro.props;
+
+type Line = { name: string; phone: string; hours: string; scope: string };
+const lines = emergency as Line[];
+const hotline =
+  lines.find((l) => l.scope === 'campus' && /24/.test(l.hours)) ?? lines.find((l) => l.scope === 'campus');
+const tel = (p: string) => `tel:${p.replace(/[^\d+]/g, '')}`;
+
+const nav = [
+  { key: 'services', label: '找服務', href: url('/services/') },
+  { key: 'news', label: '最新消息', href: url('/news/') },
+  { key: 'units', label: '單位', href: url('/units/') },
+];
+const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${title}｜政大學務處`;
+---
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#10151f" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要內容</a>
+
+    {!hideAlertBand && hotline && (
+      <aside class="alert-band" aria-label="24 小時緊急聯絡">
+        <div class="wrap alert-inner">
+          <p>
+            <span class="alert-label">{hotline.name}</span>
+            <a class="alert-phone tnum" href={tel(hotline.phone)}>{hotline.phone}</a>
+            <span class="alert-hours">{hotline.hours}</span>
+          </p>
+          <a class="alert-more" href={url('/emergency/')}>所有緊急求助電話</a>
+        </div>
+      </aside>
+    )}
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href={url('/')} aria-label="政大學務處 首頁">
+          <span class="brand-mark" aria-hidden="true">政</span>
+          <span class="brand-text">
+            <span class="brand-name">學務處</span>
+            <span class="brand-sub">國立政治大學</span>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="主要導覽">
+          <ul id="nav-list">
+            {nav.map((n) => (
+              <li><a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a></li>
+            ))}
+            <li class="nav-emergency">
+              <a href={url('/emergency/')} aria-current={current === 'emergency' ? 'page' : undefined}>緊急求助</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="header-tools">
+          <a class="icon-btn" href={url('/services/#q')} aria-label="搜尋服務">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+          <button class="icon-btn" type="button" id="theme-toggle" aria-label="切換深色模式" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
+          </button>
+          <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-list" id="menu-toggle">
+            <span class="visually-hidden">選單</span>
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div>
+          <p class="footer-name">國立政治大學 學務處</p>
+          {site.address && <p>{site.address}</p>}
+          {site.mainPhone && <p>總機 <a class="tnum" href={tel(site.mainPhone)}>{site.mainPhone}</a></p>}
+        </div>
+        <nav aria-label="頁尾導覽">
+          <ul class="footer-links">
+            <li><a href={url('/services/')}>找服務</a></li>
+            <li><a href={url('/news/')}>最新消息</a></li>
+            <li><a href={url('/units/')}>單位</a></li>
+            <li><a href={url('/emergency/')}>緊急求助</a></li>
+          </ul>
+        </nav>
+        <div class="footer-note">
+          <p>這是學生製作的非官方重新設計提案，內容與連結取自 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a>（擷取於 {site.fetchedAt}）。辦理事務請以官方網站公告為準。</p>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var btn = document.getElementById('theme-toggle');
+        function isDark() {
+          var t = root.dataset.theme;
+          if (t) return t === 'dark';
+          return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        function sync() {
+          btn.setAttribute('aria-pressed', String(isDark()));
+          btn.setAttribute('aria-label', isDark() ? '切換為淺色模式' : '切換為深色模式');
+        }
+        sync();
+        btn.addEventListener('click', function () {
+          var next = isDark() ? 'light' : 'dark';
+          root.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch (e) {}
+          sync();
+        });
+        var menu = document.getElementById('menu-toggle');
+        var list = document.getElementById('nav-list');
+        menu.addEventListener('click', function () {
+          var open = menu.getAttribute('aria-expanded') === 'true';
+          menu.setAttribute('aria-expanded', String(!open));
+          list.classList.toggle('is-open', !open);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && list.classList.contains('is-open')) {
+            list.classList.remove('is-open');
+            menu.setAttribute('aria-expanded', 'false');
+            menu.focus();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style>
+  .alert-band {
+    background: var(--alert);
+    color: var(--alert-ink);
+    font-size: var(--s-1);
+  }
+  .alert-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-5);
+    padding-block: var(--space-2);
+  }
+  .alert-inner p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); }
+  .alert-label { font-weight: 700; }
+  .alert-band a { color: inherit; }
+  .alert-phone {
+    font-size: var(--s1);
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .alert-phone:hover { text-decoration: underline; }
+  .alert-hours { opacity: 0.9; }
+  .alert-more { font-weight: 700; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 4rem;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: var(--ink);
+    margin-right: auto;
+  }
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--s1);
+  }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .brand-name { font-family: var(--font-display); font-weight: 900; font-size: var(--s1); }
+  .brand-sub { font-size: var(--s-1); color: var(--ink-soft); }
+
+  .main-nav ul { list-style: none; display: flex; gap: var(--space-2); align-items: center; }
+  .main-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-3);
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .main-nav a:hover { background: var(--brand-tint); }
+  .main-nav a[aria-current='page'] { box-shadow: inset 0 -3px 0 var(--marker); border-radius: 0; }
+  .nav-emergency a {
+    background: var(--alert);
+    color: var(--alert-ink);
+    padding-inline: var(--space-4);
+  }
+  .nav-emergency a:hover { background: var(--alert); text-decoration: underline; }
+  .nav-emergency a[aria-current='page'] { border-radius: 999px; box-shadow: none; }
+
+  .header-tools { display: flex; align-items: center; gap: var(--space-1); }
+  .icon-btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .icon-btn:hover { background: var(--brand-tint); }
+  .menu-btn { display: none; }
+
+  @media (max-width: 760px) {
+    .menu-btn { display: grid; }
+    .header-inner { flex-wrap: wrap; gap: var(--space-2); }
+    .main-nav { order: 3; width: 100%; }
+    .main-nav ul {
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      padding-bottom: var(--space-4);
+    }
+    .main-nav ul.is-open { display: flex; }
+    .main-nav a { width: 100%; border-radius: var(--radius-s); }
+    .main-nav a[aria-current='page'] { box-shadow: inset 4px 0 0 var(--marker); }
+    .brand-sub { display: none; }
+  }
+
+  .site-footer {
+    margin-top: var(--space-9);
+    padding-block: var(--space-7);
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    font-size: var(--s-1);
+    color: var(--ink-soft);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.6fr;
+    gap: var(--space-6);
+  }
+  .footer-name { font-family: var(--font-display); font-weight: 800; color: var(--ink); font-size: var(--s0); margin-bottom: var(--space-2); }
+  .footer-links { list-style: none; display: grid; gap: var(--space-1); }
+  .footer-links a { color: var(--ink); }
+  @media (max-width: 760px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>

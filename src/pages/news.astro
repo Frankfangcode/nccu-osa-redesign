@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import NewsList from '../components/NewsList.astro';
+import { news, units } from '../lib/data';
+import site from '../data/site.json';
+
+const unitsWithNews = units.filter((u) => news.some((n) => n.unit === u.slug));
+---
+<Base title="最新消息" current="news" description="政大學務處各單位的最新公告、活動與獎助學金消息。">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>最新消息</h1>
+      <p class="lede">整理自學務處各組的公告。點標題會開啟官方原文。</p>
+    </header>
+
+    {unitsWithNews.length > 1 && (
+      <fieldset class="news-filter">
+        <legend>依單位篩選</legend>
+        <label><input type="radio" name="unit" value="" checked /><span>全部</span></label>
+        {unitsWithNews.map((u) => (
+          <label><input type="radio" name="unit" value={u.slug} /><span>{u.shortName}</span></label>
+        ))}
+      </fieldset>
+    )}
+    <p class="count" id="news-count" aria-live="polite">共 {news.length} 則</p>
+
+    <div id="news-wrap" data-pagefind-body>
+      <NewsList items={news} filterable />
+    </div>
+    <p class="snapshot">消息擷取於 {site.fetchedAt}。最新公告請見 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a>。</p>
+  </div>
+</Base>
+
+<script is:inline>
+  (function () {
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#news-wrap li[data-unit]'));
+    var count = document.getElementById('news-count');
+    document.querySelectorAll('input[name="unit"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        var v = r.value, n = 0;
+        rows.forEach(function (li) {
+          var ok = !v || li.dataset.unit === v;
+          li.hidden = !ok;
+          if (ok) n++;
+        });
+        count.textContent = (v ? '篩選後 ' : '共 ') + n + ' 則';
+      });
+    });
+  })();
+</script>
+
+<style>
+  .news-filter { border: 0; padding: 0; margin: 0 0 var(--space-3); display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+  .news-filter legend { float: left; margin-right: var(--space-3); font-weight: 700; padding: 0; }
+  .news-filter label { position: relative; }
+  .news-filter input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .news-filter span {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-4);
+    border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+  }
+  .news-filter input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 700; }
+  .news-filter input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .count { color: var(--ink-soft); font-size: var(--s-1); margin-bottom: var(--space-3); }
+  .snapshot { margin-top: var(--space-6); font-size: var(--s-1); color: var(--ink-soft); }
+  #news-wrap [hidden] { display: none; }
+</style>

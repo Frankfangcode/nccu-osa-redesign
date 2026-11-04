@@ -1,0 +1,236 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+import { tasks, taskGroups, unitBySlug, audiences } from '../lib/data';
+---
+<Base title="找服務" current="services" description="搜尋政大學務處的所有服務：輸入關鍵字或選擇身分，立即找到要辦的事與負責單位。">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>找服務</h1>
+      <p class="lede">輸入你要辦的事，或先選身分。每項服務都會告訴你由哪個單位負責，並連到官方辦理頁面。</p>
+    </header>
+
+    <div class="finder" role="search">
+      <label for="q" class="finder-label">搜尋服務</label>
+      <input id="q" type="search" placeholder="例如：宿舍、獎學金、請假、緩徵" autocomplete="off" />
+
+      <fieldset class="aud-filter">
+        <legend>我是</legend>
+        <label><input type="radio" name="aud" value="" checked /> <span>全部</span></label>
+        {audiences.map((a) => (
+          <label><input type="radio" name="aud" value={a} /> <span>{a}</span></label>
+        ))}
+      </fieldset>
+      <p class="result-count" id="count" aria-live="polite">共 {tasks.length} 項服務</p>
+    </div>
+
+    <div id="groups">
+      {taskGroups.map((g) => (
+        <section class="group" data-group>
+          <h2 class="group-title">{g}</h2>
+          <ul class="task-list">
+            {tasks.filter((t) => t.group === g).map((t) => {
+              const u = unitBySlug(t.unit);
+              return (
+                <li
+                  data-task
+                  data-aud={t.audiences.join(',')}
+                  data-text={[t.phrase, t.title, t.summary, ...t.keywords, u?.name ?? '', u?.shortName ?? ''].join(' ').toLowerCase()}
+                >
+                  <a href={url(`/tasks/${t.slug}/`)} class="task-link">{t.title}</a>
+                  <p class="task-summary">{t.summary}</p>
+                  {u && <p class="task-unit">負責：{u.shortName}</p>}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <div id="no-result" class="no-result" hidden>
+      <p>沒有符合的服務。試試更短的關鍵字，或切換回「全部」身分。</p>
+    </div>
+
+    <section class="site-results" id="site-results" hidden aria-labelledby="site-results-title">
+      <h2 id="site-results-title" class="group-title">其他頁面與消息</h2>
+      <ol id="site-results-list" class="link-list"></ol>
+    </section>
+
+    <noscript>
+      <p class="no-result">這個頁面需要 JavaScript 才能即時篩選。下方仍列出所有服務。</p>
+    </noscript>
+  </div>
+</Base>
+
+<script is:inline define:vars={{ pagefindUrl: url('/pagefind/pagefind.js') }}>
+  (function () {
+    var q = document.getElementById('q');
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-task]'));
+    var groups = Array.prototype.slice.call(document.querySelectorAll('[data-group]'));
+    var count = document.getElementById('count');
+    var empty = document.getElementById('no-result');
+    var siteBox = document.getElementById('site-results');
+    var siteList = document.getElementById('site-results-list');
+    var params = new URLSearchParams(location.search);
+    var pf = null;
+    var seq = 0;
+
+    if (params.get('q')) q.value = params.get('q');
+    var aud0 = params.get('for');
+    if (aud0) {
+      var r = document.querySelector('input[name="aud"][value="' + aud0.replace(/"/g, '') + '"]');
+      if (r) r.checked = true;
+    }
+    if (location.hash === '#q') q.focus();
+
+    function currentAud() {
+      var c = document.querySelector('input[name="aud"]:checked');
+      return c ? c.value : '';
+    }
+
+    function apply() {
+      var term = q.value.trim().toLowerCase();
+      var aud = currentAud();
+      var shown = 0;
+      items.forEach(function (li) {
+        var ok = (!term || li.dataset.text.indexOf(term) !== -1) &&
+                 (!aud || li.dataset.aud.split(',').indexOf(aud) !== -1);
+        li.hidden = !ok;
+        if (ok) shown++;
+      });
+      groups.forEach(function (g) {
+        g.hidden = !g.querySelector('[data-task]:not([hidden])');
+      });
+      empty.hidden = shown !== 0;
+      count.textContent = (term || aud ? '找到 ' : '共 ') + shown + ' 項服務';
+
+      var next = new URLSearchParams();
+      if (q.value.trim()) next.set('q', q.value.trim());
+      if (aud) next.set('for', aud);
+      var qs = next.toString();
+      history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+
+      siteSearch(term);
+    }
+
+    function siteSearch(term) {
+      var my = ++seq;
+      if (term.length < 2) { siteBox.hidden = true; return; }
+      var load = pf ? Promise.resolve(pf) : import(pagefindUrl).then(function (m) { pf = m; return m; });
+      load.then(function (m) { return m.debouncedSearch(term, {}, 250); })
+        .then(function (res) {
+          if (!res || my !== seq) return;
+          return Promise.all(res.results.slice(0, 8).map(function (r) { return r.data(); }));
+        })
+        .then(function (data) {
+          if (!data || my !== seq) return;
+          var rows = data.filter(function (d) { return d.url.indexOf('/tasks/') === -1; });
+          siteList.innerHTML = '';
+          rows.forEach(function (d) {
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = d.url;
+            var t = document.createElement('span');
+            t.className = 'll-title';
+            t.textContent = (d.meta && d.meta.title) || d.url;
+            a.appendChild(t);
+            li.appendChild(a);
+            siteList.appendChild(li);
+          });
+          siteBox.hidden = rows.length === 0;
+        })
+        .catch(function () { siteBox.hidden = true; });
+    }
+
+    q.addEventListener('input', apply);
+    document.querySelectorAll('input[name="aud"]').forEach(function (r) { r.addEventListener('change', apply); });
+    apply();
+  })();
+</script>
+
+<style>
+  .finder {
+    position: sticky;
+    top: 4rem;
+    z-index: 10;
+    background: var(--paper);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-5);
+  }
+  .finder-label { display: block; font-weight: 700; margin-bottom: var(--space-2); }
+  #q {
+    width: 100%;
+    min-height: 56px;
+    padding: 0 var(--space-5);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: var(--s1);
+  }
+  #q::placeholder { color: var(--ink-soft); }
+  .aud-filter {
+    border: 0;
+    padding: 0;
+    margin: var(--space-4) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+  }
+  .aud-filter legend { float: left; margin-right: var(--space-3); font-weight: 700; padding: 0; }
+  .aud-filter label { position: relative; }
+  .aud-filter input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .aud-filter span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  .aud-filter input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 700; }
+  .aud-filter input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .result-count { margin-top: var(--space-3); color: var(--ink-soft); font-size: var(--s-1); }
+
+  .group { padding-block: var(--space-5); }
+  .group-title {
+    font-size: var(--s2);
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 3px solid var(--ink);
+  }
+  .task-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 0 var(--space-6);
+  }
+  .task-list li { padding-block: var(--space-4); border-bottom: 1px solid var(--line); }
+  .task-link {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--s1);
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--marker), var(--marker));
+    background-repeat: no-repeat;
+    background-position: 0 90%;
+    background-size: 0% 0.35em;
+    transition: background-size 220ms ease;
+  }
+  .task-link:hover, .task-link:focus-visible { background-size: 100% 0.35em; }
+  .task-summary { color: var(--ink-soft); margin-top: var(--space-1); font-size: 0.95rem; }
+  .task-unit { font-size: var(--s-1); color: var(--ink-soft); margin-top: var(--space-2); }
+  .no-result { padding: var(--space-6) 0; color: var(--ink-soft); }
+  .site-results { margin-top: var(--space-6); }
+  [hidden] { display: none !important; }
+
+  @media (max-width: 760px) {
+    .finder { top: 3.6rem; position: static; }
+  }
+</style>
