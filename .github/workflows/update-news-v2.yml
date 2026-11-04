@@ -1,0 +1,66 @@
+name: Update news (v2)
+
+# Rebuilds the v2 redesign (branch session-b) with fresh news from osa.nccu.edu.tw
+# and publishes it to gh-pages/v2/. Schedules only run from the default branch,
+# which is why this file lives on main while the site source lives on session-b.
+on:
+  schedule:
+    - cron: '0 23 * * *' # 07:00 Asia/Taipei
+  workflow_dispatch:
+  # Re-publish v2 after every root deploy, so the two never race on gh-pages.
+  workflow_run:
+    workflows: ['Deploy to GitHub Pages']
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: session-b
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Fetch latest news
+        # A failure here keeps yesterday's data: the site still builds and deploys.
+        continue-on-error: true
+        run: npm run update-news
+
+      - name: Commit news if it changed
+        run: |
+          if git diff --quiet -- src/data; then
+            echo "No new news."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+            git add src/data/news.json src/data/news-meta.json
+            git commit -m "chore: update news $(TZ=Asia/Taipei date +%F)"
+            git push origin HEAD:session-b
+          fi
+
+      - name: Build v2
+        run: npm run build
+        env:
+          BASE_PATH: /nccu-osa-redesign/v2
+
+      - run: touch dist/.nojekyll
+
+      - name: Publish to gh-pages/v2
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          destination_dir: v2
+          commit_message: 'deploy v2:'
