@@ -2,10 +2,25 @@
 import Base from '../layouts/Base.astro';
 import NewsList from '../components/NewsList.astro';
 import { url } from '../lib/url';
-import { tasks, news, units, audiences } from '../lib/data';
+import { tasks, news, units, audiences, featuredTasks, tel, phoneMain, campus24h } from '../lib/data';
+import site from '../data/site.json';
 
-const featured = tasks.filter((t) => t.featured);
+const featured = featuredTasks;
 const latest = news.slice(0, 6);
+const duty = campus24h()[0];
+
+// Online systems students use most, picked from the scraped unit menus.
+const pick = (unit: string, title: string) =>
+  units.find((u) => u.slug === unit)?.sections.flatMap((s) => s.links).find((l) => l.title === title);
+const systems = [
+  { label: '預約心理諮商初談', link: pick('health-center', '學生預約初談系統（SSO）') },
+  { label: '查詢體檢結果', link: pick('health-center', '學生體檢結果查詢') },
+  { label: '職涯平台（職缺與實習）', link: pick('career-center', '職涯平台首頁') },
+  { label: '校外租屋資訊', link: pick('housing', '校外賃居資訊網') },
+  { label: '社團補助申請', link: pick('student-activities', '學生社團補助線上申請') },
+  { label: '樂活館場地登記', link: pick('student-activities', '樂活館使用登記系統') },
+].filter((s) => s.link);
+const mailbox = site.footerNotes.find((n: string) => /信箱/.test(n))?.match(/[\w.]+@[\w.]+/)?.[0];
 ---
 <Base title="首頁" current="home">
   <section class="hero" aria-labelledby="hero-title">
@@ -20,7 +35,7 @@ const latest = news.slice(0, 6);
 
       <form class="hero-search" action={url('/services/')} method="get" role="search">
         <label for="hero-q" class="visually-hidden">搜尋服務、表單或公告</label>
-        <input id="hero-q" name="q" type="search" placeholder="或直接搜尋：例如「兵役」「工讀」「遺失物」" autocomplete="off" />
+        <input id="hero-q" name="q" type="search" placeholder="搜尋：兵役、工讀、遺失物…" autocomplete="off" />
         <button type="submit" class="btn">搜尋</button>
       </form>
     </div>
@@ -44,6 +59,46 @@ const latest = news.slice(0, 6);
         <a href={url('/news/')}>全部消息</a>
       </div>
       <NewsList items={latest} />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="help-title">
+    <div class="wrap help-grid">
+      <div>
+        <h2 id="help-title" class="section-title">不知道該找誰？</h2>
+        <p class="help-lede">先打學務處總機，說明你遇到的事，會幫你轉到負責的人。不想打電話，也可以寫信到學務處意見信箱。</p>
+        <dl class="help-lines">
+          <div>
+            <dt>學務處總機（上班時間）</dt>
+            <dd><a class="tnum" href={tel(site.mainPhone)}>{site.mainPhone}</a></dd>
+          </div>
+          {mailbox && (
+            <div>
+              <dt>意見信箱</dt>
+              <dd><a href={`mailto:${mailbox}`}>{mailbox}</a></dd>
+            </div>
+          )}
+          {duty && (
+            <div class="help-duty">
+              <dt>下班後、假日或緊急時</dt>
+              <dd><a class="tnum" href={tel(duty.phone)}>{phoneMain(duty.phone)}</a> <span>校安中心，24 小時</span></dd>
+            </div>
+          )}
+        </dl>
+      </div>
+      <div>
+        <h2 class="section-title" id="sys-title">常用線上系統</h2>
+        <ul class="link-list" aria-labelledby="sys-title">
+          {systems.map((s) => (
+            <li>
+              <a href={s.link!.url} rel="noopener">
+                <span class="ll-title ext">{s.label}</span>
+                <span class="ll-meta">{new URL(s.link!.url).hostname}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -186,6 +241,25 @@ const latest = news.slice(0, 6);
   .unit-name:hover { color: var(--brand); text-decoration: underline; }
   .unit-cols p { color: var(--ink-soft); margin-top: var(--space-1); max-width: var(--measure); }
 
+  .help-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+  .help-lede { color: var(--ink-soft); max-width: var(--measure); }
+  .help-lines { margin: var(--space-5) 0 0; display: grid; gap: var(--space-4); }
+  .help-lines dt { font-size: var(--s-1); color: var(--ink-soft); }
+  .help-lines dd { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: var(--s2); }
+  .help-lines dd a { color: var(--ink); text-decoration: none; }
+  .help-lines dd a:hover { text-decoration: underline; }
+  .help-lines dd span { font-family: var(--font-body); font-weight: 400; font-size: var(--s-1); color: var(--ink-soft); }
+  .help-duty { padding-left: var(--space-4); border-left: 4px solid var(--alert); }
+  .help-duty dd a { color: var(--alert); }
+  .ll-meta { overflow: hidden; text-overflow: ellipsis; }
+
+  @media (max-width: 860px) {
+    .help-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  }
   @media (max-width: 760px) {
     .aud-grid { grid-template-columns: 1fr; }
     .hero-search { flex-direction: column; }

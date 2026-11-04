@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { url } from '../../lib/url';
-import { units, tasksForUnit, tel } from '../../lib/data';
+import { units, tasksForUnit, tel, phoneMain } from '../../lib/data';
 ---
 <Base title="單位" current="units" description="政大學務處各組與中心的職掌、聯絡方式，以及各自負責的服務。">
   <div class="wrap">
@@ -21,7 +21,7 @@ import { units, tasksForUnit, tel } from '../../lib/data';
             </div>
             <p class="ut-summary">{u.summary}</p>
             <div class="ut-side">
-              {u.contact.phone && <a class="tnum" href={tel(u.contact.phone)}>{u.contact.phone}</a>}
+              {u.contact.phone && <a class="tnum" href={tel(u.contact.phone)}>{phoneMain(u.contact.phone)}</a>}
               {ts.length > 0 && <p class="ut-count">負責 {ts.length} 項服務</p>}
             </div>
           </li>

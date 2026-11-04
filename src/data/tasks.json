@@ -1,0 +1,1453 @@
+[
+  {
+    "slug": "scholarship",
+    "phrase": "找獎學金",
+    "title": "申請獎助學金",
+    "summary": "校內外獎助學金的申請流程與分類一覽，原住民族學生另有專屬獎助資訊。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生",
+      "僑生",
+      "原民生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "校內外獎助學金申請流程",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E7%8D%8E%E5%8A%A9%E5%AD%B8%E9%87%91/%E6%A0%A1%E5%85%A7%E7%8D%8E%E5%8A%A9%E5%AD%B8%E9%87%91%E7%94%B3%E8%AB%8B%E6%B5%81%E7%A8%8B"
+      },
+      {
+        "title": "助學措施常見問題",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BDq%EF%BC%86a"
+      },
+      {
+        "title": "原住民族學生獎助資訊",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E7%8D%8E%E5%8A%A9%E8%B3%87%E8%A8%8A-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83"
+      },
+      {
+        "title": "廖風德公共服務獎學金",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%AA%B2%E5%A4%96%E6%B4%BB%E5%8B%95%E7%B5%84/%E7%AB%B6%E8%B3%BD-%E7%8D%8E%E5%8B%B5/%E5%BB%96%E9%A2%A8%E5%BE%B7%E5%85%AC%E5%85%B1%E6%9C%8D%E5%8B%99%E7%8D%8E%E5%AD%B8%E9%87%91"
+      }
+    ],
+    "keywords": [
+      "獎學金",
+      "助學金",
+      "圓夢",
+      "清寒"
+    ],
+    "featured": true,
+    "order": 1
+  },
+  {
+    "slug": "student-loan",
+    "phrase": "辦就學貸款",
+    "title": "就學貸款",
+    "summary": "每學期註冊前辦理，需先向銀行申貸，再把文件交回學校。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "就學貸款須知",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E5%B0%B1%E5%AD%B8%E8%B2%B8%E6%AC%BE/%E5%B0%B1%E8%B2%B8%E9%A0%88%E7%9F%A5-%E5%AD%B8%E6%A0%A1%E6%96%B9%E9%9D%A2"
+      }
+    ],
+    "keywords": [
+      "就貸",
+      "貸款",
+      "學貸",
+      "銀行"
+    ],
+    "featured": true,
+    "order": 4
+  },
+  {
+    "slug": "tuition-waiver",
+    "phrase": "減免學雜費",
+    "title": "學雜費減免",
+    "summary": "符合資格的學生可在每學期規定期間內申請減免學雜費。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生",
+      "原民生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "學雜費減免申請流程",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E5%AD%B8%E9%9B%9C%E8%B2%BB%E6%B8%9B%E5%85%8D/%E5%AD%B8%E9%9B%9C%E8%B2%BB%E6%B8%9B%E5%85%8D%E7%94%B3%E8%AB%8B%E6%B5%81%E7%A8%8B"
+      }
+    ],
+    "keywords": [
+      "減免",
+      "學費",
+      "低收入",
+      "身心障礙"
+    ],
+    "featured": true,
+    "order": 5
+  },
+  {
+    "slug": "emergency-aid",
+    "phrase": "申請急難慰助",
+    "title": "急難慰助",
+    "summary": "遭遇家庭變故、重大傷病等突發狀況時，可申請校內外急難慰助。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生",
+      "僑生",
+      "陸生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "校內、校外急難慰助",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E6%80%A5%E9%9B%A3%E6%85%B0%E5%8A%A9/%E6%80%A5%E9%9B%A3%E6%85%B0%E5%8A%A9"
+      }
+    ],
+    "keywords": [
+      "急難",
+      "慰助",
+      "家庭變故",
+      "救助"
+    ]
+  },
+  {
+    "slug": "disadvantaged-aid",
+    "phrase": "申請助學金",
+    "title": "不利處境學生助學金與補助",
+    "summary": "經濟不利處境學生的助學金、生活助學金與專項補助。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "不利處境學生助學金",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E4%B8%8D%E5%88%A9%E8%99%95%E5%A2%83%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E9%87%91"
+      },
+      {
+        "title": "助學服務與生活助學金",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E5%8A%A9%E5%AD%B8%E6%9C%8D%E5%8B%99/%E5%A4%A7%E5%AD%B8%E9%83%A8%E5%8A%A9%E5%AD%B8%E9%87%91%E4%BD%9C%E6%A5%AD"
+      },
+      {
+        "title": "不利處境學生多元生理用品專項補助",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E4%B8%8D%E5%88%A9%E8%99%95%E5%A2%83%E5%AD%B8%E7%94%9F%E5%A4%9A%E5%85%83%E7%94%9F%E7%90%86%E7%94%A8%E5%93%81%E5%B0%88%E9%A0%85%E8%A3%9C%E5%8A%A9"
+      },
+      {
+        "title": "失業勞工子女就學補助",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E5%A4%B1%E6%A5%AD%E5%8B%9E%E5%B7%A5%E5%AD%90%E5%A5%B3%E5%B0%B1%E5%AD%B8%E8%A3%9C%E5%8A%A9"
+      },
+      {
+        "title": "大專校院不利處境學生助學計畫專區",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E5%8B%99%E9%95%B7%E5%AE%A4/%E5%A4%A7%E5%B0%88%E6%A0%A1%E9%99%A2%E4%B8%8D%E5%88%A9%E8%99%95%E5%A2%83%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E8%A8%88%E7%95%AB%E5%B0%88%E5%8D%80"
+      }
+    ],
+    "keywords": [
+      "助學金",
+      "生活助學金",
+      "生理用品",
+      "失業勞工"
+    ]
+  },
+  {
+    "slug": "hope-seed",
+    "phrase": "參加希望種子計畫",
+    "title": "希望種子培育計畫",
+    "summary": "為經濟或文化不利學生提供考試補助、課業輔導與職涯培力，先完成資格認證。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生"
+    ],
+    "unit": "hope-seed",
+    "links": [
+      {
+        "title": "資格認證申請",
+        "url": "https://cd.nccu.edu.tw/hopeseed"
+      },
+      {
+        "title": "考試優惠",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90/%E8%80%83%E8%A9%A6%E5%84%AA%E6%83%A0-%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90%E5%9F%B9%E8%82%B2%E8%A8%88%E7%95%AB"
+      },
+      {
+        "title": "課業學習輔導",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90/%E8%AA%B2%E6%A5%AD%E5%AD%B8%E7%BF%92%E8%BC%94%E5%B0%8E-%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90%E5%9F%B9%E8%82%B2%E8%A8%88%E7%95%AB"
+      },
+      {
+        "title": "其他助學資源",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90/%E5%85%B6%E4%BB%96%E5%8A%A9%E5%AD%B8%E8%B3%87%E6%BA%90-%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90%E5%9F%B9%E8%82%B2%E8%A8%88%E7%95%AB"
+      }
+    ],
+    "keywords": [
+      "希望種子",
+      "考試補助",
+      "課業輔導",
+      "培力"
+    ]
+  },
+  {
+    "slug": "part-time",
+    "phrase": "找校內工讀",
+    "title": "校內工讀與兼職",
+    "summary": "校內工讀與就業機會彙整；助學工讀則由生僑組辦理。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "career-center",
+    "links": [
+      {
+        "title": "就業與工讀機會",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83/%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90/%E5%B0%B1%E6%A5%AD%E8%88%87%E5%B7%A5%E8%AE%80%E6%A9%9F%E6%9C%83"
+      },
+      {
+        "title": "助學服務（含工讀登錄）",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%8A%A9%E5%AD%B8%E6%8E%AA%E6%96%BD/%E5%8A%A9%E5%AD%B8%E6%9C%8D%E5%8B%99/%E5%A4%A7%E5%AD%B8%E9%83%A8%E5%8A%A9%E5%AD%B8%E9%87%91%E4%BD%9C%E6%A5%AD"
+      }
+    ],
+    "keywords": [
+      "工讀",
+      "打工",
+      "兼職",
+      "助學"
+    ]
+  },
+  {
+    "slug": "refund",
+    "phrase": "辦休退學退費",
+    "title": "休退學與畢業退費",
+    "summary": "休學、退學或研究生提前畢業時，學雜費依時間點按比例退還。",
+    "group": "獎助與費用",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "休退學退費標準",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99/%E4%BC%91%E9%80%80%E5%AD%B8%E6%9A%A8%E7%A0%94%E7%A9%B6%E7%94%9F%E7%95%A2%E6%A5%AD%E9%80%80%E8%B2%BB/%E4%BC%91-%E9%80%80-%E5%AD%B8%E9%80%80%E8%B2%BB%E6%A8%99%E6%BA%96"
+      }
+    ],
+    "keywords": [
+      "休學",
+      "退學",
+      "退費",
+      "提前畢業"
+    ]
+  },
+  {
+    "slug": "dorm",
+    "phrase": "申請宿舍",
+    "title": "申請學生宿舍",
+    "summary": "學士班與碩博士班分開申請，費用、床位尺寸與宿舍照片都可以先查。",
+    "group": "住宿",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生",
+      "僑生",
+      "陸生"
+    ],
+    "unit": "housing",
+    "links": [
+      {
+        "title": "學士班宿舍申請",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B%E8%88%87%E5%BA%8A%E4%BD%8D%E8%B3%87%E8%A8%8A/%E5%AD%B8%E5%A3%AB%E7%8F%AD%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B"
+      },
+      {
+        "title": "碩博士班宿舍申請",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B%E8%88%87%E5%BA%8A%E4%BD%8D%E8%B3%87%E8%A8%8A/%E7%A2%A9%E5%8D%9A%E5%A3%AB%E7%8F%AD%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B"
+      },
+      {
+        "title": "宿舍費用及床位尺寸資訊",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B%E8%88%87%E5%BA%8A%E4%BD%8D%E8%B3%87%E8%A8%8A/%E5%AE%BF%E8%88%8D%E8%B2%BB%E7%94%A8%E5%8F%8A%E5%BA%8A%E4%BD%8D%E5%B0%BA%E5%AF%B8%E8%B3%87%E8%A8%8A"
+      },
+      {
+        "title": "宿舍照片",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B%E8%88%87%E5%BA%8A%E4%BD%8D%E8%B3%87%E8%A8%8A/%E5%AE%BF%E8%88%8D%E7%85%A7%E7%89%87"
+      },
+      {
+        "title": "宿舍性別友善",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E6%80%A7%E5%88%A5%E5%8F%8B%E5%96%84"
+      }
+    ],
+    "keywords": [
+      "宿舍",
+      "住宿",
+      "床位",
+      "抽籤",
+      "自強",
+      "莊敬"
+    ],
+    "featured": true,
+    "order": 0
+  },
+  {
+    "slug": "dorm-change",
+    "phrase": "換寢室或退宿",
+    "title": "換寢室與退宿",
+    "summary": "寢室異動、退離宿程序與退補宿費的規定。",
+    "group": "住宿",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "housing",
+    "links": [
+      {
+        "title": "寢室異動流程",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B%E8%88%87%E5%BA%8A%E4%BD%8D%E8%B3%87%E8%A8%8A/%E5%AF%A2%E5%AE%A4%E7%95%B0%E5%8B%95%E6%B5%81%E7%A8%8B"
+      },
+      {
+        "title": "退離宿程序",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B%E8%88%87%E5%BA%8A%E4%BD%8D%E8%B3%87%E8%A8%8A/%E9%80%80%E9%9B%A2%E5%AE%BF%E7%A8%8B%E5%BA%8F"
+      },
+      {
+        "title": "退/補宿費規定",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%B3%E8%AB%8B%E8%88%87%E5%BA%8A%E4%BD%8D%E8%B3%87%E8%A8%8A/%E9%80%80-%E8%A3%9C%E5%AE%BF%E8%B2%BB%E8%A6%8F%E5%AE%9A"
+      }
+    ],
+    "keywords": [
+      "換房",
+      "寢室異動",
+      "退宿",
+      "宿費"
+    ]
+  },
+  {
+    "slug": "off-campus",
+    "phrase": "找校外租屋",
+    "title": "校外租屋",
+    "summary": "校外賃居資訊網提供租屋資訊與租屋安全提醒。",
+    "group": "住宿",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "housing",
+    "links": [
+      {
+        "title": "校外賃居資訊網",
+        "url": "https://www.osa.nccu.edu.tw/dorm2/"
+      },
+      {
+        "title": "宿舍生活資訊",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E7%94%9F%E6%B4%BB%E8%B3%87%E8%A8%8A"
+      }
+    ],
+    "keywords": [
+      "租屋",
+      "賃居",
+      "外宿",
+      "房東"
+    ]
+  },
+  {
+    "slug": "dorm-alternative",
+    "phrase": "了解中繼宿舍",
+    "title": "莊敬外舍拆建替代宿舍",
+    "summary": "莊敬外舍拆建期間，學校提供的替代住宿方案。",
+    "group": "住宿",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "housing",
+    "links": [
+      {
+        "title": "木柵久康街社會住宅（政大中繼宿舍）",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E8%8E%8A%E6%95%AC%E5%A4%96%E8%88%8D%E6%8B%86%E5%BB%BA%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/%E6%9C%A8%E6%9F%B5%E4%B9%85%E5%BA%B7%E8%A1%97%E7%A4%BE%E6%9C%83%E4%BD%8F%E5%AE%85_%E6%94%BF%E5%A4%A7%E4%B8%AD%E7%B9%BC%E5%AE%BF%E8%88%8D"
+      },
+      {
+        "title": "化南新村臨時學生宿舍",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E8%8E%8A%E6%95%AC%E5%A4%96%E8%88%8D%E6%8B%86%E5%BB%BA%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/%E5%8C%96%E5%8D%97%E6%96%B0%E6%9D%91%E8%87%A8%E6%99%82%E5%AD%B8%E7%94%9F%E5%AE%BF%E8%88%8D"
+      },
+      {
+        "title": "臺北國際學舍床位轉介專案",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E8%8E%8A%E6%95%AC%E5%A4%96%E8%88%8D%E6%8B%86%E5%BB%BA%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/%E8%87%BA%E5%8C%97%E5%9C%8B%E9%9A%9B%E5%AD%B8%E8%88%8D%E5%BA%8A%E4%BD%8D%E8%BD%89%E4%BB%8B%E5%B0%88%E6%A1%88"
+      }
+    ],
+    "keywords": [
+      "中繼宿舍",
+      "久康街",
+      "社會住宅",
+      "化南新村",
+      "國際學舍"
+    ]
+  },
+  {
+    "slug": "dorm-points",
+    "phrase": "處理宿舍記點",
+    "title": "宿舍記點、銷點與申訴",
+    "summary": "宿舍違規記點後的銷點方式，以及不服處分時的申訴管道。",
+    "group": "住宿",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "housing",
+    "links": [
+      {
+        "title": "宿舍違規記點銷點流程",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E9%8A%B7%E8%A8%98%E9%BB%9E%E8%88%87%E7%94%B3%E8%A8%B4/%E5%AE%BF%E8%88%8D%E9%81%95%E8%A6%8F%E8%A8%98%E9%BB%9E%E9%8A%B7%E9%BB%9E%E6%B5%81%E7%A8%8B"
+      },
+      {
+        "title": "宿舍獎懲申訴",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E9%8A%B7%E8%A8%98%E9%BB%9E%E8%88%87%E7%94%B3%E8%A8%B4/%E5%AE%BF%E8%88%8D%E7%8D%8E%E6%87%B2%E7%94%B3%E8%A8%B4"
+      }
+    ],
+    "keywords": [
+      "記點",
+      "銷點",
+      "違規",
+      "申訴"
+    ]
+  },
+  {
+    "slug": "freshman-academy",
+    "phrase": "了解新生書院",
+    "title": "政大新生書院",
+    "summary": "以住宿生活為核心的新生學習社群，有輔導資源與活動。",
+    "group": "住宿",
+    "audiences": [
+      "新生"
+    ],
+    "unit": "housing",
+    "links": [
+      {
+        "title": "政大新生書院",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E6%96%B0%E7%94%9F%E6%9B%B8%E9%99%A2-%E4%BD%8F%E5%AE%BF%E7%B5%84/%E6%94%BF%E5%A4%A7%E6%96%B0%E7%94%9F%E6%9B%B8%E9%99%A2-%E4%BD%8F%E5%AE%BF%E7%B5%84"
+      },
+      {
+        "title": "新生書院輔導資源",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E6%96%B0%E7%94%9F%E6%9B%B8%E9%99%A2-%E4%BD%8F%E5%AE%BF%E7%B5%84/%E6%96%B0%E7%94%9F%E6%9B%B8%E9%99%A2%E8%BC%94%E5%B0%8E%E8%B3%87%E6%BA%90"
+      },
+      {
+        "title": "新生書院活動介紹",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E6%96%B0%E7%94%9F%E6%9B%B8%E9%99%A2-%E4%BD%8F%E5%AE%BF%E7%B5%84/%E6%96%B0%E7%94%9F%E6%9B%B8%E9%99%A2%E6%B4%BB%E5%8B%95%E4%BB%8B%E7%B4%B9"
+      }
+    ],
+    "keywords": [
+      "新生書院",
+      "書院",
+      "大一"
+    ]
+  },
+  {
+    "slug": "counseling",
+    "phrase": "預約諮商",
+    "title": "預約心理諮商",
+    "summary": "先預約初談，由心理師了解你的狀況後安排後續諮商；服務免費且保密。",
+    "group": "身心健康",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生",
+      "僑生",
+      "陸生",
+      "原民生"
+    ],
+    "unit": "health-center",
+    "links": [
+      {
+        "title": "預約初談說明",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E5%BF%83%E7%90%86%E8%AB%AE%E5%95%86/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE/%E6%88%91%E8%A6%81%E9%A0%90%E7%B4%84%E5%88%9D%E8%AB%87"
+      },
+      {
+        "title": "學生預約初談系統",
+        "url": "https://moltke.nccu.edu.tw/SSO/startApplication?name=inccupsymS"
+      },
+      {
+        "title": "心理諮商服務項目",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E5%BF%83%E7%90%86%E8%AB%AE%E5%95%86/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE"
+      },
+      {
+        "title": "線上心理健康健檢",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E7%B6%B2%E8%B7%AF%E8%B3%87%E6%BA%90%E9%80%A3%E7%B5%90/%E7%B7%9A%E4%B8%8A%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%81%A5%E6%AA%A2"
+      }
+    ],
+    "keywords": [
+      "諮商",
+      "心理",
+      "初談",
+      "情緒",
+      "壓力",
+      "輔導"
+    ],
+    "featured": true,
+    "order": 3
+  },
+  {
+    "slug": "workshop",
+    "phrase": "參加心理工作坊",
+    "title": "心理衛生活動與團體",
+    "summary": "身心健康中心舉辦的團體、工作坊、心理測驗與講座。",
+    "group": "身心健康",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "health-center",
+    "links": [
+      {
+        "title": "團體/工作坊",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E8%BF%91%E6%9C%9F%E6%B4%BB%E5%8B%95/%E5%9C%98%E9%AB%94-%E5%B7%A5%E4%BD%9C%E5%9D%8A"
+      },
+      {
+        "title": "全校性心理衛生活動",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E8%BF%91%E6%9C%9F%E6%B4%BB%E5%8B%95/%E5%85%A8%E6%A0%A1%E6%80%A7%E5%BF%83%E7%90%86%E8%A1%9B%E7%94%9F%E6%B4%BB%E5%8B%95"
+      },
+      {
+        "title": "團體測驗",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E8%BF%91%E6%9C%9F%E6%B4%BB%E5%8B%95/%E5%9C%98%E9%AB%94%E6%B8%AC%E9%A9%97"
+      }
+    ],
+    "keywords": [
+      "工作坊",
+      "團體",
+      "心理測驗",
+      "講座"
+    ]
+  },
+  {
+    "slug": "health-check",
+    "phrase": "查體檢結果",
+    "title": "學生健康檢查",
+    "summary": "新生入學健康檢查的說明與線上結果查詢。",
+    "group": "身心健康",
+    "audiences": [
+      "新生"
+    ],
+    "unit": "health-center",
+    "links": [
+      {
+        "title": "學生健康檢查",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%A1%9B%E7%94%9F%E4%BF%9D%E5%81%A5/%E5%AD%B8%E7%94%9F%E5%81%A5%E5%BA%B7%E6%AA%A2%E6%9F%A5"
+      },
+      {
+        "title": "學生體檢結果查詢",
+        "url": "https://service.ch.com.tw/group_check/login_sh.aspx?SchoolID=FFBCFF7CFFCA"
+      }
+    ],
+    "keywords": [
+      "體檢",
+      "健康檢查",
+      "新生健檢"
+    ],
+    "featured": true,
+    "order": 11
+  },
+  {
+    "slug": "first-aid",
+    "phrase": "處理受傷或急病",
+    "title": "緊急傷病與醫療用品",
+    "summary": "校內受傷或急病的救護方式、醫療用品借用與傳染病防治資訊。",
+    "group": "身心健康",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "health-center",
+    "links": [
+      {
+        "title": "緊急傷病救護",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%A1%9B%E7%94%9F%E4%BF%9D%E5%81%A5/%E7%B7%8A%E6%80%A5%E5%82%B7%E7%97%85%E6%95%91%E8%AD%B7"
+      },
+      {
+        "title": "醫療用品借用",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%A1%9B%E7%94%9F%E4%BF%9D%E5%81%A5/%E9%86%AB%E7%99%82%E7%94%A8%E5%93%81%E5%80%9F%E7%94%A8"
+      },
+      {
+        "title": "傳染病防治",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%A1%9B%E7%94%9F%E4%BF%9D%E5%81%A5/%E5%82%B3%E6%9F%93%E7%97%85%E9%98%B2%E6%B2%BB"
+      }
+    ],
+    "keywords": [
+      "受傷",
+      "急救",
+      "保健室",
+      "醫療用品",
+      "傳染病"
+    ]
+  },
+  {
+    "slug": "disability",
+    "phrase": "申請特教支持",
+    "title": "資源教室服務",
+    "summary": "為身心障礙與特殊教育需求學生提供學習、生活與生涯支持。",
+    "group": "身心健康",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "resource-room",
+    "links": [
+      {
+        "title": "資源教室服務項目",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE-%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4"
+      },
+      {
+        "title": "資源教室簡介",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4/%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4%E7%B0%A1%E4%BB%8B"
+      },
+      {
+        "title": "特殊教育推行委員會",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4/%E7%89%B9%E6%AE%8A%E6%95%99%E8%82%B2%E6%8E%A8%E8%A1%8C%E5%A7%94%E5%93%A1%E6%9C%83-%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4"
+      },
+      {
+        "title": "特殊教育學生生涯軌道學習輔導",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90/%E7%89%B9%E6%AE%8A%E6%95%99%E8%82%B2%E5%AD%B8%E7%94%9F%E7%94%9F%E6%B6%AF%E8%BB%8C%E9%81%93%E5%AD%B8%E7%BF%92%E8%BC%94%E5%B0%8E-%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90%E5%9F%B9%E8%82%B2%E8%A8%88%E7%95%AB"
+      }
+    ],
+    "keywords": [
+      "資源教室",
+      "身心障礙",
+      "特教",
+      "考試調整"
+    ]
+  },
+  {
+    "slug": "mentor",
+    "phrase": "找導師談談",
+    "title": "導師制",
+    "summary": "每位學生都有導師，可以就學習與生活適應找導師討論。",
+    "group": "身心健康",
+    "audiences": [
+      "新生",
+      "在學生"
+    ],
+    "unit": "health-center",
+    "links": [
+      {
+        "title": "導師制業務",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E5%B0%8E%E5%B8%AB%E5%88%B6/%E5%B0%8E%E5%B8%AB%E5%88%B6%E6%A5%AD%E5%8B%99"
+      }
+    ],
+    "keywords": [
+      "導師",
+      "導生",
+      "輔導"
+    ]
+  },
+  {
+    "slug": "leave",
+    "phrase": "請假",
+    "title": "學生請假",
+    "summary": "請假流程與線上請假系統的說明，依假別準備證明文件。",
+    "group": "請假、兵役與學籍",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "學生請假流程",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99/%E5%AD%B8%E7%94%9F%E8%AB%8B%E5%81%87-%E7%94%9F%E5%83%91%E7%B5%84/%E5%AD%B8%E7%94%9F%E8%AB%8B%E5%81%87%E6%B5%81%E7%A8%8B"
+      }
+    ],
+    "keywords": [
+      "請假",
+      "病假",
+      "事假",
+      "公假",
+      "缺曠"
+    ],
+    "featured": true,
+    "order": 2
+  },
+  {
+    "slug": "military",
+    "phrase": "辦兵役緩徵",
+    "title": "兵役緩徵與役期折減",
+    "summary": "在學男生的緩徵、儘後召集，以及修全民國防課程的役期折減。",
+    "group": "請假、兵役與學籍",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "學生兵役（緩徵、儘後召集）",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99/%E5%AD%B8%E7%94%9F%E5%85%B5%E5%BD%B9"
+      },
+      {
+        "title": "役期折減作業",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E8%BB%8D%E8%A8%93%E6%95%99%E5%AD%B8%E8%88%87%E6%9C%8D%E5%8B%99/%E5%BD%B9%E6%9C%9F%E6%8A%98%E6%B8%9B%E4%BD%9C%E6%A5%AD"
+      },
+      {
+        "title": "預官輔考",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E8%BB%8D%E8%A8%93%E6%95%99%E5%AD%B8%E8%88%87%E6%9C%8D%E5%8B%99/%E9%A0%90%E5%AE%98%E8%BC%94%E8%80%83"
+      }
+    ],
+    "keywords": [
+      "兵役",
+      "緩徵",
+      "儘後召集",
+      "役期折減",
+      "預官"
+    ],
+    "featured": true,
+    "order": 9
+  },
+  {
+    "slug": "insurance",
+    "phrase": "申請保險理賠",
+    "title": "學生團體平安保險",
+    "summary": "學生團體平安保險的保障內容與理賠申請流程。",
+    "group": "請假、兵役與學籍",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "學生團體平安保險",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99/%E5%AD%B8%E7%94%9F%E5%9C%98%E9%AB%94%E5%B9%B3%E5%AE%89%E4%BF%9D%E9%9A%AA/%E5%AD%B8%E7%94%9F%E5%9C%98%E9%AB%94%E5%B9%B3%E5%AE%89%E4%BF%9D%E9%9A%AA%E8%AA%AA%E6%98%8E"
+      }
+    ],
+    "keywords": [
+      "保險",
+      "理賠",
+      "平安保險",
+      "醫療"
+    ]
+  },
+  {
+    "slug": "lost",
+    "phrase": "找遺失物",
+    "title": "遺失物招領",
+    "summary": "校內拾獲物品的招領方式。",
+    "group": "請假、兵役與學籍",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "遺失物招領",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99/%E9%81%BA%E5%A4%B1%E7%89%A9%E6%8B%9B%E9%A0%98"
+      }
+    ],
+    "keywords": [
+      "遺失",
+      "失物",
+      "撿到",
+      "招領"
+    ],
+    "featured": true,
+    "order": 10
+  },
+  {
+    "slug": "merit",
+    "phrase": "申請銷過",
+    "title": "學生獎懲與銷過",
+    "summary": "學生獎懲建議流程、銷過申請與操行成績說明。",
+    "group": "請假、兵役與學籍",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "學生獎懲",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99/%E5%AD%B8%E7%94%9F%E7%8D%8E%E6%87%B2/%E5%AD%B8%E7%94%9F%E7%8D%8E%E6%87%B2%E5%BB%BA%E8%AD%B0%E6%B5%81%E7%A8%8B"
+      }
+    ],
+    "keywords": [
+      "獎懲",
+      "銷過",
+      "記過",
+      "操行"
+    ]
+  },
+  {
+    "slug": "appeal",
+    "phrase": "提出申訴",
+    "title": "學生申訴",
+    "summary": "對學校的處分或措施有異議時，可依程序提出申訴。",
+    "group": "請假、兵役與學籍",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "dean-office",
+    "links": [
+      {
+        "title": "學生申訴",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E5%8B%99%E9%95%B7%E5%AE%A4/%E5%AD%B8%E7%94%9F%E7%9B%B8%E9%97%9C/%E5%AD%B8%E7%94%9F%E7%94%B3%E8%A8%B4"
+      }
+    ],
+    "keywords": [
+      "申訴",
+      "權益",
+      "不服"
+    ]
+  },
+  {
+    "slug": "forms",
+    "phrase": "下載表格",
+    "title": "表格與法規",
+    "summary": "學務處各組的表格與法規下載入口。",
+    "group": "請假、兵役與學籍",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "dean-office",
+    "links": [
+      {
+        "title": "學務長室表格",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E5%8B%99%E9%95%B7%E5%AE%A4/%E6%B3%95%E8%A6%8F%E8%A1%A8%E6%A0%BC/%E8%A1%A8%E6%A0%BC%E4%B8%8B%E8%BC%89"
+      },
+      {
+        "title": "學務法規彙編",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E5%8B%99%E9%95%B7%E5%AE%A4/%E6%B3%95%E8%A6%8F%E8%A1%A8%E6%A0%BC/%E6%B3%95%E8%A6%8F%E5%BD%99%E7%B7%A8"
+      },
+      {
+        "title": "生僑組表格",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E6%B3%95%E8%A6%8F%E5%8F%8A%E8%A1%A8%E5%96%AE/%E8%A1%A8%E6%A0%BC%E4%B8%8B%E8%BC%89"
+      },
+      {
+        "title": "住宿組表格",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E6%B3%95%E8%A6%8F%E5%8F%8A%E8%A1%A8%E5%96%AE/%E8%A1%A8%E6%A0%BC%E4%B8%8B%E8%BC%89"
+      },
+      {
+        "title": "課外組表格",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%AA%B2%E5%A4%96%E6%B4%BB%E5%8B%95%E7%B5%84/%E6%B3%95%E8%A6%8F%E8%A1%A8%E6%A0%BC/%E8%A1%A8%E6%A0%BC%E4%B8%8B%E8%BC%89"
+      }
+    ],
+    "keywords": [
+      "表格",
+      "表單",
+      "法規",
+      "下載"
+    ]
+  },
+  {
+    "slug": "clubs",
+    "phrase": "加入社團",
+    "title": "找社團",
+    "summary": "學術、藝術、聯誼、服務、體適能社團與學生自治團體的網頁連結。",
+    "group": "社團與活動",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生",
+      "僑生",
+      "陸生"
+    ],
+    "unit": "student-activities",
+    "links": [
+      {
+        "title": "社團網頁一覽",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%AA%B2%E5%A4%96%E6%B4%BB%E5%8B%95%E7%B5%84/%E7%A4%BE%E5%9C%98-%E8%AA%B2%E5%A4%96%E7%B5%84%E7%BE%A9%E5%B7%A5%E5%9C%98%E8%B3%87%E8%A8%8A/%E7%A4%BE%E5%9C%98%E7%B6%B2%E9%A0%81%E9%80%A3%E7%B5%90"
+      },
+      {
+        "title": "陸生社團輔導",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E9%99%B8%E7%94%9F%E8%BC%94%E5%B0%8E%E6%A5%AD%E5%8B%99/%E9%99%B8%E7%94%9F%E7%A4%BE%E5%9C%98%E8%BC%94%E5%B0%8E"
+      }
+    ],
+    "keywords": [
+      "社團",
+      "學生會",
+      "學生自治"
+    ],
+    "featured": true,
+    "order": 7
+  },
+  {
+    "slug": "club-funding",
+    "phrase": "申請社團補助",
+    "title": "社團補助與海報張貼",
+    "summary": "社團活動補助與海報張貼都在線上申請。",
+    "group": "社團與活動",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-activities",
+    "links": [
+      {
+        "title": "學生社團補助線上申請",
+        "url": "https://clubsubsidy.nccu.edu.tw/"
+      },
+      {
+        "title": "海報張貼線上申請",
+        "url": "http://saposter.nccu.edu.tw"
+      }
+    ],
+    "keywords": [
+      "補助",
+      "社團經費",
+      "海報",
+      "張貼"
+    ]
+  },
+  {
+    "slug": "venue",
+    "phrase": "借場地",
+    "title": "借場地與器材",
+    "summary": "課外組、藝文中心與宿舍的場地和器材借用資訊。",
+    "group": "社團與活動",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-activities",
+    "links": [
+      {
+        "title": "課外組場地",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%AA%B2%E5%A4%96%E6%B4%BB%E5%8B%95%E7%B5%84/%E5%A0%B4%E5%9C%B0%E5%8F%8A%E5%99%A8%E6%9D%90/%E5%A0%B4%E5%9C%B0%E4%BB%8B%E7%B4%B9"
+      },
+      {
+        "title": "課外組器材",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%AA%B2%E5%A4%96%E6%B4%BB%E5%8B%95%E7%B5%84/%E5%A0%B4%E5%9C%B0%E5%8F%8A%E5%99%A8%E6%9D%90/%E5%99%A8%E6%9D%90%E4%BB%8B%E7%B4%B9"
+      },
+      {
+        "title": "樂活館使用登記系統",
+        "url": "https://lohasscc.nccu.edu.tw/"
+      },
+      {
+        "title": "藝文中心場地介紹",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%97%9D%E6%96%87%E4%B8%AD%E5%BF%83/%E5%A0%B4%E5%9C%B0%E8%B3%87%E8%A8%8A/%E8%97%9D%E6%96%87%E4%B8%AD%E5%BF%83%E5%A0%B4%E5%9C%B0%E4%BB%8B%E7%B4%B9"
+      },
+      {
+        "title": "自強十舍C棟B1餐廳借用",
+        "url": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AE%BF%E8%88%8D%E5%A0%B4%E5%9C%B0%E5%B0%8E%E8%A6%BD%E8%88%87%E5%8F%83%E8%A8%AA%E7%94%B3%E8%AB%8B/%E5%AE%BF%E8%88%8D%E5%A0%B4%E5%9C%B0%E5%80%9F%E7%94%A8/%E8%87%AA%E5%BC%B7%E5%8D%81%E8%88%8DC%E6%A3%9FB1%E9%A4%90%E5%BB%B3"
+      }
+    ],
+    "keywords": [
+      "場地",
+      "器材",
+      "借用",
+      "樂活館",
+      "藝文中心"
+    ],
+    "featured": true,
+    "order": 8
+  },
+  {
+    "slug": "arts",
+    "phrase": "看藝文表演",
+    "title": "藝文節目與展覽",
+    "summary": "藝文中心的表演節目與創作藝廊展覽。",
+    "group": "社團與活動",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "arts-center",
+    "links": [
+      {
+        "title": "節目介紹",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%97%9D%E6%96%87%E4%B8%AD%E5%BF%83/%E8%97%9D%E6%96%87%E7%AF%80%E7%9B%AE%E8%B3%87%E8%A8%8A/%E7%AF%80%E7%9B%AE%E4%BB%8B%E7%B4%B9"
+      },
+      {
+        "title": "創作藝廊",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%97%9D%E6%96%87%E4%B8%AD%E5%BF%83/%E8%97%9D%E6%96%87%E7%AF%80%E7%9B%AE%E8%B3%87%E8%A8%8A/%E5%89%B5%E4%BD%9C%E8%97%9D%E5%BB%8A"
+      }
+    ],
+    "keywords": [
+      "表演",
+      "展覽",
+      "藝文",
+      "音樂會",
+      "講座"
+    ]
+  },
+  {
+    "slug": "volunteer",
+    "phrase": "當志工",
+    "title": "志工招募",
+    "summary": "藝文中心志工工作室與課外組視聽服務團的招募資訊。",
+    "group": "社團與活動",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "arts-center",
+    "links": [
+      {
+        "title": "藝文中心志工報名",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%97%9D%E6%96%87%E4%B8%AD%E5%BF%83/%E5%BF%97%E5%B7%A5%E5%B7%A5%E4%BD%9C%E5%AE%A4/%E5%A0%B1%E5%90%8D%E8%B3%87%E8%A8%8A"
+      },
+      {
+        "title": "藝文中心志工工作室",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%97%9D%E6%96%87%E4%B8%AD%E5%BF%83/%E5%BF%97%E5%B7%A5%E5%B7%A5%E4%BD%9C%E5%AE%A4/%E7%B5%84%E7%B9%94%E4%BB%8B%E7%B4%B9"
+      },
+      {
+        "title": "視聽服務團",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%AA%B2%E5%A4%96%E6%B4%BB%E5%8B%95%E7%B5%84/%E7%A4%BE%E5%9C%98-%E8%AA%B2%E5%A4%96%E7%B5%84%E7%BE%A9%E5%B7%A5%E5%9C%98%E8%B3%87%E8%A8%8A/%E8%A6%96%E8%81%BD%E6%9C%8D%E5%8B%99%E5%9C%98%E7%94%B3%E8%AB%8B%E5%96%AE%E5%A1%AB%E5%AF%AB"
+      }
+    ],
+    "keywords": [
+      "志工",
+      "服務",
+      "視聽服務團"
+    ]
+  },
+  {
+    "slug": "campus-events",
+    "phrase": "參加校園大活動",
+    "title": "校慶、畢業典禮與新生營",
+    "summary": "校慶系列活動、畢業典禮與超政新生定位營。",
+    "group": "社團與活動",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-activities",
+    "links": [
+      {
+        "title": "校慶系列活動",
+        "url": "https://anniversary.nccu.edu.tw/"
+      },
+      {
+        "title": "畢業典禮",
+        "url": "https://osa.nccu.edu.tw/tw/graduation"
+      },
+      {
+        "title": "超政新生定位營",
+        "url": "http://freshmen.nccu.edu.tw/home.jsp"
+      }
+    ],
+    "keywords": [
+      "校慶",
+      "畢業典禮",
+      "新生營",
+      "超政"
+    ]
+  },
+  {
+    "slug": "chorus",
+    "phrase": "報名文化盃",
+    "title": "文化盃合唱比賽",
+    "summary": "政大年度傳統合唱比賽的辦法與資訊。",
+    "group": "社團與活動",
+    "audiences": [
+      "新生",
+      "在學生"
+    ],
+    "unit": "student-activities",
+    "links": [
+      {
+        "title": "文化盃合唱比賽",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%AA%B2%E5%A4%96%E6%B4%BB%E5%8B%95%E7%B5%84/%E7%AB%B6%E8%B3%BD-%E7%8D%8E%E5%8B%B5/%E6%96%87%E5%8C%96%E7%9B%83%E5%90%88%E5%94%B1%E6%AF%94%E8%B3%BD"
+      }
+    ],
+    "keywords": [
+      "文化盃",
+      "合唱",
+      "比賽"
+    ]
+  },
+  {
+    "slug": "internship",
+    "phrase": "找實習",
+    "title": "國內外實習",
+    "summary": "國內與海外實習機會，以及學校的實習作業系統。",
+    "group": "職涯",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "career-center",
+    "links": [
+      {
+        "title": "國內實習",
+        "url": "https://cd.nccu.edu.tw/domestic_internship"
+      },
+      {
+        "title": "海外實習",
+        "url": "https://cd.nccu.edu.tw/overseas_internship"
+      },
+      {
+        "title": "實習政策專區/實習作業系統",
+        "url": "https://cd.nccu.edu.tw/internship"
+      }
+    ],
+    "keywords": [
+      "實習",
+      "海外實習",
+      "暑期實習"
+    ],
+    "featured": true,
+    "order": 6
+  },
+  {
+    "slug": "jobs",
+    "phrase": "找工作",
+    "title": "職缺與校園徵才",
+    "summary": "職涯平台上的職缺訊息與每年的校園徵才月活動。",
+    "group": "職涯",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "career-center",
+    "links": [
+      {
+        "title": "職缺訊息",
+        "url": "https://cd.nccu.edu.tw/job"
+      },
+      {
+        "title": "徵才月",
+        "url": "https://cd.nccu.edu.tw/career_month"
+      },
+      {
+        "title": "校園徵才月活動",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83/%E8%81%B7%E6%B6%AF%E6%B4%BB%E5%8B%95/%E6%A0%A1%E5%9C%92%E5%BE%B5%E6%89%8D%E6%9C%88%E6%B4%BB%E5%8B%95"
+      }
+    ],
+    "keywords": [
+      "職缺",
+      "求職",
+      "徵才",
+      "就業博覽會"
+    ]
+  },
+  {
+    "slug": "career-advice",
+    "phrase": "諮詢職涯方向",
+    "title": "職涯諮詢與履歷",
+    "summary": "預約業師面對面諮詢、履歷與面試技巧，以及職涯興趣探索。",
+    "group": "職涯",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "career-center",
+    "links": [
+      {
+        "title": "業師諮詢面對面與預約",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83/%E8%81%B7%E6%B6%AF%E8%AB%AE%E8%A9%A2/%E6%A5%AD%E5%B8%AB%E8%AB%AE%E8%A9%A2%E9%9D%A2%E5%B0%8D%E9%9D%A2%E8%88%87%E9%A0%90%E7%B4%84/%E6%A5%AD%E5%B8%AB%E8%AB%AE%E8%A9%A2%E9%9D%A2%E5%B0%8D%E9%9D%A2%E8%88%87%E9%A0%90%E7%B4%84"
+      },
+      {
+        "title": "職涯諮詢預約（職涯平台）",
+        "url": "https://cd.nccu.edu.tw/career_consultant"
+      },
+      {
+        "title": "履歷撰寫與面試技巧",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83/%E8%81%B7%E6%B6%AF%E8%AB%AE%E8%A9%A2/%E5%B1%A5%E6%AD%B7%E6%92%B0%E5%AF%AB%E8%88%87%E9%9D%A2%E8%A9%A6%E6%8A%80%E5%B7%A7"
+      },
+      {
+        "title": "職涯興趣探索",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83/%E8%81%B7%E6%B6%AF%E8%AB%AE%E8%A9%A2/%E8%81%B7%E6%B6%AF%E8%88%88%E8%B6%A3%E6%8E%A2%E7%B4%A2"
+      }
+    ],
+    "keywords": [
+      "職涯諮詢",
+      "履歷",
+      "面試",
+      "業師",
+      "興趣探索"
+    ]
+  },
+  {
+    "slug": "career-talks",
+    "phrase": "聽職涯講座",
+    "title": "職涯講座",
+    "summary": "職涯發展中心的講座介紹與場次表。",
+    "group": "職涯",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "career-center",
+    "links": [
+      {
+        "title": "職涯講座介紹",
+        "url": "https://osa.nccu.edu.tw/tw/%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83/%E8%81%B7%E6%B6%AF%E6%B4%BB%E5%8B%95/%E8%81%B7%E6%B6%AF%E8%AC%9B%E5%BA%A7"
+      },
+      {
+        "title": "講座場次表",
+        "url": "https://cd.nccu.edu.tw/career_lecture/schedule"
+      }
+    ],
+    "keywords": [
+      "講座",
+      "職涯講座"
+    ]
+  },
+  {
+    "slug": "report-emergency",
+    "phrase": "通報緊急事故",
+    "title": "學生緊急事故通報",
+    "summary": "學生發生意外或緊急事故時的通報方式與處理流程。",
+    "group": "校園安全",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-safety",
+    "links": [
+      {
+        "title": "學生緊急事故通報",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E5%AD%B8%E7%94%9F%E7%B7%8A%E6%80%A5%E4%BA%8B%E6%95%85%E9%80%9A%E5%A0%B1"
+      },
+      {
+        "title": "校園災害緊急事件處理流程圖",
+        "url": "https://osa.nccu.edu.tw/CSRC/tw/%E6%A0%A1%E5%9C%92%E7%81%BD%E5%AE%B3%E7%B7%8A%E6%80%A5%E4%BA%8B%E4%BB%B6%E8%99%95%E7%90%86%E6%B5%81%E7%A8%8B%E5%9C%96"
+      }
+    ],
+    "keywords": [
+      "緊急",
+      "事故",
+      "通報",
+      "校安"
+    ]
+  },
+  {
+    "slug": "safety-map",
+    "phrase": "查校園安全地圖",
+    "title": "校園安全地圖與逃生路線",
+    "summary": "校園安全地圖、疏散逃生路線與災害防救計畫。",
+    "group": "校園安全",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-safety",
+    "links": [
+      {
+        "title": "校園安全地圖",
+        "url": "https://osa.nccu.edu.tw/CSRC/tw/%E6%A0%A1%E5%9C%92%E5%AE%89%E5%85%A8%E5%9C%B0%E5%9C%96"
+      },
+      {
+        "title": "校園疏散逃生路線圖",
+        "url": "https://osa.nccu.edu.tw/CSRC/tw/%E6%A0%A1%E5%9C%92%E7%96%8F%E6%95%A3%E9%80%83%E7%94%9F%E8%B7%AF%E7%B7%9A%E5%9C%96"
+      },
+      {
+        "title": "政治大學災害防救計畫",
+        "url": "https://osa.nccu.edu.tw/CSRC/tw/%E6%94%BF%E6%B2%BB%E5%A4%A7%E5%AD%B8%E7%81%BD%E5%AE%B3%E9%98%B2%E6%95%91%E8%A8%88%E7%95%AB"
+      }
+    ],
+    "keywords": [
+      "安全地圖",
+      "逃生",
+      "疏散",
+      "防災"
+    ]
+  },
+  {
+    "slug": "personal-safety",
+    "phrase": "防範詐騙",
+    "title": "人身、交通與防災安全",
+    "summary": "反詐騙、交通安全與地震防護等安全教育資訊。",
+    "group": "校園安全",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-safety",
+    "links": [
+      {
+        "title": "人身安全與反詐騙",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E4%BA%BA%E8%BA%AB%E5%AE%89%E5%85%A8%E6%95%99%E8%82%B2/%E5%8F%8D%E8%A9%90%E9%A8%99"
+      },
+      {
+        "title": "交通安全教育",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E4%BA%A4%E9%80%9A%E5%AE%89%E5%85%A8%E6%95%99%E8%82%B2/%E4%BA%A4%E9%80%9A%E5%AE%89%E5%85%A8"
+      },
+      {
+        "title": "防災教育",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E9%98%B2%E7%81%BD%E6%95%99%E8%82%B2/%E5%9C%B0%E9%9C%87%E9%98%B2%E8%AD%B7%E5%8F%8A%E9%80%83%E7%94%9F%E8%A6%81%E9%A0%98"
+      }
+    ],
+    "keywords": [
+      "詐騙",
+      "反詐騙",
+      "交通安全",
+      "地震",
+      "人身安全"
+    ]
+  },
+  {
+    "slug": "bullying",
+    "phrase": "舉報霸凌",
+    "title": "校園霸凌防制",
+    "summary": "校園霸凌防制委員會與處理機制。",
+    "group": "校園安全",
+    "audiences": [
+      "新生",
+      "在學生",
+      "研究生"
+    ],
+    "unit": "student-safety",
+    "links": [
+      {
+        "title": "校園霸凌防制",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E6%A0%A1%E5%9C%92%E9%9C%B8%E5%87%8C%E9%98%B2%E5%88%B6/%E6%A0%A1%E5%9C%92%E9%9C%B8%E5%87%8C%E9%98%B2%E5%88%B6%E5%A7%94%E5%93%A1%E6%9C%83"
+      }
+    ],
+    "keywords": [
+      "霸凌",
+      "防制"
+    ]
+  },
+  {
+    "slug": "overseas-new",
+    "phrase": "辦僑生新生報到",
+    "title": "僑生新生入學",
+    "summary": "新僑生報到註冊、居留規定、住宿與獎助學金的一站式說明。",
+    "group": "僑生、陸生與原民生",
+    "audiences": [
+      "僑生",
+      "新生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "新僑生入學專區",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E6%A5%AD%E5%8B%99/%E6%96%B0%E5%83%91%E7%94%9F%E5%85%A5%E5%AD%B8%E5%B0%88%E5%8D%80"
+      }
+    ],
+    "keywords": [
+      "僑生",
+      "新生",
+      "報到",
+      "居留"
+    ]
+  },
+  {
+    "slug": "overseas-life",
+    "phrase": "辦居留與重入境",
+    "title": "僑生居留與生活輔導",
+    "summary": "僑生居留、重入境、保險、工作許可與畢業輔導。",
+    "group": "僑生、陸生與原民生",
+    "audiences": [
+      "僑生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "僑生居留與重入境",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E6%A5%AD%E5%8B%99/%E5%83%91%E7%94%9F%E7%94%9F%E6%B4%BB%E8%BC%94%E5%B0%8E/%E5%83%91%E7%94%9F%E5%B1%85%E7%95%99%E3%80%81%E9%87%8D%E5%85%A5%E5%A2%83"
+      },
+      {
+        "title": "僑生畢業輔導",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E6%A5%AD%E5%8B%99/%E5%83%91%E7%94%9F%E7%95%A2%E6%A5%AD%E8%BC%94%E5%B0%8E"
+      }
+    ],
+    "keywords": [
+      "居留證",
+      "重入境",
+      "僑生保險",
+      "工作許可"
+    ]
+  },
+  {
+    "slug": "mainland",
+    "phrase": "辦陸生入臺手續",
+    "title": "陸生入學與生活輔導",
+    "summary": "陸生入臺申請、延長停留、畢業出境與新生入學說明。",
+    "group": "僑生、陸生與原民生",
+    "audiences": [
+      "陸生"
+    ],
+    "unit": "student-life",
+    "links": [
+      {
+        "title": "陸生入臺申請與生活輔導",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E9%99%B8%E7%94%9F%E8%BC%94%E5%B0%8E%E6%A5%AD%E5%8B%99/%E9%99%B8%E7%94%9F%E7%94%9F%E6%B4%BB%E8%BC%94%E5%B0%8E/%E5%85%A5%E8%87%BA%E7%94%B3%E8%AB%8B"
+      },
+      {
+        "title": "陸生新生入學專區",
+        "url": "https://osa.nccu.edu.tw/tw/%E7%94%9F%E6%B4%BB%E4%BA%8B%E5%8B%99%E6%9A%A8%E5%83%91%E7%94%9F%E8%BC%94%E5%B0%8E%E7%B5%84/%E9%99%B8%E7%94%9F%E8%BC%94%E5%B0%8E%E6%A5%AD%E5%8B%99/%E9%99%B8%E7%94%9F%E6%96%B0%E7%94%9F%E5%85%A5%E5%AD%B8%E5%B0%88%E5%8D%80"
+      }
+    ],
+    "keywords": [
+      "陸生",
+      "入臺",
+      "延長停留",
+      "出境"
+    ]
+  },
+  {
+    "slug": "indigenous",
+    "phrase": "找原民生資源",
+    "title": "原住民族學生資源",
+    "summary": "原資中心的生活輔導、獎助資訊、職涯資源與活動行事曆。",
+    "group": "僑生、陸生與原民生",
+    "audiences": [
+      "原民生"
+    ],
+    "unit": "indigenous-center",
+    "links": [
+      {
+        "title": "生活輔導",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E7%94%9F%E6%B4%BB%E8%BC%94%E5%B0%8E-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83"
+      },
+      {
+        "title": "獎助資訊",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E7%8D%8E%E5%8A%A9%E8%B3%87%E8%A8%8A-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83"
+      },
+      {
+        "title": "職涯相關",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E8%81%B7%E6%B6%AF%E7%9B%B8%E9%97%9C-%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83"
+      },
+      {
+        "title": "原資中心行事曆",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83/%E5%8E%9F%E8%B3%87%E4%B8%AD%E5%BF%83%E8%A1%8C%E4%BA%8B%E6%9B%86"
+      },
+      {
+        "title": "原住民學生輔導",
+        "url": "https://osa.nccu.edu.tw/tw/%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90/%E5%8E%9F%E4%BD%8F%E6%B0%91%E5%AD%B8%E7%94%9F%E8%BC%94%E5%B0%8E-%E5%B8%8C%E6%9C%9B%E7%A8%AE%E5%AD%90%E5%9F%B9%E8%82%B2%E8%A8%88%E7%95%AB"
+      }
+    ],
+    "keywords": [
+      "原住民",
+      "原民",
+      "原資中心"
+    ]
+  }
+]

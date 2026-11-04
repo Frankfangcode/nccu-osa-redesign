@@ -28,6 +28,7 @@ export type Task = {
   links: Link[];
   keywords: string[];
   featured?: boolean;
+  order?: number;
 };
 export type Line = {
   name: string;
@@ -46,8 +47,30 @@ export const lines = emergencyRaw as Line[];
 export const unitBySlug = (slug: string) => units.find((u) => u.slug === slug);
 export const tasksForUnit = (slug: string) => tasks.filter((t) => t.unit === slug);
 
-export const audiences = ['新生', '在學生', '研究生', '僑生', '陸生', '境外生'];
+export const audiences = ['新生', '在學生', '研究生', '僑生', '陸生', '原民生'];
 
 export const taskGroups = Array.from(new Set(tasks.map((t) => t.group)));
 
-export const tel = (p: string) => `tel:${p.replace(/[^\d+]/g, '')}`;
+export const featuredTasks = tasks
+  .filter((t) => t.featured)
+  .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+
+/**
+ * Source phone fields often carry extensions and notes
+ * (e.g. "0919-099-119（校內分機 66119）"). Take the first dialable number.
+ */
+export function phoneMain(p: string): string {
+  const m = p.match(/0\d{1,3}[-\s]?\d{3,4}[-\s]?\d{3,4}|0800[-\s]?\d{3}[-\s]?\d{3}|\b\d{3,4}\b/);
+  return m ? m[0].trim() : p;
+}
+/** Whatever follows the main number, e.g. "（校內分機 66119）". */
+export function phoneNote(p: string): string {
+  const main = phoneMain(p);
+  const i = p.indexOf(main);
+  return i === -1 ? '' : p.slice(i + main.length).replace(/^[\s/／;；]+/, '').trim();
+}
+/** True only when the source states the line is staffed around the clock. */
+export const is24h = (l: Line) => /^\s*24\s*小時/.test(l.hours);
+export const campus24h = () => lines.filter((l) => l.scope === 'campus' && is24h(l));
+
+export const tel = (p: string) => `tel:${phoneMain(p).replace(/[^\d+]/g, '')}`;

@@ -1,135 +1,171 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lines, tel } from '../lib/data';
+import { lines, tel, phoneMain, phoneNote, is24h, type Line } from '../lib/data';
 
-const campus = lines.filter((l) => l.scope === 'campus');
-const national = lines.filter((l) => l.scope === 'national');
-const primary = campus.find((l) => /24/.test(l.hours)) ?? campus[0];
-const otherCampus = campus.filter((l) => l !== primary);
-const life = national.filter((l) => ['110', '119'].includes(l.phone.replace(/\D/g, '')));
-const support = national.filter((l) => !life.includes(l));
+const digits = (l: Line) => phoneMain(l.phone).replace(/\D/g, '');
+const life = lines.filter((l) => l.scope === 'national' && ['110', '119'].includes(digits(l)));
+const campus24 = lines.filter((l) => l.scope === 'campus' && is24h(l));
+const campusDay = lines.filter((l) => l.scope === 'campus' && !campus24.includes(l));
+const national = lines.filter((l) => l.scope === 'national' && !life.includes(l));
+const is24 = is24h;
 ---
-<Base title="緊急求助" current="emergency" hideAlertBand description="政大校園 24 小時緊急聯絡電話，以及全國緊急與心理支持專線。">
+<Base title="緊急求助" current="emergency" hideAlertBand description="政大校園 24 小時緊急聯絡電話，以及全國緊急與心理支持專線，依急迫程度排列。">
   <div class="wrap">
     <header class="page-head">
       <h1>緊急求助</h1>
-      <p class="lede">遇到危險、受傷、身體或情緒上撐不住，現在就打電話。電話接通時，先說你在哪裡、發生什麼事。</p>
+      <p class="lede">遇到危險、受傷，或身體、情緒撐不住，現在就打電話。接通後先說你在哪裡、發生什麼事。</p>
     </header>
 
-    {life.length > 0 && (
-      <section class="life" aria-labelledby="life-title">
-        <h2 id="life-title" class="visually-hidden">有生命危險</h2>
-        <p class="life-lead">有立即的生命危險</p>
-        <ul class="life-list">
-          {life.map((l) => (
-            <li>
-              <a href={tel(l.phone)} class="life-num tnum" aria-label={`撥打 ${l.name} ${l.phone}`}>{l.phone}</a>
-              <span class="life-name">{l.name}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+    <ol class="tiers" data-pagefind-body>
+      {life.length > 0 && (
+        <li class="tier tier-life" aria-labelledby="t1">
+          <div class="tier-head">
+            <h2 id="t1">有立即的生命危險</h2>
+            <p>例如：有人失去意識、嚴重受傷、火災、正在受到攻擊。</p>
+          </div>
+          <ul class="life-list">
+            {life.map((l) => (
+              <li>
+                <a href={tel(l.phone)} class="life-num tnum">{phoneMain(l.phone)}</a>
+                <span class="life-name">{l.name}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      )}
 
-    {primary && (
-      <section class="primary" aria-labelledby="primary-title">
-        <h2 id="primary-title" class="primary-name">{primary.name}</h2>
-        <p class="primary-hours">{primary.hours}</p>
-        <a class="primary-num tnum" href={tel(primary.phone)}>{primary.phone}</a>
-        <p class="primary-desc">{primary.description}</p>
-        <p class="source"><a class="ext" href={primary.sourceUrl} rel="noopener">資料來源</a></p>
-      </section>
-    )}
+      {campus24.length > 0 && (
+        <li class="tier tier-24" aria-labelledby="t2">
+          <div class="tier-head">
+            <h2 id="t2">在校園內需要協助，任何時間</h2>
+            <p>例如：校內意外、身體或情緒急症、人身安全疑慮、宿舍緊急狀況。值勤人員會協助聯繫醫療、警消或身心健康中心。</p>
+          </div>
+          <ul class="big-list">
+            {campus24.map((l) => (
+              <li>
+                <p class="big-name">{l.name}</p>
+                <a class="big-num tnum" href={tel(l.phone)}>{phoneMain(l.phone)}</a>
+                {phoneNote(l.phone) && <p class="big-note">{phoneNote(l.phone).replace(/^（|）$/g, '')}</p>}
+                <p class="badge">24 小時</p>
+                <p class="big-desc">{l.description}</p>
+                <a class="source" href={l.sourceUrl} rel="noopener">資料來源</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      )}
 
-    {otherCampus.length > 0 && (
-      <section class="section" aria-labelledby="campus-title">
-        <h2 id="campus-title" class="section-title">校內其他協助</h2>
-        <ul class="line-list">
-          {otherCampus.map((l) => (
-            <li>
-              <div>
-                <h3>{l.name}</h3>
-                <p class="ll-desc">{l.description}</p>
-                <p class="ll-hours">{l.hours}・<a href={l.sourceUrl} rel="noopener">來源</a></p>
-              </div>
-              <a class="ll-num tnum" href={tel(l.phone)}>{l.phone}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+      {campusDay.length > 0 && (
+        <li class="tier" aria-labelledby="t3">
+          <div class="tier-head">
+            <h2 id="t3">校內其他窗口</h2>
+            <p>多數在上班時間服務。下班後請改撥上方 24 小時專線。</p>
+          </div>
+          <ul class="line-list">
+            {campusDay.map((l) => (
+              <li>
+                <div>
+                  <h3>{l.name}</h3>
+                  <p class="ll-desc">{l.description}</p>
+                  <p class="ll-hours">{l.hours}<span aria-hidden="true">・</span><a href={l.sourceUrl} rel="noopener">來源</a></p>
+                </div>
+                <a class="ll-num tnum" href={tel(l.phone)} aria-label={`撥打 ${l.name} ${phoneMain(l.phone)}`}>{phoneMain(l.phone)}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      )}
 
-    {support.length > 0 && (
-      <section class="section" aria-labelledby="national-title">
-        <h2 id="national-title" class="section-title">全國專線</h2>
-        <ul class="line-list">
-          {support.map((l) => (
-            <li>
-              <div>
-                <h3>{l.name}</h3>
-                <p class="ll-desc">{l.description}</p>
-                <p class="ll-hours">{l.hours}・<a href={l.sourceUrl} rel="noopener">來源</a></p>
-              </div>
-              <a class="ll-num tnum" href={tel(l.phone)}>{l.phone}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+      {national.length > 0 && (
+        <li class="tier" aria-labelledby="t4">
+          <div class="tier-head">
+            <h2 id="t4">全國專線</h2>
+            <p>想找人說說話、遇到家庭暴力或性侵害，或需要外語協助時。</p>
+          </div>
+          <ul class="line-list">
+            {national.map((l) => (
+              <li>
+                <div>
+                  <h3>{l.name} {is24(l) && <span class="badge badge-inline">24 小時</span>}</h3>
+                  <p class="ll-desc">{l.description}</p>
+                  <p class="ll-hours">{l.hours}<span aria-hidden="true">・</span><a href={l.sourceUrl} rel="noopener">來源</a></p>
+                </div>
+                <a class="ll-num tnum" href={tel(l.phone)} aria-label={`撥打 ${l.name} ${phoneMain(l.phone)}`}>{phoneMain(l.phone)}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      )}
+    </ol>
   </div>
 </Base>
 
 <style>
-  .life {
+  .tiers { list-style: none; display: grid; gap: var(--space-6); }
+  .tier-head { margin-bottom: var(--space-4); }
+  .tier-head h2 { font-size: var(--s3); }
+  .tier-head p { color: var(--ink-soft); margin-top: var(--space-2); max-width: var(--measure); }
+
+  .tier-life {
     background: var(--alert);
     color: var(--alert-ink);
     border-radius: var(--radius-m);
-    padding: var(--space-5) var(--space-6);
+    padding: var(--space-6);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
-  .life-lead { font-family: var(--font-display); font-weight: 900; font-size: var(--s2); }
-  .life-list { list-style: none; display: flex; gap: var(--space-6); }
+  .tier-life .tier-head { margin: 0; }
+  .tier-life .tier-head p { color: inherit; opacity: 0.92; }
+  .life-list { list-style: none; display: flex; gap: var(--space-7); }
   .life-list li { display: flex; flex-direction: column; align-items: center; }
   .life-num {
     color: inherit;
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: var(--s6);
+    font-size: var(--s7);
     line-height: 1;
     text-decoration: none;
   }
   .life-num:hover { text-decoration: underline; }
-  .life-num:focus-visible { outline-color: var(--alert-ink); }
-  .life-name { font-size: var(--s-1); font-weight: 700; }
+  .tier-life :focus-visible { outline-color: var(--alert-ink); }
+  .life-name { font-weight: 700; }
 
-  .primary {
-    margin-top: var(--space-6);
-    padding: var(--space-7) var(--space-6);
+  .tier-24 {
     border: 3px solid var(--alert);
     border-radius: var(--radius-m);
     background: var(--alert-tint);
-    text-align: center;
+    padding: var(--space-6);
   }
-  .primary-name { font-size: var(--s3); }
-  .primary-hours { font-weight: 700; color: var(--alert); margin-top: var(--space-1); }
-  .primary-num {
-    display: inline-block;
-    margin-top: var(--space-4);
+  .big-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: var(--space-6); }
+  .big-list li { display: flex; flex-direction: column; align-items: flex-start; }
+  .big-name { font-weight: 700; font-size: var(--s1); }
+  .big-num {
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: clamp(var(--s5), 9vw, var(--s7));
-    line-height: 1.1;
+    font-size: clamp(var(--s4), 6vw, var(--s6));
+    line-height: 1.15;
     color: var(--ink);
     text-decoration: none;
     letter-spacing: 0.02em;
   }
-  .primary-num:hover { text-decoration: underline; text-decoration-color: var(--alert); }
-  .primary-desc { margin: var(--space-4) auto 0; max-width: var(--measure); color: var(--ink-soft); }
-  .source { margin-top: var(--space-3); font-size: var(--s-1); }
+  .big-num:hover { text-decoration: underline; text-decoration-color: var(--alert); }
+  .big-note { color: var(--ink-soft); font-size: 0.95rem; }
+  .big-desc { margin-top: var(--space-3); color: var(--ink-soft); max-width: var(--measure); }
+  .badge {
+    display: inline-block;
+    margin-top: var(--space-2);
+    padding: 0.05em 0.7em;
+    border-radius: 999px;
+    background: var(--alert);
+    color: var(--alert-ink);
+    font-size: var(--s-1);
+    font-weight: 700;
+  }
+  .badge-inline { margin: 0 0 0 var(--space-2); vertical-align: middle; font-family: var(--font-body); }
+  .source { margin-top: var(--space-2); font-size: var(--s-1); }
 
   .line-list { list-style: none; }
   .line-list li {
@@ -147,23 +183,22 @@ const support = national.filter((l) => !life.includes(l));
   .ll-num {
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: var(--s3);
+    font-size: var(--s2);
     white-space: nowrap;
     color: var(--ink);
     text-decoration: none;
-    min-height: 44px;
+    min-height: 48px;
     display: inline-flex;
     align-items: center;
-    padding: 0 var(--space-4);
+    padding: 0 var(--space-5);
     border: 2px solid var(--ink);
     border-radius: 999px;
   }
   .ll-num:hover { background: var(--ink); color: var(--paper); }
 
   @media (max-width: 640px) {
-    .life { padding: var(--space-5); }
-    .life-num { font-size: var(--s5); }
+    .tier-life, .tier-24 { padding: var(--space-5); }
+    .life-num { font-size: var(--s6); }
     .line-list li { flex-direction: column; align-items: flex-start; }
-    .ll-num { font-size: var(--s2); }
   }
 </style>

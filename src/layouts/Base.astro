@@ -1,8 +1,8 @@
 ---
 import '../styles/global.css';
 import { url } from '../lib/url';
-import emergency from '../data/emergency.json';
 import site from '../data/site.json';
+import { lines, tel, phoneMain, is24h, campus24h } from '../lib/data';
 
 interface Props {
   title: string;
@@ -12,11 +12,9 @@ interface Props {
 }
 const { title, description = '政大學務處服務入口：獎助學金、請假、宿舍、諮商、社團與僑陸生服務，依你要辦的事找到窗口。', current, hideAlertBand = false } = Astro.props;
 
-type Line = { name: string; phone: string; hours: string; scope: string };
-const lines = emergency as Line[];
 const hotline =
-  lines.find((l) => l.scope === 'campus' && /24/.test(l.hours)) ?? lines.find((l) => l.scope === 'campus');
-const tel = (p: string) => `tel:${p.replace(/[^\d+]/g, '')}`;
+  campus24h()[0];
+const campus24 = campus24h();
 
 const nav = [
   { key: 'services', label: '找服務', href: url('/services/') },
@@ -49,12 +47,11 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
       <aside class="alert-band" aria-label="24 小時緊急聯絡">
         <div class="wrap alert-inner">
           <p>
-            <span class="alert-label">{hotline.name}</span>
-            <a class="alert-phone tnum" href={tel(hotline.phone)}>{hotline.phone}</a>
-            <span class="alert-hours">{hotline.hours}</span>
-            <span class="alert-life">生命危險請撥 <a href="tel:110">110</a>／<a href="tel:119">119</a></span>
-          </p>
-          <a class="alert-more" href={url('/emergency/')}>所有緊急求助電話</a>
+            <span class="alert-label">24 小時校安專線</span>
+            <a class="alert-phone tnum" href={tel(hotline.phone)}>{phoneMain(hotline.phone)}</a>
+            </p>
+          <p class="alert-sub"><span class="alert-life">生命危險 <a href="tel:110">110</a>／<a href="tel:119">119</a></span>
+          <a class="alert-more" href={url('/emergency/')}>更多緊急電話</a></p>
         </div>
       </aside>
     )}
@@ -118,8 +115,8 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
           <p class="footer-name">緊急聯絡</p>
           <ul>
             <li>生命危險 <a class="tnum" href="tel:110">110</a>／<a class="tnum" href="tel:119">119</a></li>
-            {lines.filter((l) => l.scope === 'campus').slice(0, 3).map((l) => (
-              <li>{l.name} <a class="tnum" href={tel(l.phone)}>{l.phone}</a></li>
+            {campus24.map((l) => (
+              <li>{l.name.replace(/（.*?）/, '')} <a class="tnum" href={tel(l.phone)}>{phoneMain(l.phone)}</a>（24 小時）</li>
             ))}
           </ul>
         </div>
@@ -194,9 +191,7 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
   .alert-phone:hover { text-decoration: underline; }
   .alert-hours { opacity: 0.9; }
   .alert-life a { font-weight: 800; }
-  @media (max-width: 560px) {
-    .alert-hours { display: none; }
-  }
+  .alert-sub { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); align-items: baseline; }
   .alert-more { font-weight: 700; }
 
   .site-header {

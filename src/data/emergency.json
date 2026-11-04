@@ -1,0 +1,130 @@
+[
+  {
+    "name": "學安、校安中心（學生安全輔導組值勤）",
+    "phone": "0919-099-119（校內分機 66119）",
+    "hours": "24 小時",
+    "scope": "campus",
+    "description": "校內任何學生緊急事故、意外或安全疑慮的第一通報窗口，教官全天候值勤。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E5%AD%B8%E7%94%9F%E7%B7%8A%E6%80%A5%E4%BA%8B%E6%95%85%E9%80%9A%E5%A0%B1"
+  },
+  {
+    "name": "駐警隊（警衛室）",
+    "phone": "02-2938-7129（校內分機 66110）",
+    "hours": "24 小時",
+    "scope": "campus",
+    "description": "校園門禁、治安與現場警衛支援，校內發生可疑人士或治安事件時聯繫。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E5%AD%B8%E7%94%9F%E7%B7%8A%E6%80%A5%E4%BA%8B%E6%95%85%E9%80%9A%E5%A0%B1"
+  },
+  {
+    "name": "身心健康中心 心理諮商緊急電話",
+    "phone": "02-8237-7419",
+    "hours": "週一至週五上班時段（官方頁面未標示 24 小時；下班後請改撥學安中心）",
+    "scope": "campus",
+    "description": "需要立即心理支持或處理心理危機時，可直接聯繫諮商中心的緊急專線。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%A5%AD%E5%8B%99%E8%81%B7%E6%8E%8C/%E9%97%9C%E6%96%BC%E6%88%91%E5%80%91"
+  },
+  {
+    "name": "身心健康中心 衛生保健緊急電話",
+    "phone": "02-8237-7424",
+    "hours": "週一至週五上班時段（官方頁面未標示 24 小時）",
+    "scope": "campus",
+    "description": "校內緊急傷病需要護理人員協助或急救箱時聯繫衛保組。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%A1%9B%E7%94%9F%E4%BF%9D%E5%81%A5/%E7%B7%8A%E6%80%A5%E5%82%B7%E7%97%85%E6%95%91%E8%AD%B7"
+  },
+  {
+    "name": "身心健康中心 下班時段緊急聯絡（值班人員）",
+    "phone": "02-2939-3091（總機轉值班）",
+    "hours": "下班時段，限緊急事件",
+    "scope": "campus",
+    "description": "身心健康中心非上班時間的緊急聯繫方式，會轉由學校值班人員處理。",
+    "sourceUrl": "https://osa.nccu.edu.tw/gb/physical-and-mental-health-center/opening-hours"
+  },
+  {
+    "name": "資源教室值班台",
+    "phone": "02-8237-7417",
+    "hours": "上班時段（未標示確切時間）",
+    "scope": "campus",
+    "description": "身心障礙或特教學生遇到學習、生活支持上的急需時聯繫。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E6%9C%8D%E5%8B%99%E6%A5%AD%E5%8B%99%E9%A0%85%E7%9B%AE/%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4/%E8%B3%87%E6%BA%90%E6%95%99%E5%AE%A4%E7%B0%A1%E4%BB%8B"
+  },
+  {
+    "name": "宿舍夜間緊急電話",
+    "phone": "0910-631-831",
+    "hours": "17:00–08:00",
+    "scope": "campus",
+    "description": "住宿生夜間在宿舍遇到緊急狀況時的聯絡電話（頁面發布於 2015 年，使用前請再確認）。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E4%BD%8F%E5%AE%BF%E8%BC%94%E5%B0%8E%E7%B5%84/%E9%97%9C%E6%96%BC%E6%88%91%E5%80%91/%E5%90%84%E5%AE%BF%E8%88%8D%E9%80%A3%E7%B5%A1%E8%B3%87%E8%A8%8A"
+  },
+  {
+    "name": "學務處總機",
+    "phone": "02-2939-3091",
+    "hours": "上班時段",
+    "scope": "campus",
+    "description": "學務處各組一般洽詢，可轉接各單位分機。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E%E7%B5%84/%E5%AD%B8%E7%94%9F%E5%AE%89%E5%85%A8%E8%BC%94%E5%B0%8E/%E5%AD%B8%E7%94%9F%E7%B7%8A%E6%80%A5%E4%BA%8B%E6%95%85%E9%80%9A%E5%A0%B1"
+  },
+  {
+    "name": "臺北市學生心理諮商專線",
+    "phone": "08-0909-8185",
+    "hours": "官方頁面未標示",
+    "scope": "national",
+    "description": "臺北市提供學生的心理諮商電話（市話免費；屬臺北市地方專線），由身心健康中心資源頁轉介。",
+    "sourceUrl": "https://osa.nccu.edu.tw/tw/%E8%BA%AB%E5%BF%83%E5%81%A5%E5%BA%B7%E4%B8%AD%E5%BF%83/%E7%B6%B2%E8%B7%AF%E8%B3%87%E6%BA%90%E9%80%A3%E7%B5%90/%E7%B6%B2%E8%B7%AF%E8%B3%87%E6%BA%90%E9%80%A3%E7%B5%90"
+  },
+  {
+    "name": "警察報案",
+    "phone": "110",
+    "hours": "24 小時",
+    "scope": "national",
+    "description": "遇到犯罪、危及人身安全或需要警察協助時撥打。",
+    "sourceUrl": "https://www.moi.gov.tw/cp.aspx?n=8370"
+  },
+  {
+    "name": "消防／救護",
+    "phone": "119",
+    "hours": "24 小時",
+    "scope": "national",
+    "description": "火災、重大傷病需要救護車時撥打；校內撥打後請同時通知警衛室。",
+    "sourceUrl": "https://www.moi.gov.tw/cp.aspx?n=8370"
+  },
+  {
+    "name": "113 保護專線",
+    "phone": "113",
+    "hours": "24 小時",
+    "scope": "national",
+    "description": "家暴、性侵害、性騷擾、兒少與老人保護等案件的免付費諮詢與通報專線。",
+    "sourceUrl": "https://mohw.gov.tw/cp-16-57981-1.html"
+  },
+  {
+    "name": "1925 安心專線",
+    "phone": "1925",
+    "hours": "24 小時",
+    "scope": "national",
+    "description": "衛福部提供全年無休、免付費的心理諮詢電話，情緒低落或有自殺念頭時可撥打。",
+    "sourceUrl": "https://mohw.gov.tw/cp-16-50587-1.html"
+  },
+  {
+    "name": "1995 生命線",
+    "phone": "1995",
+    "hours": "官方頁面未標示時段",
+    "scope": "national",
+    "description": "國際生命線台灣總會的協談專線，提供情緒支持與危機處理。",
+    "sourceUrl": "https://www.life1995.org.tw/?aid=2"
+  },
+  {
+    "name": "1980 張老師專線",
+    "phone": "1980",
+    "hours": "週一至週六 9:00–12:00、14:00–17:00、18:00–21:30；週日 9:00–12:00、14:00–17:00",
+    "scope": "national",
+    "description": "張老師基金會的輔導專線，提供生活、課業、人際等困擾的電話協談。",
+    "sourceUrl": "https://www.1980.org.tw/service_item_show.php?service_item_id=1"
+  },
+  {
+    "name": "外籍人士在臺生活諮詢熱線",
+    "phone": "0800-024-111",
+    "hours": "24 小時",
+    "scope": "national",
+    "description": "給國際學生與外籍人士的免付費多語生活諮詢熱線。",
+    "sourceUrl": "https://osa.nccu.edu.tw/gb/student-safety-service-section/service-hours"
+  }
+]
