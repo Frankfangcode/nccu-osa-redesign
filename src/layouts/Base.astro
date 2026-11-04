@@ -52,6 +52,7 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
             <span class="alert-label">{hotline.name}</span>
             <a class="alert-phone tnum" href={tel(hotline.phone)}>{hotline.phone}</a>
             <span class="alert-hours">{hotline.hours}</span>
+            <span class="alert-life">生命危險請撥 <a href="tel:110">110</a>／<a href="tel:119">119</a></span>
           </p>
           <a class="alert-more" href={url('/emergency/')}>所有緊急求助電話</a>
         </div>
@@ -113,6 +114,15 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
             <li><a href={url('/emergency/')}>緊急求助</a></li>
           </ul>
         </nav>
+        <div class="footer-emergency">
+          <p class="footer-name">緊急聯絡</p>
+          <ul>
+            <li>生命危險 <a class="tnum" href="tel:110">110</a>／<a class="tnum" href="tel:119">119</a></li>
+            {lines.filter((l) => l.scope === 'campus').slice(0, 3).map((l) => (
+              <li>{l.name} <a class="tnum" href={tel(l.phone)}>{l.phone}</a></li>
+            ))}
+          </ul>
+        </div>
         <div class="footer-note">
           <p>這是學生製作的非官方重新設計提案，內容與連結取自 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a>（擷取於 {site.fetchedAt}）。辦理事務請以官方網站公告為準。</p>
         </div>
@@ -183,6 +193,10 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
   }
   .alert-phone:hover { text-decoration: underline; }
   .alert-hours { opacity: 0.9; }
+  .alert-life a { font-weight: 800; }
+  @media (max-width: 560px) {
+    .alert-hours { display: none; }
+  }
   .alert-more { font-weight: 700; }
 
   .site-header {
@@ -285,7 +299,12 @@ const pageTitle = current === 'home' ? '政大學務處｜我想……' : `${tit
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1.6fr;
+    grid-template-columns: 1.2fr 0.8fr 1.4fr 1.6fr;
+  }
+  .footer-emergency ul { list-style: none; display: grid; gap: var(--space-1); }
+  .footer-emergency a { color: var(--ink); font-weight: 700; }
+  @media (max-width: 1000px) and (min-width: 761px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
     gap: var(--space-6);
   }
   .footer-name { font-family: var(--font-display); font-weight: 800; color: var(--ink); font-size: var(--s0); margin-bottom: var(--space-2); }

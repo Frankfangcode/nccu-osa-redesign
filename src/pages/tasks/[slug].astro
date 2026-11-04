@@ -54,6 +54,7 @@ const related = tasks.filter((t) => t.group === task.group && t.slug !== task.sl
             {unit.contact.location && (<><dt>地點</dt><dd>{unit.contact.location}</dd></>)}
             {unit.contact.hours && (<><dt>時間</dt><dd>{unit.contact.hours}</dd></>)}
           </dl>
+          <p class="urgent">下班後或遇到緊急狀況，請改撥 <a href={url('/emergency/')}>24 小時緊急電話</a>。</p>
         </aside>
       )}
     </div>
@@ -100,6 +101,8 @@ const related = tasks.filter((t) => t.group === task.group && t.slug !== task.sl
   .contact { margin: var(--space-4) 0 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-2) var(--space-4); font-size: 0.95rem; }
   .contact dt { color: var(--ink-soft); }
   .contact dd { margin: 0; overflow-wrap: anywhere; }
+  .urgent { margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--line); font-size: var(--s-1); color: var(--ink-soft); }
+  .urgent a { color: var(--alert); font-weight: 700; }
   .rel-list { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
   .rel-list a { font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
   @media (max-width: 860px) {
