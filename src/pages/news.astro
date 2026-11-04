@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import NewsList from '../components/NewsList.astro';
 import { news, units } from '../lib/data';
-import site from '../data/site.json';
+import meta from '../data/news-meta.json';
 
 const unitsWithNews = units.filter((u) => news.some((n) => n.unit === u.slug));
 ---
@@ -10,7 +10,7 @@ const unitsWithNews = units.filter((u) => news.some((n) => n.unit === u.slug));
   <div class="wrap">
     <header class="page-head">
       <h1>最新消息</h1>
-      <p class="lede">整理自學務處各組的公告。點標題會開啟官方原文。</p>
+      <p class="lede">整理自學務處各組的公告，每天早上自動更新。點標題會開啟官方原文。</p>
     </header>
 
     {unitsWithNews.length > 1 && (
@@ -27,7 +27,7 @@ const unitsWithNews = units.filter((u) => news.some((n) => n.unit === u.slug));
     <div id="news-wrap" data-pagefind-body>
       <NewsList items={news} filterable />
     </div>
-    <p class="snapshot">消息擷取於 {site.fetchedAt}。最新公告請見 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a>。</p>
+    <p class="snapshot">消息每天早上自動更新，最後更新於 {meta.updatedAt}。完整公告請見 <a href="https://osa.nccu.edu.tw/tw/">學務處官方網站</a>。</p>
   </div>
 </Base>
 
